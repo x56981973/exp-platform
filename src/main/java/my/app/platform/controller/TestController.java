@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author 夏之阳
  * 创建时间：2016-03-14 20:46
@@ -23,12 +25,13 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Result testHandler(@RequestParam String request){
-        Teacher teacher = new Teacher();
-        teacher.setT_login_name("yiping");
-        teacher.setT_name("yiping");
-        teacher.setT_password("123");
-        teacher.setT_school("SJTU");
-        int result = teacherInfoDao.updateTeacherInfo(teacher);
-        return ResultHelper.newSuccessResult(result);
+//        Teacher teacher = new Teacher();
+//        teacher.setT_login_name("yiping");
+//        teacher.setT_name("yiping");
+//        teacher.setT_password("123");
+//        teacher.setT_school("SJTU");
+//        int result = teacherInfoDao.updateTeacherInfo(teacher);
+        List<Teacher> teacherList = teacherInfoDao.queryTeacherInfo("yiping");
+        return ResultHelper.newSuccessResult(teacherList);
     }
 }

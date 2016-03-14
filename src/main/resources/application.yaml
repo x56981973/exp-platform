@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+exp-platform:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3307/exp_platform
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
