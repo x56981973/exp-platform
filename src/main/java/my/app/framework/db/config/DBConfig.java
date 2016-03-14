@@ -26,9 +26,9 @@ public class DBConfig {
     @Bean
     public DataSource dataSource(){
         DruidDataSource dataSource=new DruidDataSource();
-        dataSource.setUrl("jdbc:mysql://127.0.0.1/exp_platform");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3307/exp_platform");
         dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setPassword("");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         return dataSource;
     }
