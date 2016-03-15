@@ -25,12 +25,6 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Result testHandler(@RequestParam String request){
-//        Teacher teacher = new Teacher();
-//        teacher.setT_login_name("yiping");
-//        teacher.setT_name("yiping");
-//        teacher.setT_password("123");
-//        teacher.setT_school("SJTU");
-//        int result = teacherInfoDao.updateTeacherInfo(teacher);
         List<Teacher> teacherList = teacherInfoDao.queryTeacherInfo("yiping");
         return ResultHelper.newSuccessResult(teacherList);
     }

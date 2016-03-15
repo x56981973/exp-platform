@@ -7,12 +7,24 @@ package my.app.platform.domain;
  */
 
 public class Teacher {
+    /**
+     * 教师姓名
+     */
     private String t_name;
 
+    /**
+     * 教师登录名
+     */
     private String t_login_name;
 
+    /**
+     * 教师登陆密码
+     */
     private String t_password;
 
+    /**
+     * 学校
+     */
     private String t_school;
 
     public String getT_name() {
