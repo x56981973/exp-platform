@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my.app.platform.repository.mapper.student.IStudentInfoDao">
+    <select id="queryStudentInfo" parameterType="String" resultType="my.app.platform.domain.Student">
+        SELECT * FROM student
+        WHERE s_login_name = #{s_login_name}
+     </select>
+
+    <insert id="insertStudentInfo" parameterType="my.app.platform.domain.Student">
+        INSERT INTO
+        student(s_name,s_login_name,s_password,s_grade,s_score,teacher)
+        VALUES (#{s_name},#{s_login_name},#{s_password},#{s_grade},#{s_score},#{teacher})
+    </insert>
+
+    <update id="updateStudentInfo" parameterType="my.app.platform.domain.Student">
+        UPDATE student SET s_name = #{s_name},s_password = #{s_password},s_grade = #{s_grade},s_score = #{s_score},teacher = #{teacher}
+        WHERE s_login_name = #{s_login_name}
+    </update>
+</mapper>

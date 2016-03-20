@@ -13,7 +13,7 @@ public class ExpClass {
     private int c_id;
 
     /**
-     * 分类名
+     * 分类名n
      */
     private String c_name;
 

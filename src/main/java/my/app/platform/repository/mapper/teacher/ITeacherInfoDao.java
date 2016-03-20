@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author 夏之阳
  * 创建时间：2016-03-14 21:05
- * 创建说明：
+ * 创建说明：教师查询接口
  */
 
 public interface ITeacherInfoDao {

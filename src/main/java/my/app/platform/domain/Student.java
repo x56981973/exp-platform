@@ -32,6 +32,11 @@ public class Student {
      */
     private String s_score;
 
+    /**
+     * 教师
+     */
+    private String teacher;
+
     public String getS_name() {
         return s_name;
     }
@@ -70,5 +75,13 @@ public class Student {
 
     public void setS_score(String s_score) {
         this.s_score = s_score;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
     }
 }
