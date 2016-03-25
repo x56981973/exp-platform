@@ -17,6 +17,11 @@ public class ExpType {
      */
     private String type_name;
 
+    /**
+     * 类别id
+     */
+    private String class_id;
+
     public int getType_id() {
         return type_id;
     }
@@ -31,5 +36,13 @@ public class ExpType {
 
     public void setType_name(String type_name) {
         this.type_name = type_name;
+    }
+
+    public String getClass_id() {
+        return class_id;
+    }
+
+    public void setClass_id(String class_id) {
+        this.class_id = class_id;
     }
 }

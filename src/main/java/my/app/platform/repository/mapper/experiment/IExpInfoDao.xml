@@ -15,8 +15,8 @@
 
     <insert id="insertExpType" parameterType="my.app.platform.domain.ExpType">
         INSERT INTO
-        exp_type(type_id,type_name)
-        VALUES (#{type_id},#{type_name})
+        exp_type(type_id,type_name,class_id)
+        VALUES (#{type_id},#{type_name},#{class_id})
     </insert>
 
     <delete id="deleteExperiment" parameterType="String">
@@ -36,17 +36,14 @@
 
     <select id="queryExperiment" parameterType="String" resultType="my.app.platform.domain.Experiment">
         SELECT * FROM experiment
-        WHERE e_id = #{e_id}
     </select>
 
     <select id="queryExpClass" parameterType="String" resultType="my.app.platform.domain.ExpClass">
         SELECT * FROM exp_class
-        WHERE class_id = #{class_id}
     </select>
 
     <select id="queryExpType" parameterType="String" resultType="my.app.platform.domain.ExpType">
         SELECT * FROM exp_type
-        WHERE type_id = #{type_id}
     </select>
 
     <update id="updateExperiment" parameterType="my.app.platform.domain.Experiment">
@@ -70,7 +67,7 @@
     <update id="updateExpType" parameterType="my.app.platform.domain.ExpType">
         UPDATE exp_type
         SET
-        type_name = #{type_name},
+        type_name = #{type_name},class_id = #{class_id}
         WHERE type_id = #{type_id}
     </update>
 

@@ -4,6 +4,8 @@ import my.app.platform.domain.ExpClass;
 import my.app.platform.domain.ExpType;
 import my.app.platform.domain.Experiment;
 
+import java.util.List;
+
 /**
  * @author 夏之阳
  * 创建时间：2016-03-21 23:10
@@ -58,21 +60,21 @@ public interface IExpInfoDao {
      * @param e_id 实验id
      * @return 实验信息
      */
-    int queryExperiment(String e_id);
+    List<Experiment> queryExperiment(String e_id);
 
     /**
      * 查询实验类别
      * @param class_id 实验类别id
      * @return 实验类别
      */
-    int queryExpClass(String class_id);
+    List<ExpClass> queryExpClass(String class_id);
 
     /**
      * 查询实验类型
      * @param type_id 实验类型id
      * @return 实验类型
      */
-    int queryExpType(String type_id);
+    List<ExpType> queryExpType(String type_id);
 
     /**
      * 修改实验信息
