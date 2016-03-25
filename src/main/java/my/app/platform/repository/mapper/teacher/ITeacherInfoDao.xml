@@ -17,5 +17,9 @@
         WHERE t_login_name = #{t_login_name}
     </update>
 
+    <delete id="deleteTeacherInfo" parameterType="String">
+        DELETE FROM teacher
+        WHERE t_login_name = #{t_login_name}
+    </delete>
 
 </mapper>

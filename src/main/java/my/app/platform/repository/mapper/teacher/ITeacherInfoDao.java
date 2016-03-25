@@ -31,4 +31,11 @@ public interface ITeacherInfoDao {
      * @return 成功条数
      */
     int updateTeacherInfo(Teacher teacher);
+
+    /**
+     * 删除教师信息
+     * @param t_login_name 教师登录名
+     * @return 删除条数
+     */
+    int deleteTeacherInfo(String t_login_name);
 }

@@ -35,6 +35,16 @@ public class StudentController {
     }
 
     /**
+     * 删除单个学生
+     * @param s_login_name 学生登录名
+     * @return 是否成功
+     */
+    @RequestMapping(value = "/student/delete", method = RequestMethod.GET)
+    public Result deleteStudentHandler(@RequestParam String s_login_name) {
+        return ResultHelper.newSuccessResult(studentInfoDao.deleteStudentInfo(s_login_name));
+    }
+
+    /**
      * 从文件中导入学生名单
      * @param path 文件路径
      * @return 插入成功条数

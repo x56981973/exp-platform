@@ -10,26 +10,26 @@ public class ExpClass {
     /**
      * 分类id
      */
-    private int c_id;
+    private int class_id;
 
     /**
-     * 分类名n
+     * 分类名
      */
-    private String c_name;
+    private String class_name;
 
-    public int getC_id() {
-        return c_id;
+    public int getClass_id() {
+        return class_id;
     }
 
-    public void setC_id(int c_id) {
-        this.c_id = c_id;
+    public void setClass_id(int class_id) {
+        this.class_id = class_id;
     }
 
-    public String getC_name() {
-        return c_name;
+    public String getClass_name() {
+        return class_name;
     }
 
-    public void setC_name(String c_name) {
-        this.c_name = c_name;
+    public void setClass_name(String class_name) {
+        this.class_name = class_name;
     }
 }

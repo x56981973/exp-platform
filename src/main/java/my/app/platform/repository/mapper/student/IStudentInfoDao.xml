@@ -16,4 +16,9 @@
         UPDATE student SET s_name = #{s_name},s_password = #{s_password},s_grade = #{s_grade},s_score = #{s_score},teacher = #{teacher}
         WHERE s_login_name = #{s_login_name}
     </update>
+
+    <delete id="deleteStudentInfo" parameterType="String">
+        DELETE FROM student
+        WHERE s_login_name = #{s_login_name}
+    </delete>
 </mapper>

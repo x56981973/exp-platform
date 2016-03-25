@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my.app.platform.repository.mapper.experiment.IExpInfoDao">
+    <insert id="insertExperiment" parameterType="my.app.platform.domain.Experiment">
+        INSERT INTO
+        experiment(e_id,e_name,e_description,class_id,type_id,e_srcPath)
+        VALUES (#{e_id},#{e_name},#{e_description},#{class_id},#{type_id},#{e_srcPath})
+    </insert>
+
+    <insert id="insertExpClass" parameterType="my.app.platform.domain.ExpClass">
+        INSERT INTO
+        exp_class(class_id,class_name)
+        VALUES (#{class_id},#{class_name})
+    </insert>
+
+    <insert id="insertExpType" parameterType="my.app.platform.domain.ExpType">
+        INSERT INTO
+        exp_type(type_id,type_name)
+        VALUES (#{type_id},#{type_name})
+    </insert>
+
+    <delete id="deleteExperiment" parameterType="String">
+        DELETE FROM experiment
+        WHERE e_id = #{e_id}
+    </delete>
+
+    <delete id="deleteExpClass" parameterType="String">
+        DELETE FROM exp_class
+        WHERE class_id = #{class_id}
+    </delete>
+
+    <delete id="deleteExpType" parameterType="String">
+        DELETE FROM exp_type
+        WHERE type_id = #{type_id}
+    </delete>
+
+    <select id="queryExperiment" parameterType="String" resultType="my.app.platform.domain.Experiment">
+        SELECT * FROM experiment
+        WHERE e_id = #{e_id}
+    </select>
+
+    <select id="queryExpClass" parameterType="String" resultType="my.app.platform.domain.ExpClass">
+        SELECT * FROM exp_class
+        WHERE class_id = #{class_id}
+    </select>
+
+    <select id="queryExpType" parameterType="String" resultType="my.app.platform.domain.ExpType">
+        SELECT * FROM exp_type
+        WHERE type_id = #{type_id}
+    </select>
+
+    <update id="updateExperiment" parameterType="my.app.platform.domain.Experiment">
+        UPDATE experiment
+        SET
+        e_name = #{e_name},
+        e_description = #{e_description},
+        class_id = #{class_id},
+        type_id = #{type_id},
+        e_srcPath = #{e_srcPath}
+        WHERE e_id = #{e_id}
+    </update>
+
+    <update id="updateExpClass" parameterType="my.app.platform.domain.ExpClass">
+        UPDATE exp_class
+        SET
+        class_name = #{class_name},
+        WHERE class_id = #{class_id}
+    </update>
+
+    <update id="updateExpType" parameterType="my.app.platform.domain.ExpType">
+        UPDATE exp_type
+        SET
+        type_name = #{type_name},
+        WHERE type_id = #{type_id}
+    </update>
+
+</mapper>
