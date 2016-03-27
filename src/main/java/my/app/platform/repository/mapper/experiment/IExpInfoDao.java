@@ -14,6 +14,12 @@ import java.util.List;
 
 public interface IExpInfoDao {
     /**
+     * 获取所有实验列表
+     * @return 实验列表
+     */
+    List<Experiment> queryAllExp();
+
+    /**
      * 插入实验信息
      * @param experiment 实验信息
      * @return 插入成功条数

@@ -25,6 +25,11 @@ public class ExpController {
     @Autowired
     IExpInfoDao expInfoDao;
 
+    @RequestMapping(value = "/exp/getList", method = RequestMethod.GET)
+    public Result queryExperiment(){
+        return ResultHelper.newSuccessResult(expInfoDao.queryAllExp());
+    }
+
     /**
      * 新增实验
      * @param experiment 实验信息
