@@ -54,4 +54,9 @@ public class StudentController {
     public Result insertStudentListHandler(@RequestParam String path) throws IOException {
         return ResultHelper.newSuccessResult(studentService.insertStudentList(path));
     }
+
+    @RequestMapping(value = "/student/score", method = RequestMethod.GET)
+    public Result studentScoreHandler(@RequestParam String studentName) {
+        return ResultHelper.newSuccessResult(studentInfoDao.queryScore(studentName));
+    }
 }

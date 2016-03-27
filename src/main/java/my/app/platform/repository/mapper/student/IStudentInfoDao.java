@@ -12,11 +12,11 @@ import java.util.List;
 
 public interface IStudentInfoDao {
     /**
-     * 查询学生基本信息
+     * 查询学生基本信息(登陆时调用)
      * @param s_login_name 学生登录名
      * @return 学生信息
      */
-    List<Student> queryStudentInfo(String s_login_name);
+    List<Student> queryStudentInfo(String s_login_name, String s_password);
 
     /**
      * 插入学生基本信息
@@ -38,4 +38,11 @@ public interface IStudentInfoDao {
      * @return 删除条数
      */
     int deleteStudentInfo(String s_login_name);
+
+    /**
+     * 学生成绩查询
+     * @param s_login_name 学生登陆名
+     * @return
+     */
+    String queryScore(String s_login_name);
 }

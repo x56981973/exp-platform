@@ -3,7 +3,7 @@
 <mapper namespace="my.app.platform.repository.mapper.student.IStudentInfoDao">
     <select id="queryStudentInfo" parameterType="String" resultType="my.app.platform.domain.Student">
         SELECT * FROM student
-        WHERE s_login_name = #{s_login_name}
+        WHERE s_login_name = #{0} AND s_password = #{1}
      </select>
 
     <insert id="insertStudentInfo" parameterType="my.app.platform.domain.Student">
@@ -21,4 +21,9 @@
         DELETE FROM student
         WHERE s_login_name = #{s_login_name}
     </delete>
+
+    <select id="queryScore" parameterType="String" resultType="String">
+        SELECT s_score FROM student
+        WHERE s_login_name = #{s_login_name}
+    </select>
 </mapper>

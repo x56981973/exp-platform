@@ -3,7 +3,7 @@
 <mapper namespace="my.app.platform.repository.mapper.teacher.ITeacherInfoDao">
     <select id="queryTeacherInfo" parameterType="String" resultType="my.app.platform.domain.Teacher">
         SELECT * FROM teacher
-        WHERE t_login_name = #{t_login_name}
+        WHERE t_login_name = #{0} AND t_password = #{1}
      </select>
 
     <insert id="insertTeacherInfo" parameterType="my.app.platform.domain.Teacher">
