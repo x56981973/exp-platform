@@ -62,7 +62,7 @@ public class ExcelUtil {
     }
 
     /**
-     * 读文件（后缀为xlsx）
+     * 读文件（后缀为xls）
      * @param path 文件路径
      * @return 字符串数组类型的文件内容
      * @throws IOException

@@ -11,3 +11,7 @@ exp-platform:
 upload:
   file:
     path: /Users/xiazhiyang/Desktop/upload/
+
+download:
+  file:
+    path: /Users/xiazhiyang/Desktop/upload/
