@@ -7,3 +7,7 @@ exp-platform:
     username: root
     password: 123456
     driverClassName: com.mysql.jdbc.Driver
+
+upload:
+  file:
+    path: /Users/xiazhiyang/Desktop/upload/
