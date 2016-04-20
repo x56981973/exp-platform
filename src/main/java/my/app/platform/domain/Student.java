@@ -37,6 +37,16 @@ public class Student {
      */
     private String teacher;
 
+    /**
+     * 报告状态
+     */
+    private String report_status;
+
+    /**
+     * 报告路径
+     */
+    private String report_path;
+
     public String getS_name() {
         return s_name;
     }
@@ -83,5 +93,21 @@ public class Student {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    public String getReport_status() {
+        return report_status;
+    }
+
+    public void setReport_status(String report_status) {
+        this.report_status = report_status;
+    }
+
+    public String getReport_path() {
+        return report_path;
+    }
+
+    public void setReport_path(String report_path) {
+        this.report_path = report_path;
     }
 }

@@ -27,6 +27,11 @@ public class Teacher {
      */
     private String t_school;
 
+    /**
+     * 角色
+     */
+    private String role;
+
     public String getT_name() {
         return t_name;
     }
@@ -57,5 +62,13 @@ public class Teacher {
 
     public void setT_school(String t_school) {
         this.t_school = t_school;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

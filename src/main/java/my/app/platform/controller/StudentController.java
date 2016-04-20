@@ -2,12 +2,15 @@ package my.app.platform.controller;
 
 import my.app.framework.web.Result;
 import my.app.framework.web.ResultHelper;
-import my.app.platform.domain.Student;
 import my.app.platform.repository.mapper.student.IStudentInfoDao;
 import my.app.platform.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -19,20 +22,13 @@ import java.io.IOException;
 @RestController
 public class StudentController {
     @Autowired
+    HttpSession httpSession;
+
+    @Autowired
     IStudentInfoDao studentInfoDao;
 
     @Autowired
     StudentService studentService;
-
-    /**
-     * 插入单个学生
-     * @param student 学生信息
-     * @return 是否成功
-     */
-    @RequestMapping(value = "/student/insert", method = RequestMethod.POST)
-    public Result insertStudentHandler(@RequestBody Student student) {
-        return ResultHelper.newSuccessResult(studentInfoDao.insertStudentInfo(student));
-    }
 
     /**
      * 删除单个学生

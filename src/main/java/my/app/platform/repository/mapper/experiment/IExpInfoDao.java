@@ -3,6 +3,8 @@ package my.app.platform.repository.mapper.experiment;
 import my.app.platform.domain.ExpClass;
 import my.app.platform.domain.ExpType;
 import my.app.platform.domain.Experiment;
+import my.app.platform.domain.model.MExpType;
+import my.app.platform.domain.model.MExperiment;
 
 import java.util.List;
 
@@ -17,7 +19,19 @@ public interface IExpInfoDao {
      * 获取所有实验列表
      * @return 实验列表
      */
-    List<Experiment> queryAllExp();
+    List<MExperiment> queryAllExp();
+
+    /**
+     * 获取所有实验分类
+     * @return 实验分类列表
+     */
+    List<ExpClass> queryAllExpClass();
+
+    /**
+     * 获取所有实验类型
+     * @return 实验类型列表
+     */
+    List<MExpType> queryAllExpType();
 
     /**
      * 插入实验信息

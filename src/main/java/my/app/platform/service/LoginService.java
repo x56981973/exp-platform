@@ -33,7 +33,7 @@ public class LoginService {
     }
 
     public Teacher teacherLoginCheck(String userName, String password){
-        List<Teacher> teachers = teacherInfoDao.queryTeacherInfo(userName, password);
+        List<Teacher> teachers = teacherInfoDao.checkLogin(userName, password);
         if(teachers.size() != 0){
             return teachers.get(0);
         } else {

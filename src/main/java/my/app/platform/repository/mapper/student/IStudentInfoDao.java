@@ -12,6 +12,12 @@ import java.util.List;
 
 public interface IStudentInfoDao {
     /**
+     * 查询所有学生信息
+     * @return 学生列表
+     */
+    List<Student> queryAllStudent();
+
+    /**
      * 查询学生基本信息(登陆时调用)
      * @param s_login_name 学生登录名
      * @return 学生信息
@@ -42,7 +48,7 @@ public interface IStudentInfoDao {
     /**
      * 学生成绩查询
      * @param s_login_name 学生登陆名
-     * @return
+     * @return 成绩
      */
     String queryScore(String s_login_name);
 }

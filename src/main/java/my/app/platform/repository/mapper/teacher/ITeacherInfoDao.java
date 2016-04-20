@@ -12,11 +12,25 @@ import java.util.List;
 
 public interface ITeacherInfoDao {
     /**
-     * 查询教师基本信息(登录时调用)
+     * 查询所有教师基本信息
+     * @return 教师信息
+     */
+    List<Teacher> queryAllTeacher();
+
+    /**
+     * 查询教师基本信息
      * @param t_login_name 教师登录名
      * @return 教师信息
      */
-    List<Teacher> queryTeacherInfo(String t_login_name,String t_password);
+    List<Teacher> querySingleTeacher(String t_login_name);
+
+    /**
+     * 查询教师基本信息(登录时调用)
+     * @param t_login_name 教师登录名
+     * @param t_password 教师登录密码
+     * @return 教师信息
+     */
+    List<Teacher> checkLogin(String t_login_name, String t_password);
 
     /**
      * 插入教师基本信息

@@ -29,9 +29,9 @@ public class LoginController {
             return ResultHelper.newSuccessResult(result);
         }
     }
-
-    @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
-    public Result teacherLoginHandler(@RequestParam String userName,String password) {
-        return ResultHelper.newSuccessResult(loginService.teacherLoginCheck(userName,password));
-    }
+//
+//    @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
+//    public Result teacherLoginHandler(@RequestParam String username,String password) {
+//        return ResultHelper.newSuccessResult(loginService.teacherLoginCheck(username,password));
+//    }
 }

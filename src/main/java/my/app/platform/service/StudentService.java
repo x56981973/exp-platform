@@ -53,4 +53,8 @@ public class StudentService {
         }
         return count;
     }
+
+    public List<Student> getStudentList(){
+        return studentInfoDao.queryAllStudent();
+    }
 }
