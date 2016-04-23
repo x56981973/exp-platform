@@ -40,17 +40,6 @@ public class StudentController {
         return ResultHelper.newSuccessResult(studentInfoDao.deleteStudentInfo(s_login_name));
     }
 
-    /**
-     * 从文件中导入学生名单
-     * @param path 文件路径
-     * @return 插入成功条数
-     * @throws IOException
-     */
-    @RequestMapping(value = "/student/insertList", method = RequestMethod.GET)
-    public Result insertStudentListHandler(@RequestParam String path) throws IOException {
-        return ResultHelper.newSuccessResult(studentService.insertStudentList(path));
-    }
-
     @RequestMapping(value = "/student/score", method = RequestMethod.GET)
     public Result studentScoreHandler(@RequestParam String studentName) {
         return ResultHelper.newSuccessResult(studentInfoDao.queryScore(studentName));

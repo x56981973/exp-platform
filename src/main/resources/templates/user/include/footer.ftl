@@ -65,4 +65,7 @@
 <script src="//cdn.bootcss.com/toastr.js/2.1.2/toastr.min.js"></script>
 
 <script src="main/js/sweetalert.min.js"></script>
+
+<script src="main/js/jquery-form.js"></script>
+
 <!-- end: JavaScript-->

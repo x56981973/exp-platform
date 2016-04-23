@@ -11,6 +11,8 @@ import my.app.platform.repository.mapper.student.IStudentInfoDao;
 import my.app.platform.tool.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,12 +23,22 @@ public class StudentService {
     IStudentInfoDao studentInfoDao;
 
     /**
+     * 插入单个学生
+     * @param student 学生信息
+     * @return 插入条数
+     */
+    public int insertStudent(Student student){
+        return studentInfoDao.insertStudentInfo(student);
+    }
+
+
+    /**
      * 从Excel中导出学生名单，插入到数据库中
      * @param path excel文件路径
      * @return 插入条数
      * @throws IOException
      */
-    public int insertStudentList(String path) throws IOException {
+    public int insertStudentList(String path,String t_id) throws IOException {
         List<List<String>> nameList;
 
         int index = path.lastIndexOf(".");
@@ -41,13 +53,17 @@ public class StudentService {
         int count = 0;
         for(List<String> person : nameList){
             if (person.size() != 3) return 0;
+
+            List<Student> students = studentInfoDao.queryStudentInfo(person.get(0));
+            if(students.size() != 0) continue;
+
             Student student = new Student();
             student.setS_login_name(person.get(0));
             student.setS_password(person.get(0)); //密码默认与登陆名一致
             student.setS_name(person.get(1));
             student.setS_grade(person.get(2));
             student.setS_score("0"); //成绩默认为0
-            student.setTeacher("yiping"); //教师由参数传递，此处为暂用
+            student.setTeacher(t_id);
 
             count += studentInfoDao.insertStudentInfo(student);
         }

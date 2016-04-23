@@ -24,7 +24,7 @@ public class LoginService {
     ITeacherInfoDao teacherInfoDao;
 
     public String studentLoginCheck(String userName, String password){
-        List<Student> students = studentInfoDao.queryStudentInfo(userName, password);
+        List<Student> students = studentInfoDao.checkStudentInfo(userName, password);
         if(students.size() != 0){
             return students.get(0).getS_name();
         } else {

@@ -20,9 +20,17 @@ public interface IStudentInfoDao {
     /**
      * 查询学生基本信息(登陆时调用)
      * @param s_login_name 学生登录名
+     * @param s_password 学生登录密码
      * @return 学生信息
      */
-    List<Student> queryStudentInfo(String s_login_name, String s_password);
+    List<Student> checkStudentInfo(String s_login_name, String s_password);
+
+    /**
+     * 查询学生基本信息(登陆时调用)
+     * @param s_login_name 学生登录名
+     * @return 学生信息
+     */
+    List<Student> queryStudentInfo(String s_login_name);
 
     /**
      * 插入学生基本信息

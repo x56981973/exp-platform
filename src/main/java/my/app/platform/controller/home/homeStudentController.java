@@ -1,14 +1,17 @@
 package my.app.platform.controller.home;
 
 import my.app.platform.domain.Student;
-import my.app.platform.repository.mapper.student.IStudentInfoDao;
+import my.app.platform.service.File.UploadFileService;
+import my.app.platform.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author 夏之阳
@@ -22,7 +25,10 @@ public class homeStudentController {
     HttpSession httpSession;
 
     @Autowired
-    IStudentInfoDao studentInfoDao;
+    StudentService studentService;
+
+    @Autowired
+    UploadFileService uploadFileService;
 
     /**
      * 插入单个学生
@@ -34,21 +40,51 @@ public class homeStudentController {
     @RequestMapping(value = "/student/insert", method = RequestMethod.POST)
     @ResponseBody
     public String insertStudentHandler(String s_login_name,String s_name,String s_password,String s_grade) {
-//        //获取教师id
-//        String t_id = httpSession.getAttribute("t_id").toString();
-//
-//        Student student = new Student();
-//        student.setS_name(s_name);
-//        student.setS_login_name(s_login_name);
-//        student.setS_password(s_password);
-//        student.setS_grade(s_grade);
-//        student.setTeacher(t_id);
-//        if(studentInfoDao.insertStudentInfo(student) > 0){
-//            return "{\"error\":\"0\",\"msg\":\"插入成功\",\"to\":\"/setting\"}";
-//        }else{
-//            return "{\"error\":\"1\",\"msg\":\"插入失败\",\"to\":\"/setting\"}";
-//        }
+        //获取教师id
+        String t_id = httpSession.getAttribute("t_id").toString();
 
-        return "{\"error\":\"0\",\"msg\":\"插入成功\",\"to\":\"/setting\"}";
+        Student student = new Student();
+        student.setS_name(s_name);
+        student.setS_login_name(s_login_name);
+        student.setS_password(s_password);
+        student.setS_grade(s_grade);
+        student.setTeacher(t_id);
+        if(studentService.insertStudent(student) > 0){
+            return "{\"error\":\"0\",\"msg\":\"插入成功\"}";
+        }else{
+            return "{\"error\":\"1\",\"msg\":\"插入失败\"}";
+        }
+    }
+
+    @RequestMapping(value = "/student/insertList", method = RequestMethod.POST)
+    @ResponseBody
+    public String insertStudentListHandler(MultipartFile studentList) {
+        //获取教师id
+        String t_id = httpSession.getAttribute("t_id").toString();
+
+        String fileName = studentList.getOriginalFilename();
+        int index = fileName.lastIndexOf(".");
+        if(!("xlsx".equals(fileName.substring(index+1)) || "xls".equals(fileName.substring(index+1)))){
+            return "{\"error\":\"1\",\"msg\":\"文件格式不正确\"}";
+        }
+
+        String result = uploadFileService.uploadService(studentList,t_id);
+        if("".equals(result)){
+            return "{\"error\":\"1\",\"msg\":\"文件上传失败\"}";
+        }else{
+            int count;
+            try {
+                count = studentService.insertStudentList(result,t_id);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "{\"error\":\"1\",\"msg\":\"插入数据库失败\"}";
+            }
+            if(count != 0){
+                String format = "{\"error\":\"0\",\"msg\":\"成功插入%d条学生记录\"}";
+                return String.format(format,count);
+            }else{
+                return "{\"error\":\"1\",\"msg\":\"插入数据库失败\"}";
+            }
+        }
     }
 }

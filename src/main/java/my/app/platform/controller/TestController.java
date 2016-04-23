@@ -24,6 +24,6 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Result testHandler(@RequestParam String path) throws IOException {
-        return ResultHelper.newSuccessResult(studentService.insertStudentList(path));
+        return ResultHelper.newSuccessResult(studentService.insertStudentList(path,"yiping"));
     }
 }

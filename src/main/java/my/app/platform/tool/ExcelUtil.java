@@ -40,7 +40,7 @@ public class ExcelUtil {
             if(xssfSheet == null){
                 continue;
             }
-            for(int i = 1; i < xssfSheet.getLastRowNum(); i++){
+            for(int i = 1; i <= xssfSheet.getLastRowNum(); i++){
                 XSSFRow xssfRow = xssfSheet.getRow(i);
 
                 int minCol = xssfRow.getFirstCellNum();
@@ -78,7 +78,7 @@ public class ExcelUtil {
             if(hssfSheet == null){
                 continue;
             }
-            for(int i = 1; i < hssfSheet.getLastRowNum(); i++){
+            for(int i = 1; i <= hssfSheet.getLastRowNum(); i++){
                 HSSFRow hssfRow = hssfSheet.getRow(i);
 
                 int minCol = hssfRow.getFirstCellNum();

@@ -28,8 +28,8 @@ public class FileController {
     DownLoadFileService downLoadFileService;
 
     @RequestMapping(value="/upload", method= RequestMethod.POST)
-    public Result handleFileUpload(MultipartFile file){
-        return ResultHelper.newSuccessResult(uploadFileService.uploadService(file));
+    public Result handleFileUpload(MultipartFile file, String userId){
+        return ResultHelper.newSuccessResult(uploadFileService.uploadService(file,userId));
     }
 
     @RequestMapping(value="/download", method= RequestMethod.POST)

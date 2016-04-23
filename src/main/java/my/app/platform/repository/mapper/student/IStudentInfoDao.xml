@@ -5,10 +5,15 @@
         SELECT * FROM student
     </select>
 
-    <select id="queryStudentInfo" parameterType="String" resultType="my.app.platform.domain.Student">
+    <select id="checkStudentInfo" parameterType="String" resultType="my.app.platform.domain.Student">
         SELECT * FROM student
         WHERE s_login_name = #{0} AND s_password = #{1}
      </select>
+
+    <select id="queryStudentInfo" parameterType="String" resultType="my.app.platform.domain.Student">
+        SELECT * FROM student
+        WHERE s_login_name = #{s_login_name}
+    </select>
 
     <insert id="insertStudentInfo" parameterType="my.app.platform.domain.Student">
         INSERT INTO

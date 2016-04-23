@@ -26,4 +26,13 @@ public class TeacherService {
             return null;
         }
     }
+
+    /**
+     * 更新教师信息
+     * @param teacher
+     * @return 更新条数
+     */
+    public int updateTeacher(Teacher teacher){
+        return teacherInfoDao.updateTeacherInfo(teacher);
+    }
 }
