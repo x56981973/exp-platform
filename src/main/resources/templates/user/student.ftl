@@ -19,9 +19,6 @@
             <div class="box span12">
                 <div class="box-header">
                     <h2><i class="halflings-icon user"></i><span class="break"></span>学生名单</h2>
-                    <div class="box-icon">
-                        <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                    </div>
                 </div>
                 <div class="box-content">
                     <table class="table table-bordered table-striped table-condensed">
@@ -53,7 +50,7 @@
                                     <a class="btn btn-info" href="#">
                                         <i class="halflings-icon white edit"></i>
                                     </a>
-                                    <a class="btn btn-danger" href="#">
+                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-name="${s.s_name}" data-deleteurl="/student/delete">
                                         <i class="halflings-icon white trash"></i>
                                     </a>
                                 </td>
@@ -70,7 +67,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>提示</h3>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">取消</a>
+        <a href="#" class="btn btn-primary">确认</a>
+    </div>
+</div>
+
 <#include "include/footer.ftl">
+
+<script type="text/javascript">
+    $("#deleteModal").on("show.bs.modal", function (event) {
+        var button = $(event.relatedTarget);
+        var name = button.data("name");
+        var deleteUrl = button.data("deleteurl");
+        var modal = $(this);
+        modal.find('.modal-body').text('确认删除 '+name+' 吗?');
+        modal.find('.modal-footer a').attr('href',deleteUrl);
+    });
+</script>
 
 </body>
 </html>

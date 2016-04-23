@@ -7,7 +7,10 @@
 
 <!-- start: JavaScript-->
 
-<script src="main/js/jquery-1.9.1.min.js"></script>
+<script src="common/plugins/jquery/dist/jquery.min.js"></script>
+
+<script src="common/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <script src="main/js/jquery-migrate-1.0.0.min.js"></script>
 
 <script src="main/js/jquery-ui-1.10.0.custom.min.js"></script>
@@ -15,8 +18,6 @@
 <script src="main/js/jquery.ui.touch-punch.js"></script>
 
 <script src="main/js/modernizr.js"></script>
-
-<script src="main/js/bootstrap.min.js"></script>
 
 <script src="main/js/jquery.cookie.js"></script>
 

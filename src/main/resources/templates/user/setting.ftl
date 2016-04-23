@@ -15,13 +15,6 @@
             <li><a href="#">设置</a></li>
         </ul>
 
-        <#--<button class="btn btn-primary" id="test" onclick="test()">test</button>-->
-        <#--<script>-->
-            <#--function test(){-->
-                <#--toastr.warning('只能选择一行进行编辑');-->
-            <#--}-->
-        <#--</script>-->
-
         <div class="row-fluid">
             <div class="box span12">
                 <div class="box-header" data-original-title>

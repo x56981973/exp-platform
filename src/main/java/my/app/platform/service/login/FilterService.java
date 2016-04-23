@@ -30,11 +30,6 @@ public class FilterService extends OncePerRequestFilter {
             return;
         }
 
-        if(uri.contains("assets")){   //登陆界面的样式不拦截
-            filterChain.doFilter(httpServletRequest,httpServletResponse);
-            return;
-        }
-
         if (session.getAttribute("t_name") == null) {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
             return;

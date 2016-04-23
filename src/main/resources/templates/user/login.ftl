@@ -9,10 +9,10 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="assets/css/form-elements.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="login/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="login/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="login/css/form-elements.css">
+        <link rel="stylesheet" href="login/css/style.css">
 
         <!-- formvalidation CSS-->
         <link href="//cdn.bootcss.com/formvalidation/0.6.1/css/formValidation.min.css" rel="stylesheet">
@@ -76,13 +76,13 @@
 
 
         <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
+        <script src="login/js/jquery-1.11.1.min.js"></script>
+        <script src="login/bootstrap/js/bootstrap.min.js"></script>
+        <script src="login/js/jquery.backstretch.min.js"></script>
+        <script src="login/js/scripts.js"></script>
         
         <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
+            <script src="login/js/placeholder.js"></script>
         <![endif]-->
 
         <script src="//cdn.bootcss.com/formvalidation/0.6.1/js/formValidation.min.js"></script>
