@@ -5,13 +5,17 @@ import my.app.platform.service.File.UploadFileService;
 import my.app.platform.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author 夏之阳
@@ -29,6 +33,18 @@ public class homeStudentController {
 
     @Autowired
     UploadFileService uploadFileService;
+
+
+    @RequestMapping(value = "/student")
+    public String student(Model model){
+        String t_name = httpSession.getAttribute("t_name").toString();
+        model.addAttribute("t_name",t_name);
+
+        List<Student> studentList = studentService.getStudentList();
+        model.addAttribute("student",studentList);
+
+        return "/user/student";
+    }
 
     /**
      * 插入单个学生
@@ -85,6 +101,16 @@ public class homeStudentController {
             }else{
                 return "{\"error\":\"1\",\"msg\":\"插入数据库失败\"}";
             }
+        }
+    }
+
+    @RequestMapping(value = "/student/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteStudentHandler(String s_login_name) {
+        if(studentService.deleteStudent(s_login_name) != 0) {
+            return "{\"error\":\"0\",\"msg\":\"删除成功\"}";
+        }else{
+            return "{\"error\":\"1\",\"msg\":\"删除失败\"}";
         }
     }
 }

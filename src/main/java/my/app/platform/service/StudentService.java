@@ -70,7 +70,20 @@ public class StudentService {
         return count;
     }
 
+    /**
+     * 获取所有学生列表
+     * @return 学生列表
+     */
     public List<Student> getStudentList(){
         return studentInfoDao.queryAllStudent();
+    }
+
+    /**
+     * 删除学生
+     * @param s_login_name 登录名
+     * @return 删除条数
+     */
+    public int deleteStudent(String s_login_name){
+        return studentInfoDao.deleteStudentInfo(s_login_name);
     }
 }

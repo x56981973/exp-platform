@@ -79,17 +79,6 @@ public class homeController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value = "/student")
-    public String student(Model model){
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
-
-        List<Student> studentList = studentService.getStudentList();
-        model.addAttribute("student",studentList);
-
-        return "/user/student";
-    }
-
     @RequestMapping(value = "/exp")
     public String experiment(Model model){
         //Get t_name
@@ -111,9 +100,6 @@ public class homeController {
 
     @RequestMapping(value = "/setting")
     public String setting(Model model){
-//        session.setAttribute("t_id","yiping");
-//        session.setAttribute("t_name","易平");
-
         String t_id = session.getAttribute("t_id").toString();
         Teacher teacher = teacherService.getTeacher(t_id);
         model.addAttribute("teacher", teacher);

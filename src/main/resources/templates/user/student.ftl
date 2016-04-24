@@ -50,7 +50,7 @@
                                     <a class="btn btn-info" href="#">
                                         <i class="halflings-icon white edit"></i>
                                     </a>
-                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-name="${s.s_name}" data-deleteurl="/student/delete">
+                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-name="${s.s_name}" data-id="${s.s_login_name}">
                                         <i class="halflings-icon white trash"></i>
                                     </a>
                                 </td>
@@ -75,22 +75,48 @@
     <div class="modal-body">
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">取消</a>
-        <a href="#" class="btn btn-primary">确认</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <a class="btn btn-primary" id="check">确认</a>
     </div>
 </div>
 
 <#include "include/footer.ftl">
 
 <script type="text/javascript">
+    var id = "";
+
     $("#deleteModal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget);
         var name = button.data("name");
-        var deleteUrl = button.data("deleteurl");
+        id = button.data("id");
         var modal = $(this);
         modal.find('.modal-body').text('确认删除 '+name+' 吗?');
-        modal.find('.modal-footer a').attr('href',deleteUrl);
     });
+
+    $("#check").click(function(){
+        $.ajax({
+            url: '/student/delete',
+            type: 'POST',
+            data: $.param({'s_login_name':id}),
+            success: function (result) {
+                var data = eval("(" + result + ")");
+                if (data.error == 0) {
+                    swal({
+                        title: data.msg,
+                        text: "",
+                        type: "success",
+                        confirmButtonText: "确认"
+                    },
+                    function(){
+                        location.reload();
+                    });
+                } else {
+                    swal(data.msg,"","error");
+                }
+            }
+        });
+        $('#deleteModal').modal('hide');
+    })
 </script>
 
 </body>
