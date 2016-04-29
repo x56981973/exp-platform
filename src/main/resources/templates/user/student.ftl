@@ -41,7 +41,11 @@
                                 <td class="center">${s.s_name}</td>
                                 <td class="center">${s.s_grade}</td>
                                 <td class="center">
-                                    <span class="label label-important">${s.report_status}</span>
+                                    <#if s.report_status == "未提交">
+                                        <span class="label label-important">${s.report_status}</span>
+                                    <#else>
+                                        <span class="label label-success">${s.report_status}</span>
+                                    </#if>
                                 </td>
                                 <td class="center">${s.s_score}</td>
                                 <td class="center">
