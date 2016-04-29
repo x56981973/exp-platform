@@ -113,4 +113,26 @@ public class homeStudentController {
             return "{\"error\":\"1\",\"msg\":\"删除失败\"}";
         }
     }
+
+    @RequestMapping(value = "/student/update/info", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateStudentInfoHandler(String s_login_name,String s_name, String s_grade, String s_score) {
+        int result = studentService.updateInfo(s_login_name,s_name,s_grade,s_score);
+        if(result != 0){
+            return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
+        } else {
+            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
+        }
+    }
+
+    @RequestMapping(value = "/student/update/pwd", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateStudentPwdHandler(String s_login_name,String s_password) {
+        int result = studentService.updateStudentPwd(s_login_name,s_password);
+        if(result != 0){
+            return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
+        } else {
+            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
+        }
+    }
 }

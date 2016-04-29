@@ -86,4 +86,22 @@ public class StudentService {
     public int deleteStudent(String s_login_name){
         return studentInfoDao.deleteStudentInfo(s_login_name);
     }
+
+    /**
+     * 更新学生成绩
+     * @param s_login_name 学生登录名
+     * @return 更新条数
+     */
+    public int updateInfo(String s_login_name,String s_name, String s_grade, String s_score){
+        return studentInfoDao.updateInfo(s_login_name,s_name,s_grade,s_score);
+    }
+
+    /**
+     * 更新学生信息
+     * @param s_login_name 学生登录名
+     * @return 更新条数
+     */
+    public int updateStudentPwd(String s_login_name,String s_password){
+        return studentInfoDao.updatePwd(s_login_name,s_password);
+    }
 }

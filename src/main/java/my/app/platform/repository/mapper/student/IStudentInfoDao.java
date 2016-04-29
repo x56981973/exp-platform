@@ -47,6 +47,20 @@ public interface IStudentInfoDao {
     int updateStudentInfo(Student student);
 
     /**
+     * 更新学生成绩
+     * @param s_login_name 学生登录名
+     * @return 更新条数
+     */
+    int updateInfo(String s_login_name,String s_name, String s_grade, String s_score);
+
+    /**
+     * 更新学生密码
+     * @param s_login_name 学生登录名
+     * @return 更新条数
+     */
+    int updatePwd(String s_login_name,String s_password);
+
+    /**
      * 删除学生信息
      * @param s_login_name 学生登录名
      * @return 删除条数

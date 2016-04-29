@@ -21,7 +21,8 @@
                     <h2><i class="halflings-icon user"></i><span class="break"></span>学生名单</h2>
                 </div>
                 <div class="box-content">
-                    <table class="table table-bordered table-striped table-condensed">
+                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                    <#--<table class="table table-bordered table-striped table-condensed">-->
                         <thead>
                         <tr>
                             <th>学号</th>
@@ -40,18 +41,26 @@
                                 <td class="center">${s.s_name}</td>
                                 <td class="center">${s.s_grade}</td>
                                 <td class="center">
-                                    <span class="label label-important">未提交</span>
+                                    <span class="label label-important">${s.report_status}</span>
                                 </td>
                                 <td class="center">${s.s_score}</td>
                                 <td class="center">
-                                    <a class="btn btn-success" href="#">
-                                        <i class="halflings-icon white zoom-in"></i>
+                                    <a class="btn btn-success" data-toggle="modal" data-target="#detailModal"
+                                       data-id="${s.s_login_name}" data-name="${s.s_name}" data-password="${s.s_password}"
+                                       data-grade="${s.s_grade}" data-report="${s.report_status}" data-score="${s.s_score}">
+                                        <#--<i class="halflings-icon white zoom-in"></i>-->
+                                        查看
                                     </a>
-                                    <a class="btn btn-info" href="#">
-                                        <i class="halflings-icon white edit"></i>
+                                    <a class="btn btn-info" data-toggle="modal" data-target="#editModal"
+                                       data-id="${s.s_login_name}" data-name="${s.s_name}"
+                                       data-grade="${s.s_grade}" data-score="${s.s_score}">
+                                        <#--<i class="halflings-icon white edit"></i>-->
+                                        编辑
                                     </a>
-                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-name="${s.s_name}" data-id="${s.s_login_name}">
-                                        <i class="halflings-icon white trash"></i>
+                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                                       data-name="${s.s_name}" data-id="${s.s_login_name}">
+                                        <#--<i class="halflings-icon white trash"></i>-->
+                                        删除
                                     </a>
                                 </td>
                             </tr>
@@ -67,7 +76,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>提示</h3>
@@ -76,7 +85,62 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <a class="btn btn-primary" id="check">确认</a>
+        <a class="btn btn-primary" id="checkDelete">确认</a>
+    </div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>学生详情</h3>
+    </div>
+    <div class="modal-body">
+        <div class="control-group">
+            <label class="control-label">学号</label>
+            <span class="input-xlarge uneditable-input" id="id"></span>
+            <label class="control-label">姓名</label>
+            <span class="input-xlarge uneditable-input" id="name"></span>
+            <label class="control-label">密码</label>
+            <span class="input-xlarge uneditable-input" id="password"></span>
+            <label class="control-label">年级</label>
+            <span class="input-xlarge uneditable-input" id="grade"></span>
+            <label class="control-label">成绩</label>
+            <span class="input-xlarge uneditable-input" id="score"></span>
+            <label class="control-label">报告提交情况</label>
+            <span class="input-xlarge uneditable-input" id="report"></span>
+        </div>
+        <div class="control-group">
+            <label class="control-label" id="progress"></label>
+            <div class="progress simpleProgress blue" id="percent">66</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>学生编辑</h3>
+    </div>
+    <div class="modal-body">
+        <div class="control-group">
+            <form>
+                <label class="control-label">学号</label>
+                <span class="input-xlarge uneditable-input" id="id"></span>
+                <label class="control-label">姓名</label>
+                <input class="input-xlarge focused" id="new_name" type="text">
+                <label class="control-label">年级</label>
+                <input class="input-xlarge focused" id="new_grade" type="text">
+                <label class="control-label">成绩</label>
+                <input class="input-xlarge focused" id="new_score" type="text">
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-primary" id="postEdit">确认</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
     </div>
 </div>
 
@@ -93,7 +157,7 @@
         modal.find('.modal-body').text('确认删除 '+name+' 吗?');
     });
 
-    $("#check").click(function(){
+    $("#checkDelete").click(function(){
         $.ajax({
             url: '/student/delete',
             type: 'POST',
@@ -118,6 +182,76 @@
         $('#deleteModal').modal('hide');
     })
 </script>
+
+<script type="text/javascript">
+    $("#detailModal").on("show.bs.modal", function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data("id");
+        var name = button.data("name");
+        var password = button.data("password")
+        var grade = button.data("grade");
+        var score = button.data("score");
+        var report = button.data("report");
+        var modal = $(this);
+        modal.find('#id').text(id);
+        modal.find('#name').text(name);
+        modal.find('#password').text(password);
+        modal.find('#grade').text(grade);
+        modal.find('#score').text(score);
+        modal.find('#report').text(report);
+        modal.find('#progress').html("课程进度: <strong> 8 / 12 </strong>");
+    });
+</script>
+
+<script type="text/javascript">
+    var id = "";
+    var name = "";
+    var grade = "";
+    var score = "";
+
+    $("#editModal").on("show.bs.modal", function (event) {
+        var button = $(event.relatedTarget);
+        id = button.data("id");
+        name = button.data("name");
+        grade = button.data("grade");
+        score = button.data("score");
+
+        var modal = $(this);
+        modal.find('#id').text(id);
+        modal.find('#new_name').val(name);
+        modal.find('#new_grade').val(grade);
+        modal.find('#new_score').val(score);
+    });
+
+    $("#postEdit").click(function(){
+        var new_name = $('#new_name').val();
+        var new_grade = $('#new_grade').val();
+        var new_score = $('#new_score').val();
+        $.ajax({
+            url: '/student/update/info',
+            type: 'POST',
+            data: $.param({'s_login_name':id,'s_name':new_name,'s_grade':new_grade,'s_score':new_score}),
+            success: function (result) {
+                var data = eval("(" + result + ")");
+                if (data.error == 0) {
+                    swal({
+                        title: data.msg,
+                        text: "",
+                        type: "success",
+                        confirmButtonText: "确认"
+                    },
+                    function(){
+                        location.reload();
+                    });
+                } else {
+                    swal(data.msg,"","error");
+                }
+            }
+        });
+        $('#deleteModal').modal('hide');
+    })
+</script>
+
 
 </body>
 </html>
