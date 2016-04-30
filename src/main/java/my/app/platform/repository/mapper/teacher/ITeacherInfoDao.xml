@@ -17,12 +17,12 @@
 
     <insert id="insertTeacherInfo" parameterType="my.app.platform.domain.Teacher">
         INSERT INTO
-        teacher(t_name,t_login_name,t_password,t_school)
-        VALUES (#{t_name},#{t_login_name},#{t_password},#{t_school})
+        teacher(t_name,t_login_name,t_password,t_school,role)
+        VALUES (#{t_name},#{t_login_name},#{t_password},#{t_school},#{role})
     </insert>
 
     <update id="updateTeacherInfo" parameterType="my.app.platform.domain.Teacher">
-        UPDATE teacher SET t_name = #{t_name},t_password = #{t_password},t_school = #{t_school}
+        UPDATE teacher SET t_name = #{t_name},t_password = #{t_password},t_school = #{t_school},role = #{role}
         WHERE t_login_name = #{t_login_name}
     </update>
 

@@ -50,12 +50,12 @@
                                     <td class="center">${s.teacher}</td>
                                     <td class="center">${s.s_score}</td>
                                     <td class="center">${s.report_status}</td>
-                                    <td class="center">${s.report_path?default("无")}</td>
+                                    <td class="center">${s.report_path}</td>
                                     <td class="center">
                                         <a class="btn btn-info" data-toggle="modal" data-target="#editModal"
                                            data-id="${s.s_login_name}" data-name="${s.s_name}" data-password="${s.s_password}"
                                            data-grade="${s.s_grade}" data-teacher="${s.teacher}" data-score="${s.s_score}"
-                                           data-status="${s.report_status}" data-path="${s.report_path?default("无")}">
+                                           data-status="${s.report_status}" data-path="${s.report_path}">
                                             编辑
                                         </a>
                                         <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
@@ -98,7 +98,7 @@
         <div class="control-group">
             <form id="editForm">
                 <label class="control-label">学号</label>
-                <input class="input-xlarge uneditable-input" id="new_id" type="text" name="s_login_name">
+                <input class="input-xlarge" id="new_id" type="text" name="s_login_name" readOnly="true">
                 <label class="control-label">姓名</label>
                 <input class="input-xlarge focused" id="new_name" type="text" name="s_name">
                 <label class="control-label">密码</label>
@@ -187,14 +187,6 @@
 </script>
 
 <script type="text/javascript">
-//    var id = "";
-//    var name = "";
-//    var password = "";
-//    var grade = "";
-//    var teacher = "";
-//    var score = "";
-//    var status = "";
-//    var path = "";
 
     $("#editModal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget);
@@ -219,13 +211,9 @@
     });
 
     $("#postEdit").click(function(){
-//        var new_name = $('#new_name').val();
-//        var new_grade = $('#new_grade').val();
-//        var new_score = $('#new_score').val();
         $.ajax({
             url: '${base}/admin/student/update',
             type: 'POST',
-//            data: $.param({'s_name':new_name,'s_grade':new_grade,'s_score':new_score}),
             data: $('#editForm').serialize(),
             success: function (result) {
                 var data = eval("(" + result + ")");
@@ -277,7 +265,7 @@
                 }
             }
         });
-        $('#editModal').modal('hide');
+        $('#addModal').modal('hide');
     })
 </script>
 

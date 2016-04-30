@@ -58,15 +58,4 @@ public class adminController {
 
         return "/admin/experiment";
     }
-
-    @RequestMapping(value = "/admin/teacher")
-    public String teacher(Model model){
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name", t_name);
-
-        List<Teacher> teacherList = teacherService.getTeacherList();
-        model.addAttribute("teacher",teacherList);
-
-        return "/admin/student";
-    }
 }

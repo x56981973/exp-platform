@@ -62,34 +62,6 @@
             <!-- start: Header Menu -->
             <div class="nav-no-collapse header-nav">
                 <ul class="nav pull-right">
-                    <li class="dropdown hidden-phone">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="halflings-icon white tasks"></i>
-                        </a>
-                        <ul class="dropdown-menu tasks">
-                            <li class="dropdown-menu-title">
-                                <span>You have 17 tasks in progress</span>
-                                <a href="#refresh"><i class="icon-repeat"></i></a>
-                            </li>
-                            <li>
-                                <a href="#">
-										<span class="header">
-											<span class="title">iOS Development</span>
-											<span class="percent"></span>
-										</span>
-                                    <div class="taskProgress progressSlim red">80</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- end: Notifications Dropdown -->
-
-                    <li>
-                        <a class="btn" href="${base}/setting">
-                            <i class="halflings-icon white wrench"></i>
-                        </a>
-                    </li>
-
                     <!-- start: User Dropdown -->
                     <li class="dropdown">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

@@ -39,4 +39,17 @@ public class TeacherService {
     public int updateTeacher(Teacher teacher){
         return teacherInfoDao.updateTeacherInfo(teacher);
     }
+
+    /**
+     * 删除教师
+     * @param t_login_name 教师登录名
+     * @return 删除条数
+     */
+    public int deleteTeacher(String t_login_name){
+        return teacherInfoDao.deleteTeacherInfo(t_login_name);
+    }
+
+    public int insertTeacher(Teacher teacher){
+        return teacherInfoDao.insertTeacherInfo(teacher);
+    }
 }
