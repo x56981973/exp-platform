@@ -4,78 +4,78 @@
     <div class="row-fluid">
     <#include "include/menu.ftl">
 
-    <!-- start: Content -->
-    <div id="content" class="span10">
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="${base}/">主页</a>
-                <i class="icon-angle-right"></i>
-            </li>
-            <li><a href="#">学生列表</a></li>
-        </ul>
+        <!-- start: Content -->
+        <div id="content" class="span10">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home"></i>
+                    <a href="${base}/">主页</a>
+                    <i class="icon-angle-right"></i>
+                </li>
+                <li><a href="#">学生列表</a></li>
+            </ul>
 
-        <div class="row-fluid">
-            <div class="box span12">
-                <div class="box-header">
-                    <h2><i class="halflings-icon user"></i><span class="break"></span>学生名单</h2>
-                </div>
-                <div class="box-content">
-                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
-                    <#--<table class="table table-bordered table-striped table-condensed">-->
-                        <thead>
-                        <tr>
-                            <th>学号</th>
-                            <th>姓名</th>
-                            <th>年级</th>
-                            <th>报告</th>
-                            <th>成绩</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <#if (student?size > 0)>
-                            <#list student as s>
+            <div class="row-fluid">
+                <div class="box span12">
+                    <div class="box-header">
+                        <h2><i class="halflings-icon user"></i><span class="break"></span>学生名单</h2>
+                    </div>
+                    <div class="box-content">
+                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                        <#--<table class="table table-bordered table-striped table-condensed">-->
+                            <thead>
                             <tr>
-                                <td class="center">${s.s_login_name}</td>
-                                <td class="center">${s.s_name}</td>
-                                <td class="center">${s.s_grade}</td>
-                                <td class="center">
-                                    <#if s.report_status == "未提交">
-                                        <span class="label label-important">${s.report_status}</span>
-                                    <#else>
-                                        <span class="label label-success">${s.report_status}</span>
-                                    </#if>
-                                </td>
-                                <td class="center">${s.s_score}</td>
-                                <td class="center">
-                                    <a class="btn btn-success" data-toggle="modal" data-target="#detailModal"
-                                       data-id="${s.s_login_name}" data-name="${s.s_name}" data-password="${s.s_password}"
-                                       data-grade="${s.s_grade}" data-report="${s.report_status}" data-score="${s.s_score}">
-                                        <#--<i class="halflings-icon white zoom-in"></i>-->
-                                        查看
-                                    </a>
-                                    <a class="btn btn-info" data-toggle="modal" data-target="#editModal"
-                                       data-id="${s.s_login_name}" data-name="${s.s_name}"
-                                       data-grade="${s.s_grade}" data-score="${s.s_score}">
-                                        <#--<i class="halflings-icon white edit"></i>-->
-                                        编辑
-                                    </a>
-                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
-                                       data-name="${s.s_name}" data-id="${s.s_login_name}">
-                                        <#--<i class="halflings-icon white trash"></i>-->
-                                        删除
-                                    </a>
-                                </td>
+                                <th>学号</th>
+                                <th>姓名</th>
+                                <th>年级</th>
+                                <th>报告</th>
+                                <th>成绩</th>
+                                <th>操作</th>
                             </tr>
-                            </#list>
-                        </#if>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <#if (student?size > 0)>
+                                <#list student as s>
+                                <tr>
+                                    <td class="center">${s.s_login_name}</td>
+                                    <td class="center">${s.s_name}</td>
+                                    <td class="center">${s.s_grade}</td>
+                                    <td class="center">
+                                        <#if s.report_status == "未提交">
+                                            <span class="label label-important">${s.report_status}</span>
+                                        <#else>
+                                            <span class="label label-success">${s.report_status}</span>
+                                        </#if>
+                                    </td>
+                                    <td class="center">${s.s_score}</td>
+                                    <td class="center">
+                                        <a class="btn btn-success" data-toggle="modal" data-target="#detailModal"
+                                           data-id="${s.s_login_name}" data-name="${s.s_name}" data-password="${s.s_password}"
+                                           data-grade="${s.s_grade}" data-report="${s.report_status}" data-score="${s.s_score}">
+                                        <#--<i class="halflings-icon white zoom-in"></i>-->
+                                            查看
+                                        </a>
+                                        <a class="btn btn-info" data-toggle="modal" data-target="#editModal"
+                                           data-id="${s.s_login_name}" data-name="${s.s_name}"
+                                           data-grade="${s.s_grade}" data-score="${s.s_score}">
+                                        <#--<i class="halflings-icon white edit"></i>-->
+                                            编辑
+                                        </a>
+                                        <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                                           data-name="${s.s_name}" data-id="${s.s_login_name}">
+                                        <#--<i class="halflings-icon white trash"></i>-->
+                                            删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                </#list>
+                            </#if>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
 </div>
@@ -170,14 +170,14 @@
                 var data = eval("(" + result + ")");
                 if (data.error == 0) {
                     swal({
-                        title: data.msg,
-                        text: "",
-                        type: "success",
-                        confirmButtonText: "确认"
-                    },
-                    function(){
-                        location.reload();
-                    });
+                                title: data.msg,
+                                text: "",
+                                type: "success",
+                                confirmButtonText: "确认"
+                            },
+                            function(){
+                                location.reload();
+                            });
                 } else {
                     swal(data.msg,"","error");
                 }
@@ -239,14 +239,14 @@
                 var data = eval("(" + result + ")");
                 if (data.error == 0) {
                     swal({
-                        title: data.msg,
-                        text: "",
-                        type: "success",
-                        confirmButtonText: "确认"
-                    },
-                    function(){
-                        location.reload();
-                    });
+                                title: data.msg,
+                                text: "",
+                                type: "success",
+                                confirmButtonText: "确认"
+                            },
+                            function(){
+                                location.reload();
+                            });
                 } else {
                     swal(data.msg,"","error");
                 }

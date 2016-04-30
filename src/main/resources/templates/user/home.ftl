@@ -9,7 +9,7 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="index.html">首页</a>
+                <a href="${base}/">首页</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li><a href="#">概览</a></li>

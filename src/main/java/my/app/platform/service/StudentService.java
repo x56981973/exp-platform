@@ -79,6 +79,14 @@ public class StudentService {
     }
 
     /**
+     * 获取所有学生列表
+     * @return 学生列表
+     */
+    public List<Student> getStudentListByTeacher(String t_login_name){
+        return studentInfoDao.queryStudentByTeacher(t_login_name);
+    }
+
+    /**
      * 删除学生
      * @param s_login_name 登录名
      * @return 删除条数

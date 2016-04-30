@@ -32,16 +32,13 @@ public class homeController {
     private HttpSession session;
 
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
 
     @Autowired
-    ExpService expService;
+    private ExpService expService;
 
     @Autowired
-    StudentService studentService;
-
-    @Autowired
-    TeacherService teacherService;
+    private TeacherService teacherService;
 
     @RequestMapping(value = "/")
     public String home(Model model){
@@ -105,12 +102,5 @@ public class homeController {
         model.addAttribute("teacher", teacher);
 
         return "/user/setting";
-    }
-
-    @RequestMapping(value = "/admin")
-    public String admin(Model model){
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
-        return "/admin/home";
     }
 }

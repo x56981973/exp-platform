@@ -40,7 +40,8 @@ public class homeStudentController {
         String t_name = httpSession.getAttribute("t_name").toString();
         model.addAttribute("t_name",t_name);
 
-        List<Student> studentList = studentService.getStudentList();
+        String t_login_name = httpSession.getAttribute("t_id").toString();
+        List<Student> studentList = studentService.getStudentListByTeacher(t_login_name);
         model.addAttribute("student",studentList);
 
         return "/user/student";

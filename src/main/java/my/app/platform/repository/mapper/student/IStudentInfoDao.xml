@@ -5,6 +5,11 @@
         SELECT * FROM student
     </select>
 
+    <select id="queryStudentByTeacher" parameterType="String" resultType="my.app.platform.domain.Student">
+        SELECT * FROM student
+        WHERE teacher = #{t_login_name}
+    </select>
+
     <select id="checkStudentInfo" parameterType="String" resultType="my.app.platform.domain.Student">
         SELECT * FROM student
         WHERE s_login_name = #{0} AND s_password = #{1}

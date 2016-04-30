@@ -18,6 +18,13 @@ public interface IStudentInfoDao {
     List<Student> queryAllStudent();
 
     /**
+     * 查询所有学生信息
+     * @param t_login_name 教师id
+     * @return 学生列表
+     */
+    List<Student> queryStudentByTeacher(String t_login_name);
+
+    /**
      * 查询学生基本信息(登陆时调用)
      * @param s_login_name 学生登录名
      * @param s_password 学生登录密码

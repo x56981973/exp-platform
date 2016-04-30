@@ -9,7 +9,7 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="/home">主页</a>
+                <a href="${base}/">主页</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li><a href="#">设置</a></li>
@@ -174,7 +174,7 @@
         }
 
         $.ajax({
-            url: '/student/insert',
+            url: '${base}/student/insert',
             type: 'POST',
             data: $('#insertStudent').serialize(),
             success: function (result) {
@@ -210,7 +210,7 @@
         }
 
         $.ajax({
-            url: '/teacher/update',
+            url: '${base}/teacher/update',
             type: 'POST',
             data: $.param({'t_login_name':"${teacher.t_login_name}",'t_name':"${teacher.t_name}",
                 'school':form.school.value,'password':form.s_password2.value}),
@@ -230,7 +230,7 @@
 
 <script type="text/javascript">
     var options = {
-        url: '/student/insertList',
+        url: '${base}/student/insertList',
         success: function (result) {
             var data = eval("(" + result + ")");
             if (data.error == 0) {

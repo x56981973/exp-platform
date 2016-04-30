@@ -32,7 +32,7 @@
                                 <th>实验简介</th>
                                 <th>所属大类</th>
                                 <th>所属小类</th>
-                                <#--<th>开放参考</th>-->
+                            <#--<th>开放参考</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -44,9 +44,9 @@
                                     <td class="center">${e.e_description}</td>
                                     <td class="center">${e.class_name}</td>
                                     <td class="center">${e.type_name}</td>
-                                    <#--<td class="center">-->
-                                        <#--<span class="label label-success">开放</span>-->
-                                    <#--</td>-->
+                                <#--<td class="center">-->
+                                <#--<span class="label label-success">开放</span>-->
+                                <#--</td>-->
                                 </tr>
                                 </#list>
                             </#if>

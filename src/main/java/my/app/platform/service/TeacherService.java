@@ -18,6 +18,10 @@ public class TeacherService {
     @Autowired
     ITeacherInfoDao teacherInfoDao;
 
+    public List<Teacher> getTeacherList(){
+        return teacherInfoDao.queryAllTeacher();
+    }
+
     public Teacher getTeacher(String s_login_name){
         List<Teacher> teachers = teacherInfoDao.querySingleTeacher(s_login_name);
         if(teachers.size() != 0){
@@ -29,7 +33,7 @@ public class TeacherService {
 
     /**
      * 更新教师信息
-     * @param teacher
+     * @param teacher 教师信息
      * @return 更新条数
      */
     public int updateTeacher(Teacher teacher){

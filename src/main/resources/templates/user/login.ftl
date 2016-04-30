@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <#include "../common.ftl">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,7 +54,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="/user/login" method="post" class="login-form" id="loginForm">
+			                    <form role="form" action="${base}/user/login" method="post" class="login-form" id="loginForm">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="username">Username</label>
 			                        	<input type="text" name="username" placeholder="Username..." class="form-username form-control" id="username">
@@ -130,7 +130,7 @@
                                 $('#loginMsg').addClass('alert alert-danger').css('display','block').text(data.msg);
                             } else{
                                 $('#loginMsg').removeClass('alert-danger').addClass('alert-success').css('display','block').text(data.msg);
-                                window.location.href= data.to;
+                                window.location.href= "${base}"+data.to;
                             }
                         }
                     });
