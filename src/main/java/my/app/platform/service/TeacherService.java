@@ -22,8 +22,8 @@ public class TeacherService {
         return teacherInfoDao.queryAllTeacher();
     }
 
-    public Teacher getTeacher(String s_login_name){
-        List<Teacher> teachers = teacherInfoDao.querySingleTeacher(s_login_name);
+    public Teacher getTeacher(String t_login_name){
+        List<Teacher> teachers = teacherInfoDao.querySingleTeacher(t_login_name);
         if(teachers.size() != 0){
             return teachers.get(0);
         } else {

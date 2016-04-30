@@ -57,7 +57,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="${base}/"><span>无线攻防实验平台</span></a>
+            <a class="brand" href="${base}/"><span>无线攻防实验平台 后台管理</span></a>
 
             <!-- start: Header Menu -->
             <div class="nav-no-collapse header-nav">

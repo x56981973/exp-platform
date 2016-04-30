@@ -33,7 +33,7 @@ public interface IStudentInfoDao {
     List<Student> checkStudentInfo(String s_login_name, String s_password);
 
     /**
-     * 查询学生基本信息(登陆时调用)
+     * 查询学生基本信息
      * @param s_login_name 学生登录名
      * @return 学生信息
      */
@@ -47,14 +47,14 @@ public interface IStudentInfoDao {
     int insertStudentInfo(Student student);
 
     /**
-     * 更新学生基本信息
-     * @param student 学生基本信息
-     * @return 成功条数
+     * 更新学生信息（面向管理员）
+     * @param student 学生信息
+     * @return 更新条数
      */
-    int updateStudentInfo(Student student);
+    int updateStudent(Student student);
 
     /**
-     * 更新学生成绩
+     * 更新学生信息（面向教师）
      * @param s_login_name 学生登录名
      * @return 更新条数
      */

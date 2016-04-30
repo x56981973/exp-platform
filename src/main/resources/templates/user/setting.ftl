@@ -180,10 +180,10 @@
             success: function (result) {
                 var data = eval("(" + result + ")");
                 if (data.error == 0) {
-                    swal("插入成功!","","success");
+                    swal("插入成功!",data.msg,"success");
                     $('#insertStudent')[0].reset();
                 } else {
-                    swal("插入失败!","","error");
+                    swal("插入失败!",data.msg,"error");
                     $('#insertStudent')[0].reset();
                 }
             }

@@ -6,12 +6,10 @@ import my.app.platform.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -60,16 +58,21 @@ public class homeStudentController {
         //获取教师id
         String t_id = httpSession.getAttribute("t_id").toString();
 
-        Student student = new Student();
-        student.setS_name(s_name);
-        student.setS_login_name(s_login_name);
-        student.setS_password(s_password);
-        student.setS_grade(s_grade);
-        student.setTeacher(t_id);
-        if(studentService.insertStudent(student) > 0){
-            return "{\"error\":\"0\",\"msg\":\"插入成功\"}";
+        Student student = studentService.getStudent(s_login_name);
+        if(student != null){
+            return "{\"error\":\"1\",\"msg\":\"已存在此学生\"}";
+        }
+
+        Student new_student = new Student();
+        new_student.setS_name(s_name);
+        new_student.setS_login_name(s_login_name);
+        new_student.setS_password(s_password);
+        new_student.setS_grade(s_grade);
+        new_student.setTeacher(t_id);
+        if(studentService.insertStudent(new_student) > 0){
+            return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
-            return "{\"error\":\"1\",\"msg\":\"插入失败\"}";
+            return "{\"error\":\"1\",\"msg\":\"添加失败\"}";
         }
     }
 

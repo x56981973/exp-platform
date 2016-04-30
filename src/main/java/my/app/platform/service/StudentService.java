@@ -70,6 +70,15 @@ public class StudentService {
         return count;
     }
 
+    public Student getStudent(String s_login_name){
+        List<Student> students = studentInfoDao.queryStudentInfo(s_login_name);
+        if(students.size() != 0) {
+            return students.get(0);
+        }else{
+            return null;
+        }
+    }
+
     /**
      * 获取所有学生列表
      * @return 学生列表
@@ -96,7 +105,16 @@ public class StudentService {
     }
 
     /**
-     * 更新学生成绩
+     * 更新学生信息（面向管理员）
+     * @param student 学生信息
+     * @return 更新条数
+     */
+    public int updateStudent(Student student){
+        return studentInfoDao.updateStudent(student);
+    }
+
+    /**
+     * 更新学生信息（面向教师）
      * @param s_login_name 学生登录名
      * @return 更新条数
      */
@@ -105,7 +123,7 @@ public class StudentService {
     }
 
     /**
-     * 更新学生信息
+     * 更新学生密码
      * @param s_login_name 学生登录名
      * @return 更新条数
      */

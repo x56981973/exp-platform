@@ -31,9 +31,6 @@ public class adminController {
     private ExpService expService;
 
     @Autowired
-    private StudentService studentService;
-
-    @Autowired
     private TeacherService teacherService;
 
     @RequestMapping(value = "/admin")
@@ -60,17 +57,6 @@ public class adminController {
         model.addAttribute("exp_class",expClassList);
 
         return "/admin/experiment";
-    }
-
-    @RequestMapping(value = "/admin/student")
-    public String student(Model model){
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
-
-        List<Student> studentList = studentService.getStudentList();
-        model.addAttribute("student",studentList);
-
-        return "/admin/student";
     }
 
     @RequestMapping(value = "/admin/teacher")

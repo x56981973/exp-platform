@@ -80,7 +80,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal hide fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>提示</h3>
@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+<div class="modal hide fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>学生详情</h3>
@@ -123,7 +123,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal hide fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>学生编辑</h3>
