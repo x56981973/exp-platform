@@ -10,7 +10,7 @@ public class Experiment {
     /**
      * 实验id
      */
-    private int e_id;
+    private String e_id;
 
     /**
      * 实验名
@@ -25,23 +25,23 @@ public class Experiment {
     /**
      * 实验分类id
      */
-    private int class_id;
+    private String class_id;
 
     /**
      * 实验类型分类
      */
-    private int type_id;
+    private String type_id;
 
     /**
      * 实验文件路径
      */
     private String e_srcPath;
 
-    public int getE_id() {
+    public String getE_id() {
         return e_id;
     }
 
-    public void setE_id(int e_id) {
+    public void setE_id(String e_id) {
         this.e_id = e_id;
     }
 
@@ -61,19 +61,19 @@ public class Experiment {
         this.e_name = e_name;
     }
 
-    public int getClass_id() {
+    public String getClass_id() {
         return class_id;
     }
 
-    public void setClass_id(int class_id) {
+    public void setClass_id(String class_id) {
         this.class_id = class_id;
     }
 
-    public int getType_id() {
+    public String getType_id() {
         return type_id;
     }
 
-    public void setType_id(int type_id) {
+    public void setType_id(String type_id) {
         this.type_id = type_id;
     }
 

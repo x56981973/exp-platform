@@ -1,14 +1,18 @@
 package my.app.platform.controller.home;
 
 import my.app.platform.domain.ExpClass;
+import my.app.platform.domain.LoginRecord;
 import my.app.platform.domain.Student;
 import my.app.platform.domain.Teacher;
 import my.app.platform.domain.model.MExpType;
 import my.app.platform.domain.model.MExperiment;
+import my.app.platform.repository.mapper.experiment.IExpInfoDao;
+import my.app.platform.repository.mapper.log.ILogInfoDao;
 import my.app.platform.service.ExpService;
 import my.app.platform.service.LoginService;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
+import my.app.platform.tool.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,10 +39,13 @@ public class homeController {
     private HttpSession session;
 
     @Autowired
+    private ILogInfoDao logInfoDao;
+
+    @Autowired
     private LoginService loginService;
 
     @Autowired
-    private ExpService expService;
+    private IExpInfoDao expInfoDao;
 
     @Autowired
     private TeacherService teacherService;
@@ -49,11 +59,28 @@ public class homeController {
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     @ResponseBody
-    public String teacherLoginHandler(String username,String password) {
+    public String teacherLoginHandler(HttpServletRequest request,String username,String password) {
+        if(!username.matches("^([A-Za-z]|[0-9]){0,}$")){
+            return "{\"error\":\"1\",\"msg\":\"用户名仅能使用数字字母组合\",\"to\":\"/login\"}";
+        }
+        if(!password.matches("^([A-Za-z]|[0-9]){0,}$")){
+            return "{\"error\":\"1\",\"msg\":\"密码仅能使用数字字母组合\",\"to\":\"/login\"}";
+        }
+
         Teacher teacher = loginService.teacherLoginCheck(username, password);
         if(teacher != null) {
             session.setAttribute("t_id",teacher.getT_login_name());
             session.setAttribute("t_name",teacher.getT_name());
+
+            //插入登陆记录
+            LoginRecord loginRecord = new LoginRecord();
+            loginRecord.setUid(username);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            String date = df.format(new Date());
+            loginRecord.setDate(date);
+            loginRecord.setIp_address(IpUtil.getIpAddr(request));
+            logInfoDao.insertLoginRecord(loginRecord);
+
             if("user".equals(teacher.getRole())) {
                 return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/\"}";
             } else {
@@ -83,13 +110,13 @@ public class homeController {
         model.addAttribute("t_name",t_name);
 
         //Get Exp info
-        List<MExperiment> experimentList = expService.getExp();
+        List<MExperiment> experimentList = expInfoDao.queryAllExp();
         model.addAttribute("exp",experimentList);
 
-        List<MExpType> expTypeList = expService.getExpType();
+        List<MExpType> expTypeList = expInfoDao.queryAllExpType();
         model.addAttribute("exp_type",expTypeList);
 
-        List<ExpClass> expClassList = expService.getExpClass();
+        List<ExpClass> expClassList = expInfoDao.queryAllExpClass();
         model.addAttribute("exp_class",expClassList);
 
         return "/user/experiment";

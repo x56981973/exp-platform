@@ -21,6 +21,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping(value = "/client")
 public class ExpController {
     @Autowired
     IExpInfoDao expInfoDao;
@@ -84,46 +85,46 @@ public class ExpController {
         return ResultHelper.newSuccessResult(count);
     }
 
-//    /**
-//     * 更新实验列表
-//     * @param experimentList 实验列表
-//     * @return 更新成功条数
-//     */
-//    @RequestMapping(value = "/exp/updateList", method = RequestMethod.POST)
-//    public Result updateExperimentList(@RequestBody List<Experiment> experimentList){
-//        int count = 0;
-//        for(Experiment e : experimentList) {
-//            count += expInfoDao.updateExperiment(e);
-//        }
-//        return ResultHelper.newSuccessResult(count);
-//    }
+    /**
+     * 更新实验列表
+     * @param experimentList 实验列表
+     * @return 更新成功条数
+     */
+    @RequestMapping(value = "/exp/updateList", method = RequestMethod.POST)
+    public Result updateExperimentList(@RequestBody List<Experiment> experimentList){
+        int count = 0;
+        for(Experiment e : experimentList) {
+            count += expInfoDao.updateExperiment(e);
+        }
+        return ResultHelper.newSuccessResult(count);
+    }
 
-//    /**
-//     * 插入实验类型列表
-//     * @param expTypeList 实验类型列表
-//     * @return 插入成功条数
-//     */
-//    @RequestMapping(value = "/expType/insert", method = RequestMethod.POST)
-//    public Result insertExpTypeList(@RequestBody List<ExpType> expTypeList){
-//        int count = 0;
-//        for(ExpType e : expTypeList) {
-//            count += expInfoDao.insertExpType(e);
-//        }
-//        return ResultHelper.newSuccessResult(count);
-//    }
+    /**
+     * 插入实验类型列表
+     * @param expTypeList 实验类型列表
+     * @return 插入成功条数
+     */
+    @RequestMapping(value = "/expType/insertList", method = RequestMethod.POST)
+    public Result insertExpTypeList(@RequestBody List<ExpType> expTypeList){
+        int count = 0;
+        for(ExpType e : expTypeList) {
+            count += expInfoDao.insertExpType(e);
+        }
+        return ResultHelper.newSuccessResult(count);
+    }
 
-//    /**
-//     * 插入实验类别列表
-//     * @param expClassList 实验类别列表
-//     * @return 插入成功条数
-//     */
-//    @RequestMapping(value = "/expClass/insertList", method = RequestMethod.POST)
-//    public Result insertExpClassList(@RequestBody List<ExpClass> expClassList){
-//        int count = 0;
-//        for(ExpClass e : expClassList) {
-//            count += expInfoDao.insertExpClass(e);
-//        }
-//        return ResultHelper.newSuccessResult(count);
-//    }
+    /**
+     * 插入实验类别列表
+     * @param expClassList 实验类别列表
+     * @return 插入成功条数
+     */
+    @RequestMapping(value = "/expClass/insertList", method = RequestMethod.POST)
+    public Result insertExpClassList(@RequestBody List<ExpClass> expClassList){
+        int count = 0;
+        for(ExpClass e : expClassList) {
+            count += expInfoDao.insertExpClass(e);
+        }
+        return ResultHelper.newSuccessResult(count);
+    }
 
 }

@@ -12,7 +12,7 @@
     </select>
 
     <select id="queryAllExpType" resultType="my.app.platform.domain.model.MExpType">
-        SELECT type_id,type_name,class_name
+        SELECT type_id,type_name,a.class_id,class_name
         FROM exp_type a LEFT JOIN exp_class b ON a.class_id = b.class_id
         ORDER BY type_id
     </select>

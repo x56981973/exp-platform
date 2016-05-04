@@ -24,8 +24,12 @@ public class FilterService extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String uri = httpServletRequest.getRequestURI();
-        if(uri.contains("login")){    //登陆页面不拦截
+        String url = httpServletRequest.getRequestURI();
+        if(url.contains("client")){    //客户端请求不拦截
+            filterChain.doFilter(httpServletRequest,httpServletResponse);
+            return;
+        }
+        if(url.contains("login")){    //登陆页面不拦截
             filterChain.doFilter(httpServletRequest,httpServletResponse);
             return;
         }

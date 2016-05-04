@@ -12,6 +12,12 @@ import java.util.List;
 
 public interface ITeacherInfoDao {
     /**
+     * 查询所有管理员信息
+     * @return 管理员信息
+     */
+    List<Teacher> queryAllAdmin();
+
+    /**
      * 查询所有教师基本信息
      * @return 教师信息
      */

@@ -18,6 +18,10 @@ public class TeacherService {
     @Autowired
     ITeacherInfoDao teacherInfoDao;
 
+    public List<Teacher> getAdminList(){
+        return teacherInfoDao.queryAllAdmin();
+    }
+
     public List<Teacher> getTeacherList(){
         return teacherInfoDao.queryAllTeacher();
     }

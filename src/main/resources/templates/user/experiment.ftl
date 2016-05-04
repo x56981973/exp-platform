@@ -58,7 +58,7 @@
 
             <div class="row-fluid">
 
-                <div class="box span6">
+                <div class="box span12">
                     <div class="box-header">
                         <h2><i class="halflings-icon align-justify"></i><span class="break"></span>实验大类</h2>
                         <div class="box-icon">
@@ -86,8 +86,10 @@
                         </table>
                     </div>
                 </div>
+            </div>
 
-                <div class="box span6">
+            <div class="row-fluid">
+                <div class="box span12">
                     <div class="box-header">
                         <h2><i class="halflings-icon align-justify"></i><span class="break"></span>实验小类</h2>
                         <div class="box-icon">
@@ -117,6 +119,7 @@
                         </table>
                     </div>
                 </div>
+            </div>
 
             </div>
         </div>

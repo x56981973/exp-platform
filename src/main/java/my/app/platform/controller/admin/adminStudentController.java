@@ -1,7 +1,9 @@
 package my.app.platform.controller.admin;
 
+import my.app.platform.domain.OptionRecord;
 import my.app.platform.domain.Student;
 import my.app.platform.domain.Teacher;
+import my.app.platform.repository.mapper.log.ILogInfoDao;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +37,9 @@ public class adminStudentController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    ILogInfoDao logInfoDao;
+
     @RequestMapping(value = "/student")
     public String student(Model model){
         String t_name = session.getAttribute("t_name").toString();
@@ -48,6 +55,15 @@ public class adminStudentController {
     @ResponseBody
     public String deleteStudentHandler(String s_login_name) {
         if(studentService.deleteStudent(s_login_name) != 0) {
+            OptionRecord optionRecord = new OptionRecord();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            String date = df.format(new Date());
+            optionRecord.setDate(date);
+            optionRecord.setUid(session.getAttribute("t_id").toString());
+            optionRecord.setOption_class("student");
+            optionRecord.setOption_detail("删除学生：" + s_login_name);
+            logInfoDao.insertOptionRecord(optionRecord);
+
             return "{\"error\":\"0\",\"msg\":\"删除成功\"}";
         }else{
             return "{\"error\":\"1\",\"msg\":\"删除失败\"}";
@@ -81,6 +97,15 @@ public class adminStudentController {
         new_student.setS_grade(s_grade);
         new_student.setTeacher(t_login_name);
         if(studentService.insertStudent(new_student) > 0){
+            OptionRecord optionRecord = new OptionRecord();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            String date = df.format(new Date());
+            optionRecord.setDate(date);
+            optionRecord.setUid(session.getAttribute("t_id").toString());
+            optionRecord.setOption_class("student");
+            optionRecord.setOption_detail("添加学生：" + s_login_name);
+            logInfoDao.insertOptionRecord(optionRecord);
+
             return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
             return "{\"error\":\"1\",\"msg\":\"添加失败\"}";
@@ -92,6 +117,15 @@ public class adminStudentController {
     public String updateStudentInfoHandler(Student student) {
         int result = studentService.updateStudent(student);
         if(result != 0){
+            OptionRecord optionRecord = new OptionRecord();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            String date = df.format(new Date());
+            optionRecord.setDate(date);
+            optionRecord.setUid(session.getAttribute("t_id").toString());
+            optionRecord.setOption_class("student");
+            optionRecord.setOption_detail("修改学生：" + student.getS_login_name());
+            logInfoDao.insertOptionRecord(optionRecord);
+
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
         } else {
             return "{\"error\":\"1\",\"msg\":\"修改失败\"}";

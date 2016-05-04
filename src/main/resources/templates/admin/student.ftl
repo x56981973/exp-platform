@@ -130,15 +130,15 @@
     <div class="modal-body">
         <form>
             <label class="control-label">学号</label>
-            <input class="input-xlarge focused" id="new_id" type="text">
+            <input class="input-xlarge focused" id="new_id1" type="text">
             <label class="control-label">姓名</label>
-            <input class="input-xlarge focused" id="new_name" type="text">
+            <input class="input-xlarge focused" id="new_name1" type="text">
             <label class="control-label">学号</label>
-            <input class="input-xlarge focused" id="new_password" type="text">
+            <input class="input-xlarge focused" id="new_password1" type="text">
             <label class="control-label">年级</label>
-            <input class="input-xlarge focused" id="new_grade" type="text">
+            <input class="input-xlarge focused" id="new_grade1" type="text">
             <label class="control-label">教师</label>
-            <input class="input-xlarge focused" id="new_teacher" type="text">
+            <input class="input-xlarge focused" id="new_teacher1" type="text">
         </form>
     </div>
     <div class="modal-footer">
@@ -162,7 +162,7 @@
 
     $("#checkDelete").click(function(){
         $.ajax({
-            url: '${base}/student/delete',
+            url: '${base}/admin/student/delete',
             type: 'POST',
             data: $.param({'s_login_name':id}),
             success: function (result) {
@@ -238,11 +238,11 @@
 
 <script type="text/javascript">
     $("#postAdd").click(function(){
-        var new_id = $('#new_id').val();
-        var new_name = $('#new_name').val();
-        var new_password = $('#new_password').val();
-        var new_grade = $('#new_grade').val();
-        var new_teacher = $('#new_teacher').val();
+        var new_id = $('#new_id1').val();
+        var new_name = $('#new_name1').val();
+        var new_password = $('#new_password1').val();
+        var new_grade = $('#new_grade1').val();
+        var new_teacher = $('#new_teacher1').val();
         $.ajax({
             url: '${base}/admin/student/insert',
             type: 'POST',

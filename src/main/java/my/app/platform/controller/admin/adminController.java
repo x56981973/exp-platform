@@ -1,10 +1,8 @@
 package my.app.platform.controller.admin;
 
-import my.app.platform.domain.ExpClass;
-import my.app.platform.domain.Student;
-import my.app.platform.domain.Teacher;
-import my.app.platform.domain.model.MExpType;
-import my.app.platform.domain.model.MExperiment;
+import my.app.platform.domain.LoginRecord;
+import my.app.platform.domain.OptionRecord;
+import my.app.platform.repository.mapper.log.ILogInfoDao;
 import my.app.platform.service.ExpService;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
@@ -28,34 +26,39 @@ public class adminController {
     private HttpSession session;
 
     @Autowired
-    private ExpService expService;
+    private ILogInfoDao logInfoDao;
 
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private ExpService expService;
+
     @RequestMapping(value = "/admin")
     public String admin(Model model){
+        String t_id = session.getAttribute("t_id").toString();
         String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
+        model.addAttribute("t_name", t_name);
+
+        int t_num = teacherService.getTeacherList().size();
+        model.addAttribute("t_num",t_num);
+
+        int s_num = studentService.getStudentList().size();
+        model.addAttribute("s_num",s_num);
+
+        int e_num = expService.getExp().size();
+        model.addAttribute("e_num", e_num);
+
+        List<LoginRecord> loginRecordList = logInfoDao.queryLoginRecord(t_id);
+        model.addAttribute("login_record",loginRecordList);
+
+        List<OptionRecord> optionRecordList = logInfoDao.queryOptionRecord(t_id);
+        model.addAttribute("option_record",optionRecordList);
+
         return "/admin/home";
     }
 
-    @RequestMapping(value = "/admin/exp")
-    public String experiment(Model model){
-        //Get t_name
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
-
-        //Get Exp info
-        List<MExperiment> experimentList = expService.getExp();
-        model.addAttribute("exp",experimentList);
-
-        List<MExpType> expTypeList = expService.getExpType();
-        model.addAttribute("exp_type",expTypeList);
-
-        List<ExpClass> expClassList = expService.getExpClass();
-        model.addAttribute("exp_class",expClassList);
-
-        return "/admin/experiment";
-    }
 }

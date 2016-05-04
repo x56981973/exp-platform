@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="my.app.platform.repository.mapper.teacher.ITeacherInfoDao">
+    <select id="queryAllAdmin" resultType="my.app.platform.domain.Teacher">
+        SELECT * FROM teacher
+        WHERE role = "admin"
+    </select>
+
     <select id="queryAllTeacher" resultType="my.app.platform.domain.Teacher">
         SELECT * FROM teacher
+        WHERE role = "user"
     </select>
 
     <select id="querySingleTeacher" parameterType="String" resultType="my.app.platform.domain.Teacher">

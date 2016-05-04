@@ -21,15 +21,14 @@
                         <h2><i class="halflings-icon align-justify"></i><span class="break"></span>实验列表</h2>
                         <div class="box-icon">
                             <a data-toggle="modal" data-target="#addModal"><i class="halflings-icon plus"></i></a>
-                            <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                         </div>
                     </div>
                     <div class="box-content">
                         <table class="table table-striped table-bordered bootstrap-datatable datatable">
                             <thead>
                             <tr>
-                                <th>编号</th>
                                 <th>登录名</th>
+                                <th>姓名</th>
                                 <th>密码</th>
                                 <th>学校</th>
                                 <th>角色</th>

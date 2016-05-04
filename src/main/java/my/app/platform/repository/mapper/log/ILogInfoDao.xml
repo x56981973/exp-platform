@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my.app.platform.repository.mapper.log.ILogInfoDao">
+    <select id="queryLoginRecord" parameterType="String" resultType="my.app.platform.domain.LoginRecord">
+        SELECT * FROM login_record
+        WHERE uid = #{uid}
+        ORDER BY id DESC
+        limit 1,10
+    </select>
+
+    <select id="queryOptionRecord" parameterType="String" resultType="my.app.platform.domain.OptionRecord">
+        SELECT * FROM option_record
+        WHERE uid = #{uid}
+        ORDER BY id DESC
+        limit 0,8
+    </select>
+
+    <insert id="insertLoginRecord" parameterType="my.app.platform.domain.LoginRecord">
+        INSERT INTO
+        login_record(uid,date,ip_address)
+        VALUES (#{uid},#{date},#{ip_address})
+    </insert>
+
+    <insert id="insertOptionRecord" parameterType="my.app.platform.domain.OptionRecord">
+        INSERT INTO
+        option_record(uid,option_detail,option_class,date)
+        VALUES (#{uid},#{option_detail},#{option_class},#{date})
+    </insert>
+</mapper>
