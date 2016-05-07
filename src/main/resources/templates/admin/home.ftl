@@ -17,7 +17,7 @@
 
         <div class="row-fluid">
 
-            <div class="span4 statbox purple">
+            <div class="span4 statbox orange">
                 <div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
                 <div class="number">${s_num}<i class="icon-arrow-up"></i></div>
                 <div class="title">学生总数</div>
@@ -84,7 +84,7 @@
                         <#if (option_record?size > 0)>
                             <#list option_record as record>
                                 <#if record.option_class == "student">
-                                    <li class="purple">
+                                    <li class="orange">
                                 <#elseif record.option_class == "teacher">
                                     <li class="green">
                                 <#elseif record.option_class == "exp">

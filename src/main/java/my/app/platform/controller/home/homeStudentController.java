@@ -88,7 +88,7 @@ public class homeStudentController {
             return "{\"error\":\"1\",\"msg\":\"文件格式不正确\"}";
         }
 
-        String result = uploadFileService.uploadService(studentList,t_id);
+        String result = uploadFileService.uploadStudentListService(studentList, t_id);
         if("".equals(result)){
             return "{\"error\":\"1\",\"msg\":\"文件上传失败\"}";
         }else{

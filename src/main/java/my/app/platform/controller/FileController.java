@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
 
 /**
  * @author 夏之阳
@@ -29,7 +28,7 @@ public class FileController {
 
     @RequestMapping(value="/upload", method= RequestMethod.POST)
     public Result handleFileUpload(MultipartFile file, String userId){
-        return ResultHelper.newSuccessResult(uploadFileService.uploadService(file,userId));
+        return ResultHelper.newSuccessResult(uploadFileService.uploadStudentListService(file, userId));
     }
 
     @RequestMapping(value="/download", method= RequestMethod.POST)

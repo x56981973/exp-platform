@@ -116,4 +116,12 @@ public interface IExpInfoDao {
      * @return 更新成功条数
      */
     int updateExpType(ExpType expType);
+
+    /**
+     * 更新文档路径
+     * @param srcPath 文档路径
+     * @param e_id 实验id
+     * @return
+     */
+    int updateExpSrc(String srcPath,String e_id);
 }

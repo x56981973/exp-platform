@@ -48,13 +48,12 @@
                                     <td class="center">${e.type_name}</td>
                                     <#--<td class="center">${e.e_srcPath}</td>-->
                                     <td class="center">
-                                        <a class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal"
-                                           data-id="${e.e_id}" data-name="${e.e_name}" data-class="${e.class_name}" data-type="${e.type_name}">
+                                        <a class="btn btn-xs btn-info" href="${base}/admin/exp/edit/${e.e_id}">
                                             <i class="halflings-icon white edit"></i>
                                         </a>
                                         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"
                                            data-name="${e.e_name}" data-id="${e.e_id}" data-flag="exp">
-                                            <i class="halflings-icon white trash">
+                                            <i class="halflings-icon white trash"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -93,8 +92,8 @@
                                     <td class="center">${e.type_name}</td>
                                     <td class="center">${e.class_name}</td>
                                     <td class="center">
-                                        <a class="btn btn-info" data-toggle="modal" data-target="#editModal"
-                                           data-id="${e.type_id}" data-tname="${e.type_name}" data-cname="${e.class_name}">
+                                        <a class="btn btn-info" data-toggle="modal" data-target="#editTypeModal"
+                                           data-tid="${e.type_id}" data-tname="${e.type_name}" data-cname="${e.class_name}" data-cid="${e.class_id}">
                                             <i class="halflings-icon white edit"></i>
                                         </a>
                                         <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
@@ -137,7 +136,7 @@
                                     <td>${e.class_id}</td>
                                     <td class="center">${e.class_name}</td>
                                     <td class="center">
-                                        <a class="btn btn-info" data-toggle="modal" data-target="#editModal"
+                                        <a class="btn btn-info" data-toggle="modal" data-target="#editClassModal"
                                            data-id="${e.class_id}" data-name="${e.class_name}">
                                             <i class="halflings-icon white edit"></i>
                                         </a>
@@ -191,6 +190,25 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="editClassModal" tabindex="-1" role="dialog" aria-labelledby="editClassModalLabel">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>编辑大类</h3>
+    </div>
+    <div class="modal-body">
+        <form id="editClassForm">
+            <label class="control-label">编号</label>
+            <input class="input" id="class_id1" type="text" name="class_id">
+            <label class="control-label">大类名称</label>
+            <input class="input" id="class_name1" type="text" name="class_name">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <a class="btn btn-primary" id="postEditClass">确认</a>
+    </div>
+</div>
+
 <div class="modal hide fade" id="addTypeModal" tabindex="-1" role="dialog" aria-labelledby="addTypeModalLabel">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
@@ -222,46 +240,36 @@
     </div>
 </div>
 
-<#--<div class="modal hide fade" id="addExpModal" tabindex="-1" role="dialog" aria-labelledby="addExpModalLabel">-->
-    <#--<div class="modal-header">-->
-        <#--<button type="button" class="close" data-dismiss="modal">×</button>-->
-        <#--<h3>添加实验</h3>-->
-    <#--</div>-->
-    <#--<div class="modal-body">-->
-        <#--<form id="addExpForm">-->
-            <#--<label class="control-label">编号</label>-->
-            <#--<input class="input" id="e_id" type="text" name="e_id">-->
-            <#--<label class="control-label">实验名称</label>-->
-            <#--<input class="input-xlarge" id="e_name" type="text" name="e_name">-->
-            <#--<label class="control-label">实验简介</label>-->
-            <#--<input class="input-xlarge" id="e_description" type="text" name="e_description">-->
-            <#--<div class="control-group">-->
-                <#--<label class="control-label">所属大类</label>-->
-                <#--<div class="controls">-->
-                    <#--<select id="class_info1" name="class_info" onchange=onselected(this.options[this.options.selectedIndex].value)>-->
-                        <#--<option value="-1">请选择</option>-->
-                    <#--<#if (exp_class?size > 0)>-->
-                        <#--<#list exp_class as e>-->
-                            <#--<option value="${e.class_id}">${e.class_id} ${e.class_name}</option>-->
-                        <#--</#list>-->
-                    <#--</#if>-->
-                    <#--</select>-->
-                <#--</div>-->
-            <#--</div>-->
-            <#--<div class="control-group">-->
-                <#--<label class="control-label">所属小类</label>-->
-                <#--<div class="controls">-->
-                    <#--<select id="type_info" name="type_info">-->
-                    <#--</select>-->
-                <#--</div>-->
-            <#--</div>-->
-        <#--</form>-->
-    <#--</div>-->
-    <#--<div class="modal-footer">-->
-        <#--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
-        <#--<a class="btn btn-primary" id="postAddExp">确认</a>-->
-    <#--</div>-->
-<#--</div>-->
+<div class="modal hide fade" id="editTypeModal" tabindex="-1" role="dialog" aria-labelledby="editTypeModalLabel">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>编辑小类</h3>
+    </div>
+    <div class="modal-body">
+        <form id="editTypeForm">
+            <label class="control-label">编号</label>
+            <input class="input" id="type_id1" type="text" name="type_id" readonly="true">
+            <label class="control-label">小类名称</label>
+            <input class="input" id="type_name1" type="text" name="type_name">
+            <div class="control-group">
+                <label class="control-label">所属大类</label>
+                <div class="controls">
+                    <select id="class_info1" name="class_info">
+                    <#if (exp_class?size > 0)>
+                        <#list exp_class as e>
+                            <option value="${e.class_id} ${e.class_name}">${e.class_id} ${e.class_name}</option>
+                        </#list>
+                    </#if>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <a class="btn btn-primary" id="postEditType">确认</a>
+    </div>
+</div>
 
 <#include "include/footer.ftl">
 
@@ -339,6 +347,50 @@
     })
 </script>
 
+<#--edit class modal-->
+<script type="text/javascript">
+    $("#editClassModal").on("show.bs.modal", function (event) {
+        var button = $(event.relatedTarget);
+        var name = button.data("name");
+        var id = button.data("id");
+
+        var modal = $(this);
+        modal.find('#class_id1').val(id);
+        modal.find('#class_name1').val(name);
+    });
+
+    $("#postEditClass").click(function(){
+        if($('#class_id1').val() == ""){
+            swal("编号不能为空","","error");
+        } else if($('#class_name1').val() == ""){
+            swal("大类名不能为空","","error");
+        } else {
+            $.ajax({
+                url: '${base}/admin/expClass/edit',
+                type: 'POST',
+                data: $('#editClassForm').serialize(),
+                success: function (result) {
+                    var data = eval("(" + result + ")");
+                    if (data.error == 0) {
+                        swal({
+                                    title: data.msg,
+                                    text: "",
+                                    type: "success",
+                                    confirmButtonText: "确认"
+                                },
+                                function () {
+                                    location.reload();
+                                });
+                    } else {
+                        swal(data.msg, "", "error");
+                    }
+                }
+            });
+            $('#editClassModal').modal('hide');
+        }
+    })
+</script>
+
 <#--add type modal-->
 <script type="text/javascript">
     $("#postAddType").click(function(){
@@ -373,59 +425,52 @@
     })
 </script>
 
-<#--&lt;#&ndash;combine class & type&ndash;&gt;-->
-<#--<script type="text/javascript">-->
+<#--edit type modal-->
+<script type="text/javascript">
+    $("#editTypeModal").on("show.bs.modal", function (event) {
+        var button = $(event.relatedTarget);
+        var tname = button.data("tname");
+        var cname = button.data("cname");
+        var tid = button.data("tid");
+        var cid = button.data("cid");
 
-<#--function onselected(value){-->
-    <#--$("#type_info").empty();-->
-    <#--<#if (exp_type?size > 0)>-->
-        <#--<#list exp_type as e>-->
-            <#--if(${e.class_id}==value){-->
-                <#--$("#type_info").append("<option>${e.type_id} ${e.type_name}</option>");-->
-            <#--}-->
-        <#--</#list>-->
-    <#--</#if>-->
-<#--}-->
+        var modal = $(this);
+        modal.find('#type_id1').val(tid);
+        modal.find('#type_name1').val(tname);
+        modal.find('#class_info1').val(cid+" "+cname);
+    });
 
-<#--</script>-->
-
-<#--&lt;#&ndash;add exp modal&ndash;&gt;-->
-<#--<script type="text/javascript">-->
-    <#--$("#postAddExp").click(function(){-->
-        <#--if($('#e_id').val() == ""){-->
-            <#--swal("编号不能为空","","error");-->
-        <#--} else if($('#e_name').val() == ""){-->
-            <#--swal("实验名称不能为空","","error");-->
-        <#--} else if($('#e_description').val() == ""){-->
-            <#--swal("实验简介不能为空","","error");-->
-        <#--} else if($('#class_info1').val() == "请选择"){-->
-            <#--swal("实验分类不能为空","","error");-->
-        <#--} else {-->
-            <#--$.ajax({-->
-                <#--url: '${base}/admin/exp/add',-->
-                <#--type: 'POST',-->
-                <#--data: $('#addExpForm').serialize(),-->
-                <#--success: function (result) {-->
-                    <#--var data = eval("(" + result + ")");-->
-                    <#--if (data.error == 0) {-->
-                        <#--swal({-->
-                                    <#--title: data.msg,-->
-                                    <#--text: "",-->
-                                    <#--type: "success",-->
-                                    <#--confirmButtonText: "确认"-->
-                                <#--},-->
-                                <#--function () {-->
-                                    <#--location.reload();-->
-                                <#--});-->
-                    <#--} else {-->
-                        <#--swal(data.msg, "", "error");-->
-                    <#--}-->
-                <#--}-->
-            <#--});-->
-            <#--$('#addExpModal').modal('hide');-->
-        <#--}-->
-    <#--})-->
-<#--</script>-->
+    $("#postEditType").click(function(){
+        if($('#type_id1').val() == ""){
+            swal("编号不能为空","","error");
+        } else if($('#type_name1').val() == ""){
+            swal("小类名不能为空","","error");
+        } else {
+            $.ajax({
+                url: '${base}/admin/expType/edit',
+                type: 'POST',
+                data: $('#editTypeForm').serialize(),
+                success: function (result) {
+                    var data = eval("(" + result + ")");
+                    if (data.error == 0) {
+                        swal({
+                                    title: data.msg,
+                                    text: "",
+                                    type: "success",
+                                    confirmButtonText: "确认"
+                                },
+                                function () {
+                                    location.reload();
+                                });
+                    } else {
+                        swal(data.msg, "", "error");
+                    }
+                }
+            });
+            $('#editTypeModal').modal('hide');
+        }
+    })
+</script>
 
 </body>
 </html>

@@ -20,7 +20,7 @@ public class UploadFileService {
     @Value("${upload.file.path}")
     private String path;
 
-    public String uploadService(MultipartFile file,String userId){
+    public String uploadStudentListService(MultipartFile file, String userId){
         String prefix = userId + "/";
         if (!file.isEmpty()) {
             try {
@@ -41,6 +41,29 @@ public class UploadFileService {
                 String newFileName = subString + "_" + time + fileName.substring(index);
 
                 String filePath = folderPath + newFileName;
+                file.transferTo(new File(filePath));
+                return filePath;
+            } catch (Exception e) {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
+    public String uploadExpGuideService(MultipartFile file){
+        if (!file.isEmpty()) {
+            try {
+                String folderPath = path + "Exp/";
+
+                //如果路径不存在，则创建
+                File newFile = new File(folderPath);
+                if(!newFile.isDirectory()){
+                    newFile.mkdir();
+                }
+
+                String fileName = file.getOriginalFilename();
+                String filePath = folderPath + fileName;
                 file.transferTo(new File(filePath));
                 return filePath;
             } catch (Exception e) {

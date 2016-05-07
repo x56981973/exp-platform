@@ -137,7 +137,7 @@
                         <div class="control-group">
                             <label class="control-label">文件格式模板下载</label>
                             <div class="controls">
-                                <a href="#" target="_blank">点击下载</a>
+                                <a href="${base}/upload/exp_type.json">点击下载</a>
                             </div>
                         </div>
                         <div class="form-actions">
@@ -155,6 +155,16 @@
 </div>
 
 <#include "include/footer.ftl">
+
+<#--<script type="text/javascript">-->
+    <#--$('#download').click(function(){-->
+        <#--$.ajax({-->
+            <#--url: '${base}/download',-->
+            <#--type: 'POST',-->
+            <#--data: {"fileName":"学生名单模版.xlsx"}-->
+        <#--});-->
+    <#--});-->
+<#--</script>-->
 
 <script type="text/javascript">
     function insert()
