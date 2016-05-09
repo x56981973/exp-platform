@@ -28,7 +28,7 @@
     </insert>
 
     <update id="updateTeacherInfo" parameterType="my.app.platform.domain.Teacher">
-        UPDATE teacher SET t_name = #{t_name},t_password = #{t_password},t_school = #{t_school},role = #{role}
+        UPDATE teacher SET t_name = #{t_name},t_password = #{t_password},t_school = #{t_school},role = #{role},active_exp = #{active_exp}
         WHERE t_login_name = #{t_login_name}
     </update>
 

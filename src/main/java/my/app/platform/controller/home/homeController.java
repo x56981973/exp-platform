@@ -2,13 +2,12 @@ package my.app.platform.controller.home;
 
 import my.app.platform.domain.ExpClass;
 import my.app.platform.domain.LoginRecord;
-import my.app.platform.domain.Student;
 import my.app.platform.domain.Teacher;
+import my.app.platform.domain.model.ActiveExperiment;
 import my.app.platform.domain.model.MExpType;
 import my.app.platform.domain.model.MExperiment;
 import my.app.platform.repository.mapper.experiment.IExpInfoDao;
 import my.app.platform.repository.mapper.log.ILogInfoDao;
-import my.app.platform.service.ExpService;
 import my.app.platform.service.LoginService;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
@@ -50,10 +49,29 @@ public class homeController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private StudentService studentService;
+
     @RequestMapping(value = "/")
     public String home(Model model){
+        String t_id = session.getAttribute("t_id").toString();
         String t_name = session.getAttribute("t_name").toString();
         model.addAttribute("t_name", t_name);
+
+        //Get Active Exp info
+        List<ActiveExperiment> activeExperiments = teacherService.getActiveExpList(t_id);
+        model.addAttribute("active_exp",activeExperiments);
+
+        //Get Exp info
+        List<MExperiment> experiments = expInfoDao.queryAllExp();
+        model.addAttribute("exp",experiments);
+
+        int s_num = studentService.getStudentListByTeacher(t_id).size();
+        model.addAttribute("s_num",s_num);
+
+        int e_num = experiments.size();
+        model.addAttribute("e_num", e_num);
+
         return "/user/home";
     }
 
@@ -122,12 +140,12 @@ public class homeController {
         return "/user/experiment";
     }
 
-    @RequestMapping(value = "/setting")
+    @RequestMapping(value = "/settings")
     public String setting(Model model){
         String t_id = session.getAttribute("t_id").toString();
         Teacher teacher = teacherService.getTeacher(t_id);
         model.addAttribute("teacher", teacher);
 
-        return "/user/setting";
+        return "/user/settings";
     }
 }

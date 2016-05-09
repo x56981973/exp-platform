@@ -133,7 +133,7 @@
             <input class="input-xlarge focused" id="new_id1" type="text">
             <label class="control-label">姓名</label>
             <input class="input-xlarge focused" id="new_name1" type="text">
-            <label class="control-label">学号</label>
+            <label class="control-label">密码</label>
             <input class="input-xlarge focused" id="new_password1" type="text">
             <label class="control-label">年级</label>
             <input class="input-xlarge focused" id="new_grade1" type="text">

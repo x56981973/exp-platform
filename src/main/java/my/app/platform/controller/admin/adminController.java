@@ -2,8 +2,8 @@ package my.app.platform.controller.admin;
 
 import my.app.platform.domain.LoginRecord;
 import my.app.platform.domain.OptionRecord;
+import my.app.platform.repository.mapper.experiment.IExpInfoDao;
 import my.app.platform.repository.mapper.log.ILogInfoDao;
-import my.app.platform.service.ExpService;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class adminController {
     private StudentService studentService;
 
     @Autowired
-    private ExpService expService;
+    private IExpInfoDao expInfoDao;
 
     @RequestMapping(value = "/admin")
     public String admin(Model model){
@@ -49,7 +49,7 @@ public class adminController {
         int s_num = studentService.getStudentList().size();
         model.addAttribute("s_num",s_num);
 
-        int e_num = expService.getExp().size();
+        int e_num = expInfoDao.queryAllExp().size();
         model.addAttribute("e_num", e_num);
 
         List<LoginRecord> loginRecordList = logInfoDao.queryLoginRecord(t_id);

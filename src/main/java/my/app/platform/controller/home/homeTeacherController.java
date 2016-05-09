@@ -44,4 +44,58 @@ public class homeTeacherController {
             return "{\"error\":\"1\",\"msg\":\"插入失败\"}";
         }
     }
+
+    /**
+     * 修改正在进行中实验的状态
+     * @param e_id 实验id
+     * @param status 状态
+     * @return 处理结果
+     */
+    @RequestMapping(value = "/teacher/changeExpStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public String changeExpStatus(String e_id,String status){
+        String t_id = httpSession.getAttribute("t_id").toString();
+        Teacher teacher = teacherService.getTeacher(t_id);
+        String exp_status = teacher.getActive_exp();
+        StringBuilder new_status = new StringBuilder(exp_status);
+        int index = exp_status.indexOf(e_id) + e_id.length();
+        new_status.replace(index, index + 1, status);
+        teacher.setActive_exp(new_status.toString());
+        if (teacherService.updateTeacher(teacher) != 0) {
+            return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
+        } else {
+            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
+        }
+    }
+
+    /**
+     * 修改正在进行中的实验
+     * @param list 新实验列表
+     * @return
+     */
+    @RequestMapping(value = "/teacher/changeActiveExp", method = RequestMethod.POST)
+    @ResponseBody
+    public String changeActiveExp(String list){
+        String t_id = httpSession.getAttribute("t_id").toString();
+        Teacher teacher = teacherService.getTeacher(t_id);
+        String exp_status = teacher.getActive_exp();
+        String[] new_exp = list.split(",");
+
+        String new_exp_status = "";
+        for(String e : new_exp){
+            if(exp_status.contains(e)){
+                int index = exp_status.indexOf(e);
+                new_exp_status += e + exp_status.charAt(index+e.length()) + ",";
+            } else {
+                new_exp_status += e + "-" + ",";
+            }
+        }
+        teacher.setActive_exp(new_exp_status);
+
+        if (teacherService.updateTeacher(teacher) != 0) {
+            return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
+        } else {
+            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
+        }
+    }
 }

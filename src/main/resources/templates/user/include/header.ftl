@@ -68,13 +68,13 @@
                         </a>
                         <ul class="dropdown-menu tasks">
                             <li class="dropdown-menu-title">
-                                <span>You have 17 tasks in progress</span>
+                                <span>You have 8 Message</span>
                                 <a href="#refresh"><i class="icon-repeat"></i></a>
                             </li>
                             <li>
                                 <a href="#">
 										<span class="header">
-											<span class="title">iOS Development</span>
+											<span class="title">实验进度</span>
 											<span class="percent"></span>
 										</span>
                                     <div class="taskProgress progressSlim red">80</div>
@@ -85,7 +85,7 @@
                     <!-- end: Notifications Dropdown -->
 
                     <li>
-                        <a class="btn" href="${base}/setting">
+                        <a class="btn" href="${base}/settings">
                             <i class="halflings-icon white wrench"></i>
                         </a>
                     </li>

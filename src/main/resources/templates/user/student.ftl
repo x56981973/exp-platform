@@ -19,6 +19,9 @@
             <div class="box span12">
                 <div class="box-header">
                     <h2><i class="halflings-icon user"></i><span class="break"></span>学生名单</h2>
+                    <div class="box-icon">
+                        <a data-toggle="modal" data-target="#addModal"><i class="halflings-icon plus"></i></a>
+                    </div>
                 </div>
                 <div class="box-content">
                     <table class="table table-striped table-bordered bootstrap-datatable datatable">
@@ -77,6 +80,37 @@
         </div>
     </div>
 
+    </div>
+</div>
+
+<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>添加学生</h3>
+    </div>
+    <div class="modal-body">
+        <form id="insertStudent">
+            <label class="control-label">学号</label>
+            <input type="text" name="s_login_name" id="s_login_name">
+            <label class="control-label">姓名</label>
+            <input type="text" name="s_name" id="s_name">
+            <label class="control-label">密码</label>
+            <input type="text" name="s_password" id="s_password">
+            <label class="control-label">年级</label>
+            <select id="selectError" data-rel="chosen" name="s_grade">
+                <option>2011</option>
+                <option>2012</option>
+                <option>2013</option>
+                <option>2014</option>
+                <option>2015</option>
+                <option selected>2016</option>
+                <option>2017</option>
+            </select>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <a class="btn btn-primary" id="postAdd">确认</a>
     </div>
 </div>
 
@@ -256,6 +290,36 @@
     })
 </script>
 
+<script type="text/javascript">
+    $("#postAdd").click(function(){
+        var new_id = $('#new_id').val();
+        var new_name = $('#new_name').val();
+        var new_password = $('#new_password').val();
+        var new_grade = $('#new_grade').val();
+        $.ajax({
+            url: '${base}/student/insert',
+            type: 'POST',
+            data: $('#insertStudent').serialize(),
+            success: function (result) {
+                var data = eval("(" + result + ")");
+                if (data.error == 0) {
+                    swal({
+                                title: data.msg,
+                                text: "",
+                                type: "success",
+                                confirmButtonText: "确认"
+                            },
+                            function(){
+                                location.reload();
+                            });
+                } else {
+                    swal(data.msg,"","error");
+                }
+            }
+        });
+        $('#addModal').modal('hide');
+    })
+</script>
 
 </body>
 </html>

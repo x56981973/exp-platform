@@ -32,6 +32,11 @@ public class Teacher {
      */
     private String role;
 
+    /**
+     * 正在进行中的实验
+     */
+    private String active_exp;
+
     public String getT_name() {
         return t_name;
     }
@@ -70,5 +75,13 @@ public class Teacher {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getActive_exp() {
+        return active_exp;
+    }
+
+    public void setActive_exp(String active_exp) {
+        this.active_exp = active_exp;
     }
 }

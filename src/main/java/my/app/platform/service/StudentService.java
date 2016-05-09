@@ -88,7 +88,7 @@ public class StudentService {
     }
 
     /**
-     * 获取所有学生列表
+     * 获取教师学生列表
      * @return 学生列表
      */
     public List<Student> getStudentListByTeacher(String t_login_name){
