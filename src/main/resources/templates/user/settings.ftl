@@ -137,7 +137,7 @@
                         <div class="control-group">
                             <label class="control-label">文件格式模板下载</label>
                             <div class="controls">
-                                <a href="${base}/upload/exp_type.json">点击下载</a>
+                                <a href="${base}/download/学生名单模版.xlsx">点击下载</a>
                             </div>
                         </div>
                         <div class="form-actions">

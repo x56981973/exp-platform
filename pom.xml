@@ -6,8 +6,11 @@
 
     <groupId>my.app.exp</groupId>
     <artifactId>exp-platform</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>wireless</name>
+    <description>wireless experiment platform</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
