@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class LoginController {
+public class StudentLoginController {
     @Autowired
     LoginService loginService;
 
@@ -29,9 +29,4 @@ public class LoginController {
             return ResultHelper.newSuccessResult(result);
         }
     }
-//
-//    @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
-//    public Result teacherLoginHandler(@RequestParam String username,String password) {
-//        return ResultHelper.newSuccessResult(loginService.teacherLoginCheck(username,password));
-//    }
 }

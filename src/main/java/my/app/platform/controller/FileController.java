@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RestController
+@RequestMapping(value="/client")
 public class FileController {
     @Autowired
     UploadFileService uploadFileService;
@@ -26,9 +27,10 @@ public class FileController {
     @Autowired
     DownLoadFileService downLoadFileService;
 
-    @RequestMapping(value="/upload", method= RequestMethod.POST)
-    public Result handleFileUpload(MultipartFile file, String userId){
-        return ResultHelper.newSuccessResult(uploadFileService.uploadStudentListService(file, userId));
+    @RequestMapping(value="/upload/report", method= RequestMethod.POST)
+    public boolean uploadReportHandler(MultipartFile file, String s_id){
+        uploadFileService.uploadStudentReport(file, s_id);
+        return true;
     }
 
     @RequestMapping(value="/download", method= RequestMethod.POST)

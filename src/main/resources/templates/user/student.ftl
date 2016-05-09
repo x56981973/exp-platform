@@ -47,7 +47,9 @@
                                     <#if s.report_status == "未提交">
                                         <span class="label label-important">${s.report_status}</span>
                                     <#else>
-                                        <span class="label label-success">${s.report_status}</span>
+                                        <a class="label label-success" href="${base}/upload/${s.teacher}/${s.s_login_name}/${s.report_path}">
+                                            ${s.report_status}
+                                        </a>
                                     </#if>
                                 </td>
                                 <td class="center">${s.s_score}</td>
