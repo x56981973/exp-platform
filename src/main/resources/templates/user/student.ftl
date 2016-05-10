@@ -9,7 +9,7 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="${base}/">主页</a>
+                <a href="${base}/user/home">主页</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li><a href="#">学生列表</a></li>
@@ -199,7 +199,7 @@
 
     $("#checkDelete").click(function(){
         $.ajax({
-            url: '${base}/student/delete',
+            url: '${base}/user/student/delete',
             type: 'POST',
             data: $.param({'s_login_name':id}),
             success: function (result) {
@@ -268,7 +268,7 @@
         var new_grade = $('#new_grade').val();
         var new_score = $('#new_score').val();
         $.ajax({
-            url: '${base}/student/update/info',
+            url: '${base}/user/student/update/info',
             type: 'POST',
             data: $.param({'s_login_name':id,'s_name':new_name,'s_grade':new_grade,'s_score':new_score}),
             success: function (result) {
@@ -299,7 +299,7 @@
         var new_password = $('#new_password').val();
         var new_grade = $('#new_grade').val();
         $.ajax({
-            url: '${base}/student/insert',
+            url: '${base}/user/student/insert',
             type: 'POST',
             data: $('#insertStudent').serialize(),
             success: function (result) {

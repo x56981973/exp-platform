@@ -9,10 +9,10 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home"></i>
-                    <a href="${base}/">主页</a>
+                    <a href="${base}/user/home">主页</a>
                     <i class="icon-angle-right"></i>
                 </li>
-                <li><a href="${base}/exp">实验列表</a></li>
+                <li><a href="#">实验列表</a></li>
             </ul>
 
             <div class="row-fluid">

@@ -9,7 +9,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home"></i>
-                    <a href="${base}/admin/">主页</a>
+                    <a href="${base}/admin/home">主页</a>
                     <i class="icon-angle-right"></i>
                 </li>
                 <li><a href="${base}/admin/exp">实验列表</a></li>

@@ -13,10 +13,11 @@ import javax.servlet.http.HttpSession;
 /**
  * @author 夏之阳
  * 创建时间：2016-04-21 13:24
- * 创建说明：
+ * 创建说明：用户教师信息接口
  */
 
 @Controller
+@RequestMapping(value = "/user")
 public class homeTeacherController {
     @Autowired
     HttpSession httpSession;
@@ -39,9 +40,9 @@ public class homeTeacherController {
 
         int result = teacherService.updateTeacher(teacher);
         if (result != 0) {
-            return "{\"error\":\"0\",\"msg\":\"插入成功\"}";
+            return "{\"error\":\"0\",\"msg\":\"更新成功\"}";
         } else {
-            return "{\"error\":\"1\",\"msg\":\"插入失败\"}";
+            return "{\"error\":\"1\",\"msg\":\"更新失败\"}";
         }
     }
 
@@ -71,7 +72,7 @@ public class homeTeacherController {
     /**
      * 修改正在进行中的实验
      * @param list 新实验列表
-     * @return
+     * @return 处理结果
      */
     @RequestMapping(value = "/teacher/changeActiveExp", method = RequestMethod.POST)
     @ResponseBody

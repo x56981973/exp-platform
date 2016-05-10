@@ -2,20 +2,13 @@ package my.app.platform.controller;
 
 import my.app.framework.web.Result;
 import my.app.framework.web.ResultHelper;
-import my.app.platform.domain.ExpClass;
-import my.app.platform.domain.Experiment;
 import my.app.platform.domain.Teacher;
-import my.app.platform.domain.model.ActiveExperiment;
 import my.app.platform.repository.mapper.experiment.IExpInfoDao;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author 夏之阳

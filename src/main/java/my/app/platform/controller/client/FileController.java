@@ -1,7 +1,5 @@
-package my.app.platform.controller;
+package my.app.platform.controller.client;
 
-import my.app.framework.web.Result;
-import my.app.framework.web.ResultHelper;
 import my.app.platform.service.File.DownLoadFileService;
 import my.app.platform.service.File.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;

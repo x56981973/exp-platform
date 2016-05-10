@@ -19,7 +19,13 @@ public interface IExpInfoDao {
      * 获取所有实验列表
      * @return 实验列表
      */
-    List<MExperiment> queryAllExp();
+    List<Experiment> queryAllExp();
+
+    /**
+     * 获取所有实验列表
+     * @return 实验列表
+     */
+    List<MExperiment> queryAllMExp();
 
     /**
      * 获取所有实验分类
@@ -31,7 +37,13 @@ public interface IExpInfoDao {
      * 获取所有实验类型
      * @return 实验类型列表
      */
-    List<MExpType> queryAllExpType();
+    List<MExpType> queryAllMExpType();
+
+    /**
+     * 获取所有实验类型
+     * @return 实验类型列表
+     */
+    List<ExpType> queryAllExpType();
 
     /**
      * 插入实验信息

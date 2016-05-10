@@ -9,7 +9,7 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="${base}/">首页</a>
+                <a href="${base}/user/home">首页</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li><a href="#">概览</a></li>
@@ -22,7 +22,7 @@
                 <div class="number">${s_num}<i class="icon-arrow-up"></i></div>
                 <div class="title">学生总数</div>
                 <div class="footer">
-                    <a href="${base}/student"> 查看学生</a>
+                    <a href="${base}/user/student"> 查看学生</a>
                 </div>
             </div>
             <div class="span3 statbox green">
@@ -30,7 +30,7 @@
                 <div class="number">${e_num}<i class="icon-arrow-up"></i></div>
                 <div class="title">实验总数</div>
                 <div class="footer">
-                    <a href="${base}/exp"> 查看实验</a>
+                    <a href="${base}/user/exp"> 查看实验</a>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                 <div class="number"><i class="icon-cogs"></i></div>
                 <div class="title">设置</div>
                 <div class="footer">
-                    <a href="${base}/settings"> 进入设置</a>
+                    <a href="${base}/user/settings"> 进入设置</a>
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
         list = list.substring(0,list.length-1);
 
         $.ajax({
-            url: '${base}/teacher/changeActiveExp',
+            url: '${base}/user/teacher/changeActiveExp',
             type: 'POST',
             data: $.param({'list':list}),
             success: function (result) {
@@ -182,7 +182,7 @@
        }
 
        $.ajax({
-           url: '${base}/teacher/changeExpStatus',
+           url: '${base}/user/teacher/changeExpStatus',
            type: 'POST',
            data: $.param({'e_id':id,'status':status}),
            success: function (result) {

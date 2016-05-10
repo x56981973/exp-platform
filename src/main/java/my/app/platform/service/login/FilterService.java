@@ -39,6 +39,27 @@ public class FilterService extends OncePerRequestFilter {
             return;
         }
 
+        if(url.contains("admin")){
+            if( "admin".equals(session.getAttribute("role")) ){
+                filterChain.doFilter(httpServletRequest,httpServletResponse);
+                return;
+            } else {
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/error");
+                return;
+            }
+        }
+
+        if(url.contains("user")){
+            if( "user".equals(session.getAttribute("role")) ){
+                filterChain.doFilter(httpServletRequest,httpServletResponse);
+                return;
+            } else {
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/error");
+                return;
+            }
+        }
+
+
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }
 }

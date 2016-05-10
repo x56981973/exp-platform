@@ -18,10 +18,11 @@ import java.util.List;
 /**
  * @author 夏之阳
  * 创建时间：2016-04-17 17:19
- * 创建说明：
+ * 创建说明：用户学生管理接口
  */
 
 @Controller
+@RequestMapping(value = "/user")
 public class homeStudentController {
     @Autowired
     HttpSession httpSession;

@@ -9,10 +9,10 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home"></i>
-                    <a href="/admin/home">主页</a>
+                    <a href="${base}/admin/home">主页</a>
                     <i class="icon-angle-right"></i>
                 </li>
-                <li><a href="/teacher">教师</a></li>
+                <li><a href="#">教师</a></li>
             </ul>
 
             <div class="row-fluid">

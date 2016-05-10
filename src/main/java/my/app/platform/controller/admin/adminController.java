@@ -21,6 +21,7 @@ import java.util.List;
  */
 
 @Controller
+@RequestMapping(value = "/admin")
 public class adminController {
     @Autowired
     private HttpSession session;
@@ -37,7 +38,7 @@ public class adminController {
     @Autowired
     private IExpInfoDao expInfoDao;
 
-    @RequestMapping(value = "/admin")
+    @RequestMapping(value = "/home")
     public String admin(Model model){
         String t_id = session.getAttribute("t_id").toString();
         String t_name = session.getAttribute("t_name").toString();
@@ -49,7 +50,7 @@ public class adminController {
         int s_num = studentService.getStudentList().size();
         model.addAttribute("s_num",s_num);
 
-        int e_num = expInfoDao.queryAllExp().size();
+        int e_num = expInfoDao.queryAllMExp().size();
         model.addAttribute("e_num", e_num);
 
         List<LoginRecord> loginRecordList = logInfoDao.queryLoginRecord(t_id);

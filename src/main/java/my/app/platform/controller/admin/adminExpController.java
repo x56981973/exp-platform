@@ -25,10 +25,11 @@ import java.util.List;
 /**
  * @author 夏之阳
  * 创建时间：2016-05-02 14:12
- * 创建说明：
+ * 创建说明：管理员实验管理
  */
 
 @Controller
+@RequestMapping(value = "/admin")
 public class adminExpController {
     @Autowired
     HttpSession session;
@@ -44,17 +45,17 @@ public class adminExpController {
 
     OptionRecord optionRecord = new OptionRecord();
 
-    @RequestMapping(value = "/admin/exp")
+    @RequestMapping(value = "/exp")
     public String experiment(Model model){
         //Get t_name
         String t_name = session.getAttribute("t_name").toString();
         model.addAttribute("t_name",t_name);
 
         //Get Exp info
-        List<MExperiment> experimentList = expInfoDao.queryAllExp();
+        List<MExperiment> experimentList = expInfoDao.queryAllMExp();
         model.addAttribute("exp",experimentList);
 
-        List<MExpType> expTypeList = expInfoDao.queryAllExpType();
+        List<MExpType> expTypeList = expInfoDao.queryAllMExpType();
         model.addAttribute("exp_type",expTypeList);
 
         List<ExpClass> expClassList = expInfoDao.queryAllExpClass();
@@ -63,7 +64,7 @@ public class adminExpController {
         return "/admin/experiment";
     }
 
-    @RequestMapping(value = "/admin/exp/delete")
+    @RequestMapping(value = "/exp/delete")
     @ResponseBody
     public String expDeleteHandler(String id){
         if(expInfoDao.deleteExperiment(id) != 0) {
@@ -81,7 +82,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/expType/delete")
+    @RequestMapping(value = "/expType/delete")
     @ResponseBody
     public String typeDeleteHandler(String id){
         if(expInfoDao.deleteExpType(id) != 0) {
@@ -99,7 +100,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/expClass/delete")
+    @RequestMapping(value = "/expClass/delete")
     @ResponseBody
     public String classDeleteHandler(String id){
         if(expInfoDao.deleteExpClass(id) != 0) {
@@ -117,7 +118,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/expClass/add")
+    @RequestMapping(value = "/expClass/add")
     @ResponseBody
     public String classAddHandler(ExpClass expClass){
         String class_id = String.valueOf(expClass.getClass_id());
@@ -141,7 +142,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/expClass/edit")
+    @RequestMapping(value = "/expClass/edit")
     @ResponseBody
     public String classEditHandler(ExpClass expClass){
         String class_id = String.valueOf(expClass.getClass_id());
@@ -165,7 +166,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/expType/add")
+    @RequestMapping(value = "/expType/add")
     @ResponseBody
     public String typeAddHandler(ExpType expType,String class_info){
         String class_id = class_info.split(" ")[0];
@@ -192,7 +193,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/expType/edit")
+    @RequestMapping(value = "/expType/edit")
     @ResponseBody
     public String typeEditHandler(ExpType expType,String class_info){
         String class_id = class_info.split(" ")[0];
@@ -219,7 +220,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/exp/insert")
+    @RequestMapping(value = "/exp/insert")
     @ResponseBody
     public String expAddHandler(Experiment experiment,String class_info,String type_info){
         String class_id = class_info.split(" ")[0];
@@ -249,17 +250,17 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/exp/add")
+    @RequestMapping(value = "/exp/add")
     public String expAddHandler(Model model){
         //Get t_name
         String t_name = session.getAttribute("t_name").toString();
         model.addAttribute("t_name", t_name);
 
         //Get Exp info
-        List<MExperiment> experimentList = expInfoDao.queryAllExp();
+        List<MExperiment> experimentList = expInfoDao.queryAllMExp();
         model.addAttribute("exp", experimentList);
 
-        List<MExpType> expTypeList = expInfoDao.queryAllExpType();
+        List<MExpType> expTypeList = expInfoDao.queryAllMExpType();
         model.addAttribute("exp_type",expTypeList);
 
         List<ExpClass> expClassList = expInfoDao.queryAllExpClass();
@@ -268,7 +269,7 @@ public class adminExpController {
         return "/admin/newExp";
     }
 
-    @RequestMapping(value = "/admin/exp/edit/{e_id}")
+    @RequestMapping(value = "/exp/edit/{e_id}")
     public String expEditHandler(@PathVariable String e_id,Model model){
         //Get t_name
         String t_name = session.getAttribute("t_name").toString();
@@ -281,7 +282,7 @@ public class adminExpController {
         Experiment experiment = experiments.get(0);
         model.addAttribute("experiment", experiment);
 
-        List<MExpType> expTypeList = expInfoDao.queryAllExpType();
+        List<MExpType> expTypeList = expInfoDao.queryAllMExpType();
         model.addAttribute("exp_type",expTypeList);
 
         List<ExpClass> expClassList = expInfoDao.queryAllExpClass();
@@ -290,7 +291,7 @@ public class adminExpController {
         return "/admin/editExp";
     }
 
-    @RequestMapping(value = "/admin/exp/edit")
+    @RequestMapping(value = "/exp/edit")
     @ResponseBody
     public String editExp(Experiment experiment,String class_info,String type_info){
         String class_id = class_info.split(" ")[0];
@@ -320,7 +321,7 @@ public class adminExpController {
         }
     }
 
-    @RequestMapping(value = "/admin/exp/insertGuide")
+    @RequestMapping(value = "/exp/insertGuide")
     @ResponseBody
     public String insertGuide(MultipartFile guide,String e_id){
         List<Experiment> experiments = expInfoDao.queryExperiment(e_id);

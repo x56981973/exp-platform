@@ -9,7 +9,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home"></i>
-                    <a href="${base}/">主页</a>
+                    <a href="${base}/admin/home">主页</a>
                     <i class="icon-angle-right"></i>
                 </li>
                 <li><a href="#">学生列表</a></li>

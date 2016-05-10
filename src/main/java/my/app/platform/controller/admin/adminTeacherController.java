@@ -20,10 +20,11 @@ import java.util.List;
 /**
  * @author 夏之阳
  * 创建时间：2016-05-01 00:44
- * 创建说明：
+ * 创建说明：管理员教师管理
  */
 
 @Controller
+@RequestMapping(value = "/admin")
 public class adminTeacherController {
     @Autowired
     private HttpSession session;
@@ -36,7 +37,7 @@ public class adminTeacherController {
 
     OptionRecord optionRecord = new OptionRecord();
 
-    @RequestMapping(value = "/admin/teacher")
+    @RequestMapping(value = "/teacher")
     public String teacher(Model model){
         String t_name = session.getAttribute("t_name").toString();
         model.addAttribute("t_name", t_name);
@@ -47,7 +48,7 @@ public class adminTeacherController {
         return "/admin/teacher";
     }
 
-    @RequestMapping(value = "/admin/teacher/delete")
+    @RequestMapping(value = "/teacher/delete")
     @ResponseBody
     public String teacherDeleteHandler(String t_login_name){
         if(teacherService.deleteTeacher(t_login_name) != 0) {
@@ -65,7 +66,7 @@ public class adminTeacherController {
         }
     }
 
-    @RequestMapping(value = "/admin/teacher/insert")
+    @RequestMapping(value = "/teacher/insert")
     @ResponseBody
     public String teacherInsertHandler(Teacher teacher){
         Teacher t = teacherService.getTeacher(teacher.getT_login_name());
@@ -88,7 +89,7 @@ public class adminTeacherController {
         }
     }
 
-    @RequestMapping(value = "/admin/teacher/update")
+    @RequestMapping(value = "/teacher/update")
     @ResponseBody
     public String teacherUpdateHandler(Teacher teacher){
         if(teacherService.updateTeacher(teacher) != 0) {

@@ -9,7 +9,7 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="${base}/">主页</a>
+                <a href="${base}/user/home">主页</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li><a href="#">设置</a></li>
@@ -156,16 +156,6 @@
 
 <#include "include/footer.ftl">
 
-<#--<script type="text/javascript">-->
-    <#--$('#download').click(function(){-->
-        <#--$.ajax({-->
-            <#--url: '${base}/download',-->
-            <#--type: 'POST',-->
-            <#--data: {"fileName":"学生名单模版.xlsx"}-->
-        <#--});-->
-    <#--});-->
-<#--</script>-->
-
 <script type="text/javascript">
     function insert()
     {
@@ -184,7 +174,7 @@
         }
 
         $.ajax({
-            url: '${base}/student/insert',
+            url: '${base}/user/student/insert',
             type: 'POST',
             data: $('#insertStudent').serialize(),
             success: function (result) {
@@ -220,7 +210,7 @@
         }
 
         $.ajax({
-            url: '${base}/teacher/update',
+            url: '${base}/user/teacher/update',
             type: 'POST',
             data: $.param({'t_login_name':"${teacher.t_login_name}",'t_name':"${teacher.t_name}",
                 'school':form.school.value,'password':form.s_password2.value}),
@@ -240,7 +230,7 @@
 
 <script type="text/javascript">
     var options = {
-        url: '${base}/student/insertList',
+        url: '${base}/user/student/insertList',
         success: function (result) {
             var data = eval("(" + result + ")");
             if (data.error == 0) {

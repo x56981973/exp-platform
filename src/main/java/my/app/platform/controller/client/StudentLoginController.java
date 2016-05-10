@@ -1,7 +1,5 @@
-package my.app.platform.controller;
+package my.app.platform.controller.client;
 
-import my.app.framework.web.Result;
-import my.app.framework.web.ResultHelper;
 import my.app.platform.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,17 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
+@RequestMapping(value = "/client")
 public class StudentLoginController {
     @Autowired
     LoginService loginService;
 
     @RequestMapping(value = "/student/login", method = RequestMethod.POST)
-    public Result studentLoginHandler(@RequestParam String userName,String password) {
+    public String studentLoginHandler(@RequestParam String userName,String password) {
         String result = loginService.studentLoginCheck(userName, password);
         if("".equals(result)){
-            return ResultHelper.newSuccessResult("Login Failed");
+            return "Login Failed";
         } else {
-            return ResultHelper.newSuccessResult(result);
+            return result;
         }
     }
 }
