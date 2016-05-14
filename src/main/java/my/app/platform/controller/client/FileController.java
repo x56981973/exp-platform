@@ -1,5 +1,7 @@
 package my.app.platform.controller.client;
 
+import my.app.framework.web.Result;
+import my.app.framework.web.ResultHelper;
 import my.app.platform.service.File.DownLoadFileService;
 import my.app.platform.service.File.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,21 @@ public class FileController {
     DownLoadFileService downLoadFileService;
 
     @RequestMapping(value="/upload/report", method= RequestMethod.POST)
-    public boolean uploadReportHandler(MultipartFile file, String s_id){
-        uploadFileService.uploadStudentReport(file, s_id);
-        return true;
+    public Result uploadReportHandler(MultipartFile file, String s_id){
+        String fileName = file.getOriginalFilename();
+        int index = fileName.lastIndexOf(".");
+        if(!("doc".equals(fileName.substring(index+1)) ||
+            "docx".equals(fileName.substring(index+1)) ||
+            "pdf".equals(fileName.substring(index+1)))){
+            return ResultHelper.newFailureResult("请上传文件名后缀为doc/docx/pdf的文件!");
+        }
+
+        String result = uploadFileService.uploadStudentReport(file, s_id);
+        if("".equals(result)){
+            return ResultHelper.newFailureResult("请联系管理员");
+        } else {
+            return ResultHelper.newSuccessResult(result);
+        }
     }
 
     @RequestMapping(value="/download", method= RequestMethod.POST)

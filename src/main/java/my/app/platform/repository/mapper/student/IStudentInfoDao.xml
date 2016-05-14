@@ -27,7 +27,17 @@
     </insert>
 
     <update id="updateStudent" parameterType="my.app.platform.domain.Student">
-        UPDATE student SET s_name = #{s_name},s_password = #{s_password},s_grade = #{s_grade},s_score = #{s_score},teacher = #{teacher},report_status = #{report_status},report_path = #{report_path}
+        UPDATE student
+        SET
+        s_name = #{s_name},
+        s_password = #{s_password},
+        s_grade = #{s_grade},
+        s_score = #{s_score},
+        teacher = #{teacher},
+        report_status = #{report_status},
+        report_path = #{report_path},
+        task_done = #{task_done},
+        progress = #{progress}
         WHERE s_login_name = #{s_login_name}
     </update>
 

@@ -4,3 +4,6 @@ target
 upload files
 logs
 .DS_Store
+*.zip
+*.xlsx
+*.pdf

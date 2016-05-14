@@ -47,6 +47,16 @@ public class Student {
      */
     private String report_path;
 
+    /**
+     * 已完成的实验
+     */
+    private String task_done;
+
+    /**
+     * 实验进度
+     */
+    private String progress;
+
     public String getS_name() {
         return s_name;
     }
@@ -109,5 +119,21 @@ public class Student {
 
     public void setReport_path(String report_path) {
         this.report_path = report_path;
+    }
+
+    public String getTask_done() {
+        return task_done;
+    }
+
+    public void setTask_done(String task_done) {
+        this.task_done = task_done;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 }

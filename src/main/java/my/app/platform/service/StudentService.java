@@ -7,20 +7,23 @@ package my.app.platform.service;
  */
 
 import my.app.platform.domain.Student;
+import my.app.platform.domain.Teacher;
 import my.app.platform.repository.mapper.student.IStudentInfoDao;
 import my.app.platform.tool.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
 public class StudentService {
     @Autowired
     IStudentInfoDao studentInfoDao;
+
+    @Autowired
+    TeacherService teacherService;
 
     /**
      * 插入单个学生
@@ -70,6 +73,11 @@ public class StudentService {
         return count;
     }
 
+    /**
+     * 查询学生信息
+     * @param s_login_name 学生登录名
+     * @return 学生信息
+     */
     public Student getStudent(String s_login_name){
         List<Student> students = studentInfoDao.queryStudentInfo(s_login_name);
         if(students.size() != 0) {
@@ -119,7 +127,7 @@ public class StudentService {
      * @return 更新条数
      */
     public int updateInfo(String s_login_name,String s_name, String s_grade, String s_score){
-        return studentInfoDao.updateInfo(s_login_name,s_name,s_grade,s_score);
+        return studentInfoDao.updateInfo(s_login_name, s_name, s_grade, s_score);
     }
 
     /**
@@ -128,6 +136,53 @@ public class StudentService {
      * @return 更新条数
      */
     public int updateStudentPwd(String s_login_name,String s_password){
-        return studentInfoDao.updatePwd(s_login_name,s_password);
+        return studentInfoDao.updatePwd(s_login_name, s_password);
+    }
+
+    /**
+     * 更新学生已完成实验
+     * @param s_login_name 学生登录名
+     * @return 更新条数
+     */
+    public int updateTask(String s_login_name,String e_id){
+        Student student = getStudent(s_login_name);
+        String task = student.getTask_done();
+        if(task == null) task = "";
+
+        String t_login_name = student.getTeacher();
+        Teacher teacher = teacherService.getTeacher(t_login_name);
+        String taskList = teacher.getActive_exp();
+
+        if(!taskList.contains(e_id)){
+            return 0;
+        }
+        if(task.contains(e_id)){
+            return 0;
+        }
+
+        if("".equals(task)) task += e_id;
+        else task += "," + e_id;
+        student.setTask_done(task);
+        student.setProgress(getStudentProgress(task, t_login_name));
+        return studentInfoDao.updateStudent(student);
+    }
+
+    /**
+     * 获取学生实验进度
+     * @param task 学生完成实验列表
+     * @param t_login_name 教师id
+     * @return 进度百分比
+     */
+    public String getStudentProgress(String task,String t_login_name){
+        int done = task.split(",").length;
+
+        Teacher teacher = teacherService.getTeacher(t_login_name);
+        String taskList = teacher.getActive_exp();
+        int todoList = taskList.split(",").length;
+
+        float num= (float)done/todoList*100;
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        return df.format(num);
     }
 }

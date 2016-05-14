@@ -80,4 +80,5 @@ public interface IStudentInfoDao {
      * @return 成绩
      */
     String queryScore(String s_login_name);
+
 }

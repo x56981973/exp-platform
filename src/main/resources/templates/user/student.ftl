@@ -56,7 +56,8 @@
                                 <td class="center">
                                     <a class="btn btn-success" data-toggle="modal" data-target="#detailModal"
                                        data-id="${s.s_login_name}" data-name="${s.s_name}" data-password="${s.s_password}"
-                                       data-grade="${s.s_grade}" data-report="${s.report_status}" data-score="${s.s_score}">
+                                       data-grade="${s.s_grade}" data-report="${s.report_status}" data-score="${s.s_score}"
+                                            data-progress="${s.progress}">
                                         <#--<i class="halflings-icon white zoom-in"></i>-->
                                         查看
                                     </a>
@@ -149,10 +150,6 @@
             <label class="control-label">报告提交情况</label>
             <span class="input-xlarge uneditable-input" id="report"></span>
         </div>
-        <div class="control-group">
-            <label class="control-label" id="progress"></label>
-            <div class="progress simpleProgress blue" id="percent">66</div>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
@@ -228,10 +225,11 @@
         var button = $(event.relatedTarget);
         var id = button.data("id");
         var name = button.data("name");
-        var password = button.data("password")
+        var password = button.data("password");
         var grade = button.data("grade");
         var score = button.data("score");
         var report = button.data("report");
+        var progress = button.data("progress");
         var modal = $(this);
         modal.find('#id').text(id);
         modal.find('#name').text(name);
@@ -239,7 +237,7 @@
         modal.find('#grade').text(grade);
         modal.find('#score').text(score);
         modal.find('#report').text(report);
-        modal.find('#progress').html("课程进度: <strong> 8 / 12 </strong>");
+        modal.find('#progress').html("课程进度: <strong> "+ progress +"% </strong>");
     });
 </script>
 
