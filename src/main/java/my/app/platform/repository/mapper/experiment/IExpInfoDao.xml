@@ -80,7 +80,8 @@
         e_description = #{e_description},
         class_id = #{class_id},
         type_id = #{type_id},
-        e_srcPath = #{e_srcPath}
+        e_srcPath = #{e_srcPath},
+        ref_path = #{ref_path}
         WHERE e_id = #{e_id}
     </update>
 
@@ -105,4 +106,10 @@
         WHERE e_id = #{1}
     </update>
 
+    <update id="updateRefPath" parameterType="String">
+        UPDATE experiment
+        SET
+        ref_path = #{0}
+        WHERE e_id = #{1}
+    </update>
 </mapper>

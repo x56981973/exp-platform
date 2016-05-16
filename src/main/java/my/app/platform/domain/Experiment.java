@@ -37,6 +37,11 @@ public class Experiment {
      */
     private String e_srcPath;
 
+    /**
+     * 参考代码路径
+     */
+    private String ref_path;
+
     public String getE_id() {
         return e_id;
     }
@@ -83,5 +88,13 @@ public class Experiment {
 
     public void setE_srcPath(String e_srcPath) {
         this.e_srcPath = e_srcPath;
+    }
+
+    public String getRef_path() {
+        return ref_path;
+    }
+
+    public void setRef_path(String ref_path) {
+        this.ref_path = ref_path;
     }
 }

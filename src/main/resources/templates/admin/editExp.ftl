@@ -38,6 +38,12 @@
                                    value="${experiment.e_srcPath}"
                                    </#if>
                                     >
+                            <label class="control-label">参考代码路径</label>
+                            <input class="input-xlarge focused" id="ref_path" type="text" name="ref_path"
+                                    <#if experiment.ref_path??>
+                                           value="${experiment.ref_path}"
+                                    </#if>
+                                    >
                             <div class="control-group">
                                 <label class="control-label">所属大类</label>
                                 <div class="controls">

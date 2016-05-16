@@ -92,6 +92,34 @@ public class UploadFileService {
         }
     }
 
+    /**
+     * 管理员上传实验参考代码
+     * @param file 参考代码
+     * @return 是否上传成功
+     */
+    public String uploadExpRefService(MultipartFile file){
+        if (!file.isEmpty()) {
+            try {
+                String folderPath = path + "ref/";
+
+                //如果路径不存在，则创建
+                File newFile = new File(folderPath);
+                if(!newFile.isDirectory()){
+                    newFile.mkdir();
+                }
+
+                String fileName = file.getOriginalFilename();
+                String filePath = folderPath + fileName;
+                file.transferTo(new File(filePath));
+                return filePath;
+            } catch (Exception e) {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
     public String uploadStudentReport(MultipartFile file,String s_id){
         if (!file.isEmpty()) {
             try {

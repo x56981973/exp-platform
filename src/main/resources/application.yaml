@@ -6,6 +6,10 @@ spring:
   freemarker:
     requestContextAttribute: request
 
+multipart:
+  maxFileSize: 10MB
+  maxRequestSize: 10MB
+
 exp-platform:
   datasource:
     url: jdbc:mysql://127.0.0.1:3307/exp_platform

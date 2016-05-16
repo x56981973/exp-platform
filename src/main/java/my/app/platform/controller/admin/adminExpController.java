@@ -335,8 +335,29 @@ public class adminExpController {
         }
 
         String filename = "Exp\\" + guide.getOriginalFilename();
-        if(expInfoDao.updateExpSrc(filename,e_id) > 0){
+        if(expInfoDao.updateExpSrc(filename, e_id) > 0){
             return "{\"error\":\"0\",\"msg\":\"文档路径修改成功\"}";
+        }else{
+            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
+        }
+    }
+
+    @RequestMapping(value = "/exp/insertRef")
+    @ResponseBody
+    public String insertRef(MultipartFile ref,String e_id){
+        List<Experiment> experiments = expInfoDao.queryExperiment(e_id);
+        if(experiments.size() == 0){
+            return "{\"error\":\"1\",\"msg\":\"查无此实验编号\"}";
+        }
+
+        String result = uploadFileService.uploadExpRefService(ref);
+        if("".equals(result)){
+            return "{\"error\":\"1\",\"msg\":\"上传文件失败\"}";
+        }
+
+        String filename = ref.getOriginalFilename();
+        if(expInfoDao.updateRefPath(filename,e_id) > 0){
+            return "{\"error\":\"0\",\"msg\":\"参考代码修改成功\"}";
         }else{
             return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
         }

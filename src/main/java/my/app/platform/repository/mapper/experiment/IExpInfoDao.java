@@ -133,7 +133,15 @@ public interface IExpInfoDao {
      * 更新文档路径
      * @param srcPath 文档路径
      * @param e_id 实验id
-     * @return
+     * @return 更新条数
      */
     int updateExpSrc(String srcPath,String e_id);
+
+    /**
+     * 更新参考代码路径
+     * @param refPath 参开代码路径
+     * @param e_id 实验id
+     * @return 更新条数
+     */
+    int updateRefPath(String refPath,String e_id);
 }

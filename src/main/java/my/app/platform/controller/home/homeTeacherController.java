@@ -91,7 +91,7 @@ public class homeTeacherController {
                 new_exp_status += e + "-" + ",";
             }
         }
-        teacher.setActive_exp(new_exp_status);
+        teacher.setActive_exp(new_exp_status.substring(0,new_exp_status.length()-1));
 
         if (teacherService.updateTeacher(teacher) != 0) {
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";

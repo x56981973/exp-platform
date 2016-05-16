@@ -33,14 +33,18 @@ public class TestController {
 
     @RequestMapping(value = "/client/test", method = RequestMethod.POST)
      public Result testHandler() {
-        int count = 0;
-        List<Student> studentList = studentService.getStudentListByTeacher("yiping");
-        for(Student student : studentList){
-            studentService.updateTask(student.getS_login_name(),"3");
-            count ++;
+        Student student = studentService.getStudent("1");
+        Teacher teacher = teacherService.getTeacher(student.getTeacher());
+        String activeExp = teacher.getActive_exp();
+        String e_id = "6";
+        if(!activeExp.contains(e_id)){
+            return ResultHelper.newFailureResult("");
         }
-
-        return ResultHelper.newSuccessResult(count);
+        int index = activeExp.lastIndexOf(e_id);
+        if(activeExp.charAt(index+e_id.length())=='-'){
+            return ResultHelper.newFailureResult("");
+        }
+        return ResultHelper.newSuccessResult("");
     }
 
     @RequestMapping(value = "/client/interface/test", method = RequestMethod.POST)

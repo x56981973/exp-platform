@@ -73,7 +73,25 @@
                             <label class="control-label">选择文件</label>
                             <input class="input-file uniform_on" id="guide" type="file" name="guide">
 
-                            <button type="submit" class="btn btn-primary" onclick="return upload()">上传</button>
+                            <button type="submit" class="btn btn-primary" onclick="return uploadGuide()">上传</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="box span12">
+                    <div class="box-header" data-original-title>
+                        <h2><i class="halflings-icon edit"></i><span class="break"></span>实验参考代码上传</h2>
+                    </div>
+                    <div class="box-content">
+                        <form id="refUpload" enctype="multipart/form-data" method="post">
+                            <label class="control-label">编号</label>
+                            <input class="input" id="e_id3" type="text" name="e_id">
+                            <label class="control-label">选择文件</label>
+                            <input class="input-file uniform_on" id="ref" type="file" name="ref">
+
+                            <button type="submit" class="btn btn-primary" onclick="return uploadRef()">上传</button>
                         </form>
                     </div>
                 </div>
@@ -139,7 +157,7 @@ function onSelected(value){
 </script>
 
 <script type="text/javascript">
-    function upload(){
+    function uploadGuide(){
         var form = document.getElementById("guideUpload");
         if(form.e_id.value == ""){
             return false;
@@ -159,6 +177,29 @@ function onSelected(value){
     };
 
     $('#guideUpload').ajaxForm(options);
+</script>
+
+<script type="text/javascript">
+    function uploadRef(){
+        var form = document.getElementById("refUpload");
+        if(form.e_id.value == ""){
+            return false;
+        }
+    }
+
+    var options = {
+        url: '${base}/admin/exp/insertRef',
+        success: function (result) {
+            var data = eval("(" + result + ")");
+            if (data.error == 0) {
+                swal(data.msg,"","success");
+            } else {
+                swal(data.msg,"","error");
+            }
+        }
+    };
+
+    $('#refUpload').ajaxForm(options);
 </script>
 
 </body>

@@ -36,4 +36,24 @@ public class DownLoadFileService {
             e.printStackTrace();
         }
     }
+
+    public void downloadRefCode(String fileName,HttpServletResponse response){
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition","attachment;fileName="+fileName);
+
+        try {
+            File file=new File(folderPath + "ref/" + fileName);
+            InputStream inputStream=new FileInputStream(file);
+            OutputStream os=response.getOutputStream();
+            byte[] b=new byte[1024];
+            int length;
+            while((length=inputStream.read(b))>0){
+                os.write(b,0,length);
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
