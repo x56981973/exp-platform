@@ -1,4 +1,4 @@
-package my.app.platform.controller.home;
+package my.app.platform.controller.user;
 
 import my.app.platform.domain.Student;
 import my.app.platform.service.File.UploadFileService;
@@ -23,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
-public class homeStudentController {
+public class UserStudentController {
     @Autowired
     HttpSession httpSession;
 

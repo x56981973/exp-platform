@@ -1,4 +1,4 @@
-package my.app.platform.controller.home;
+package my.app.platform.controller.user;
 
 import my.app.platform.domain.*;
 import my.app.platform.domain.model.ActiveExperiment;
@@ -7,7 +7,6 @@ import my.app.platform.domain.model.MExperiment;
 import my.app.platform.domain.model.MMessage;
 import my.app.platform.repository.mapper.experiment.IExpInfoDao;
 import my.app.platform.repository.mapper.message.IMessageInfoDao;
-import my.app.platform.service.MessageService;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
-public class homeController {
+public class UserController {
     @Autowired
     private HttpSession session;
 

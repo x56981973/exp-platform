@@ -1,4 +1,4 @@
-package my.app.platform.controller.home;
+package my.app.platform.controller.user;
 
 import my.app.platform.domain.Teacher;
 import my.app.platform.repository.mapper.message.IMessageInfoDao;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/user")
-public class homeTeacherController {
+public class UserTeacherController {
     @Autowired
     HttpSession httpSession;
 
