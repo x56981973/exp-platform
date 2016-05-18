@@ -30,6 +30,12 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    /**
+     * 学生登录
+     * @param usr 用户名
+     * @param pwd 密码
+     * @return 登录结果
+     */
     @RequestMapping(value = "/student/login", method = RequestMethod.POST)
     public Result studentLoginHandler(String usr, String pwd) {
         Student student = loginService.studentLoginCheck(usr, pwd);
@@ -40,18 +46,35 @@ public class StudentController {
         }
     }
 
+    /**
+     * 查询成绩
+     * @param s_login_name 学号id
+     * @return 分数
+     */
     @RequestMapping(value = "/student/score", method = RequestMethod.POST)
     public Result studentScoreHandler(String s_login_name) {
         String score = studentInfoDao.queryScore(s_login_name);
         return ResultHelper.newSuccessResult(score);
     }
 
+    /**
+     * 修改密码
+     * @param s_login_name 学生id
+     * @param pwd 密码
+     * @return 修改结果
+     */
     @RequestMapping(value = "/student/changePwd", method = RequestMethod.POST)
     public Result studentChangePwdHandler(String s_login_name,String pwd) {
         int result = studentInfoDao.updatePwd(s_login_name, pwd);
         return ResultHelper.newSuccessResult(result);
     }
 
+    /**
+     * 学生新开始一个实验的记录
+     * @param s_login_name 学生id
+     * @param e_id 实验id
+     * @return 新增结果
+     */
     @RequestMapping(value = "/student/newExp", method = RequestMethod.POST)
     public Result studentNewExpHandler(String s_login_name,String e_id) {
         int result = studentService.updateTask(s_login_name, e_id);

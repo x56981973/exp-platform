@@ -20,8 +20,15 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
+    /**
+     * 消息插入
+     * @param s_id 学生id
+     * @param e_id 实验id
+     * @param text 消息正文
+     * @return
+     */
     @RequestMapping(value = "/message", method = RequestMethod.POST)
-    public Result studentLoginHandler(String s_id, String e_id, String text) {
+    public Result messageInsertHandler(String s_id, String e_id, String text) {
         int result = messageService.insertMessage(s_id, e_id, text);
         if(result != 0){
             return ResultHelper.newSuccessResult("");

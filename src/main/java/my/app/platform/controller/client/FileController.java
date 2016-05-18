@@ -42,6 +42,12 @@ public class FileController {
     @Autowired
     IExpInfoDao expInfoDao;
 
+    /**
+     * 实验报告上传
+     * @param file 实验报告
+     * @param s_id 学生id
+     * @return 上传结果
+     */
     @RequestMapping(value="/upload/report", method= RequestMethod.POST)
     public Result uploadReportHandler(MultipartFile file, String s_id){
         String fileName = file.getOriginalFilename();
@@ -60,11 +66,22 @@ public class FileController {
         }
     }
 
+    /**
+     * 文件下载接口
+     * @param fileName 文件名（含路径）
+     * @param response http响应（返回文件流格式）
+     */
     @RequestMapping(value="/download", method= RequestMethod.POST)
     public void downloadFile(String fileName,HttpServletResponse response){
         downLoadFileService.downloadFile(fileName, response);
     }
 
+    /**
+     * 参考代码下载
+     * @param s_id 学生id
+     * @param e_id 实验id
+     * @param response http响应（返回文件流格式）
+     */
     @RequestMapping(value="/download/referenceCode", method= RequestMethod.GET)
     public void downloadCodeFile(String s_id,String e_id,HttpServletResponse response){
 
@@ -84,6 +101,12 @@ public class FileController {
         downLoadFileService.downloadRefCode(refPath, response);
     }
 
+    /**
+     * 参考代码下载验证
+     * @param s_id 学生id
+     * @param e_id 实验id
+     * @return 验证结果
+     */
     @RequestMapping(value="/download/referenceCode/check", method= RequestMethod.GET)
     public Result downloadRefFile(String s_id,String e_id){
         Student student = studentService.getStudent(s_id);

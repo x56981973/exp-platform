@@ -4,8 +4,8 @@ import my.app.framework.core.exception.AppRuntimeException;
 
 /**
  * @author 夏之阳
- *         创建时间：2016-03-14 15:23
- *         创建说明：
+ * 创建时间：2016-03-14 15:23
+ * 创建说明：Result生成helper
  */
 
 public class ResultHelper {

@@ -45,6 +45,7 @@ public class adminExpController {
 
     OptionRecord optionRecord = new OptionRecord();
 
+    //实验页面
     @RequestMapping(value = "/exp")
     public String experiment(Model model){
         //Get t_name
@@ -64,6 +65,7 @@ public class adminExpController {
         return "/admin/experiment";
     }
 
+    //删除实验
     @RequestMapping(value = "/exp/delete")
     @ResponseBody
     public String expDeleteHandler(String id){
@@ -82,6 +84,7 @@ public class adminExpController {
         }
     }
 
+    //删除实验类型
     @RequestMapping(value = "/expType/delete")
     @ResponseBody
     public String typeDeleteHandler(String id){
@@ -100,6 +103,7 @@ public class adminExpController {
         }
     }
 
+    //删除实验类别
     @RequestMapping(value = "/expClass/delete")
     @ResponseBody
     public String classDeleteHandler(String id){
@@ -118,6 +122,7 @@ public class adminExpController {
         }
     }
 
+    //新增实验类别
     @RequestMapping(value = "/expClass/add")
     @ResponseBody
     public String classAddHandler(ExpClass expClass){
@@ -142,6 +147,7 @@ public class adminExpController {
         }
     }
 
+    //编辑实验类别
     @RequestMapping(value = "/expClass/edit")
     @ResponseBody
     public String classEditHandler(ExpClass expClass){
@@ -166,6 +172,7 @@ public class adminExpController {
         }
     }
 
+    //新增实验类型
     @RequestMapping(value = "/expType/add")
     @ResponseBody
     public String typeAddHandler(ExpType expType,String class_info){
@@ -193,6 +200,7 @@ public class adminExpController {
         }
     }
 
+    //编辑实验类型
     @RequestMapping(value = "/expType/edit")
     @ResponseBody
     public String typeEditHandler(ExpType expType,String class_info){
@@ -220,6 +228,7 @@ public class adminExpController {
         }
     }
 
+    //新增实验
     @RequestMapping(value = "/exp/insert")
     @ResponseBody
     public String expAddHandler(Experiment experiment,String class_info,String type_info){
@@ -250,6 +259,7 @@ public class adminExpController {
         }
     }
 
+    //新增页面
     @RequestMapping(value = "/exp/add")
     public String expAddHandler(Model model){
         //Get t_name
@@ -269,6 +279,7 @@ public class adminExpController {
         return "/admin/newExp";
     }
 
+    //编辑实验页面
     @RequestMapping(value = "/exp/edit/{e_id}")
     public String expEditHandler(@PathVariable String e_id,Model model){
         //Get t_name
@@ -291,6 +302,7 @@ public class adminExpController {
         return "/admin/editExp";
     }
 
+    //编辑实验
     @RequestMapping(value = "/exp/edit")
     @ResponseBody
     public String editExp(Experiment experiment,String class_info,String type_info){
@@ -321,6 +333,7 @@ public class adminExpController {
         }
     }
 
+    //导入实验指南
     @RequestMapping(value = "/exp/insertGuide")
     @ResponseBody
     public String insertGuide(MultipartFile guide,String e_id){
@@ -342,6 +355,7 @@ public class adminExpController {
         }
     }
 
+    //导入实验参考代码
     @RequestMapping(value = "/exp/insertRef")
     @ResponseBody
     public String insertRef(MultipartFile ref,String e_id){

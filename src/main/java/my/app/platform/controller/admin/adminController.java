@@ -38,6 +38,7 @@ public class adminController {
     @Autowired
     private IExpInfoDao expInfoDao;
 
+    //首页
     @RequestMapping(value = "/home")
     public String admin(Model model){
         String t_id = session.getAttribute("t_id").toString();

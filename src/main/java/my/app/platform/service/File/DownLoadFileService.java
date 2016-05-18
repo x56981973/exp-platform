@@ -37,6 +37,11 @@ public class DownLoadFileService {
         }
     }
 
+    /**
+     * 下载参考代码
+     * @param fileName 文件名
+     * @param response http响应（文件流格式）
+     */
     public void downloadRefCode(String fileName,HttpServletResponse response){
         response.setCharacterEncoding("utf-8");
         response.setContentType("multipart/form-data");

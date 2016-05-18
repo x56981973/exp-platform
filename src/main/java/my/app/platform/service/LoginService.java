@@ -23,6 +23,12 @@ public class LoginService {
     @Autowired
     ITeacherInfoDao teacherInfoDao;
 
+    /**
+     * 学生登录验证
+     * @param userName 用户名
+     * @param password 密码
+     * @return 学生信息
+     */
     public Student studentLoginCheck(String userName, String password){
         List<Student> students = studentInfoDao.checkStudentInfo(userName, password);
         if(students.size() != 0){
@@ -32,6 +38,12 @@ public class LoginService {
         }
     }
 
+    /**
+     * 用户登录验证
+     * @param userName 用户名
+     * @param password 密码
+     * @return 用户信息
+     */
     public Teacher teacherLoginCheck(String userName, String password){
         List<Teacher> teachers = teacherInfoDao.checkLogin(userName, password);
         if(teachers.size() != 0){

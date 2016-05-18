@@ -33,11 +33,19 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    /**
+     * 登陆接口
+     * @return 跳转到登陆页面
+     */
     @RequestMapping(value = "/login")
     public String login(){
         return "/login";
     }
 
+    /**
+     * 登出接口
+     * @return 跳转到登录页面
+     */
     @RequestMapping(value = "/logout")
     public String logout(){
         session.removeAttribute("t_id");
@@ -45,6 +53,13 @@ public class LoginController {
         return "redirect:/login";
     }
 
+    /**
+     * 登陆验证接口
+     * @param request http请求
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
     @ResponseBody
     public String teacherLoginHandler(HttpServletRequest request,String username,String password) {

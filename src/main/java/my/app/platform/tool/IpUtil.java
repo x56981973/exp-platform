@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class IpUtil {
+    /**
+     * 获得ip地址
+     * @param request http请求
+     * @return ip地址
+     */
     public static String getIpAddr(HttpServletRequest request) {
         String remoteAddr = request.getRemoteAddr();
         String forwarded = request.getHeader("X-Forwarded-For");

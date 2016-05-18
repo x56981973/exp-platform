@@ -33,7 +33,7 @@ public class UserStudentController {
     @Autowired
     UploadFileService uploadFileService;
 
-
+    //学生页面
     @RequestMapping(value = "/student")
     public String student(Model model){
         String t_name = httpSession.getAttribute("t_name").toString();
@@ -77,6 +77,11 @@ public class UserStudentController {
         }
     }
 
+    /**
+     * 插入学生列表
+     * @param studentList 学生列表
+     * @return 插入结果
+     */
     @RequestMapping(value = "/student/insertList", method = RequestMethod.POST)
     @ResponseBody
     public String insertStudentListHandler(MultipartFile studentList) {
@@ -109,6 +114,11 @@ public class UserStudentController {
         }
     }
 
+    /**
+     * 删除学生
+     * @param s_login_name 学生登录名
+     * @return 删除结果
+     */
     @RequestMapping(value = "/student/delete", method = RequestMethod.POST)
     @ResponseBody
     public String deleteStudentHandler(String s_login_name) {
@@ -119,6 +129,14 @@ public class UserStudentController {
         }
     }
 
+    /**
+     * 更新学生信息
+     * @param s_login_name 登录名
+     * @param s_name 学生姓名
+     * @param s_grade 学生年级
+     * @param s_score 学生成绩
+     * @return 修改结果
+     */
     @RequestMapping(value = "/student/update/info", method = RequestMethod.POST)
     @ResponseBody
     public String updateStudentInfoHandler(String s_login_name,String s_name, String s_grade, String s_score) {
@@ -130,6 +148,12 @@ public class UserStudentController {
         }
     }
 
+    /**
+     * 修改学生密码
+     * @param s_login_name 学生登录名
+     * @param s_password 学生密码
+     * @return 修改结果
+     */
     @RequestMapping(value = "/student/update/pwd", method = RequestMethod.POST)
     @ResponseBody
     public String updateStudentPwdHandler(String s_login_name,String s_password) {

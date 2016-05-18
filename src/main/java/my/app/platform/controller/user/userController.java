@@ -43,6 +43,7 @@ public class UserController {
     @Autowired
     private IMessageInfoDao messageInfoDao;
 
+    //主页
     @RequestMapping(value = "/home")
     public String home(Model model){
         String t_id = session.getAttribute("t_id").toString();
@@ -69,6 +70,7 @@ public class UserController {
         return "/user/home";
     }
 
+    //实验页面
     @RequestMapping(value = "/exp")
     public String experiment(Model model){
         //Get t_name
@@ -88,6 +90,7 @@ public class UserController {
         return "/user/experiment";
     }
 
+    //设置页面
     @RequestMapping(value = "/settings")
     public String setting(Model model){
         String t_id = session.getAttribute("t_id").toString();
@@ -97,6 +100,7 @@ public class UserController {
         return "/user/settings";
     }
 
+    //消息页面
     @RequestMapping(value = "/message")
     public String message(Model model){
         //Get t_name

@@ -31,6 +31,10 @@ public class TestController {
     @Autowired
     StudentService studentService;
 
+    /**
+     * 测试接口
+     * @return 测试结果
+     */
     @RequestMapping(value = "/client/test", method = RequestMethod.POST)
      public Result testHandler() {
         Student student = studentService.getStudent("1");
@@ -47,6 +51,11 @@ public class TestController {
         return ResultHelper.newSuccessResult("");
     }
 
+    /**
+     * 客户端连接测试结果
+     * @param hello 测试语句
+     * @return 原句返回
+     */
     @RequestMapping(value = "/client/interface/test", method = RequestMethod.POST)
     public Result interfaceTestHandler(String hello) {
         return ResultHelper.newSuccessResult(hello);

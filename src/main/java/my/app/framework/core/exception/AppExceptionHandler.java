@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author 夏之阳
  * 创建时间：2016-03-14 15:29
- * 创建说明：
+ * 创建说明：异常处理
  */
 
 @ControllerAdvice
 public class AppExceptionHandler {
     @ResponseBody
     @ExceptionHandler(AppRuntimeException.class)
-    public Result handleKyeeException(HttpServletRequest request,AppRuntimeException ex){
+    public Result handleKnownException(HttpServletRequest request,AppRuntimeException ex){
         return ResultHelper.newExceptionResult(String.format("程序内部错误: %s", ex.getMessage()), ex);
     }
     @ResponseBody
