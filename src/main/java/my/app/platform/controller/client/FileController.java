@@ -65,7 +65,7 @@ public class FileController {
         downLoadFileService.downloadFile(fileName, response);
     }
 
-    @RequestMapping(value="/download/referenceCode", method= RequestMethod.POST)
+    @RequestMapping(value="/download/referenceCode", method= RequestMethod.GET)
     public void downloadCodeFile(String s_id,String e_id,HttpServletResponse response){
 
         Student student = studentService.getStudent(s_id);
@@ -84,8 +84,8 @@ public class FileController {
         downLoadFileService.downloadRefCode(refPath, response);
     }
 
-    @RequestMapping(value="/download/referenceCode/check", method= RequestMethod.POST)
-    public Result downloadCodeFile(String s_id,String e_id){
+    @RequestMapping(value="/download/referenceCode/check", method= RequestMethod.GET)
+    public Result downloadRefFile(String s_id,String e_id){
         Student student = studentService.getStudent(s_id);
         Teacher teacher = teacherService.getTeacher(student.getTeacher());
         String activeExp = teacher.getActive_exp();
@@ -93,9 +93,10 @@ public class FileController {
             return ResultHelper.newFailureResult("");
         }
         int index = activeExp.lastIndexOf(e_id);
-        if(activeExp.charAt(index+e_id.length())=='-'){
+        if(activeExp.charAt(index+e_id.length())=='-') {
             return ResultHelper.newFailureResult("");
         }
+
         return ResultHelper.newSuccessResult("");
     }
 

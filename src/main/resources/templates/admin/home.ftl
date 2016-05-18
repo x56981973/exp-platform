@@ -19,7 +19,7 @@
 
             <div class="span4 statbox orange">
                 <div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
-                <div class="number">${s_num}<i class="icon-arrow-up"></i></div>
+                <div class="number">${s_num}<i class="icon-group"></i></div>
                 <div class="title">学生总数</div>
                 <div class="footer">
                     <a href="${base}/admin/student"> 查看学生</a>
@@ -27,7 +27,7 @@
             </div>
             <div class="span4 statbox green">
                 <div class="boxchart">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
-                <div class="number">${t_num}<i class="icon-arrow-up"></i></div>
+                <div class="number">${t_num}<i class="icon-user"></i></div>
                 <div class="title">教师总数</div>
                 <div class="footer">
                     <a href="${base}/admin/teacher"> 查看教师</a>
@@ -35,7 +35,7 @@
             </div>
             <div class="span4 statbox blue noMargin">
                 <div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
-                <div class="number">${e_num}<i class="icon-arrow-up"></i></div>
+                <div class="number">${e_num}<i class="icon-book"></i></div>
                 <div class="title">实验总数</div>
                 <div class="footer">
                     <a href="${base}/admin/exp"> 查看实验</a>

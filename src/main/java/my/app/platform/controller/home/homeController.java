@@ -1,11 +1,13 @@
 package my.app.platform.controller.home;
 
-import my.app.platform.domain.ExpClass;
-import my.app.platform.domain.Teacher;
+import my.app.platform.domain.*;
 import my.app.platform.domain.model.ActiveExperiment;
 import my.app.platform.domain.model.MExpType;
 import my.app.platform.domain.model.MExperiment;
+import my.app.platform.domain.model.MMessage;
 import my.app.platform.repository.mapper.experiment.IExpInfoDao;
+import my.app.platform.repository.mapper.message.IMessageInfoDao;
+import my.app.platform.service.MessageService;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,6 +41,9 @@ public class homeController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private IMessageInfoDao messageInfoDao;
+
     @RequestMapping(value = "/home")
     public String home(Model model){
         String t_id = session.getAttribute("t_id").toString();
@@ -57,6 +63,9 @@ public class homeController {
 
         int e_num = experiments.size();
         model.addAttribute("e_num", e_num);
+
+        List<Message> messageList = messageInfoDao.queryNotReadMessage(t_id);
+        model.addAttribute("m_num", messageList.size());
 
         return "/user/home";
     }
@@ -87,5 +96,42 @@ public class homeController {
         model.addAttribute("teacher", teacher);
 
         return "/user/settings";
+    }
+
+    @RequestMapping(value = "/message")
+    public String message(Model model){
+        //Get t_name
+        String t_name = session.getAttribute("t_name").toString();
+        model.addAttribute("t_name",t_name);
+
+        //Get t_name
+        String t_id = session.getAttribute("t_id").toString();
+        List<Message> messageList = messageInfoDao.queryMessage(t_id);
+        List<MMessage> mMessageList = new ArrayList<>();
+        for(Message message : messageList){
+            MMessage mMessage = new MMessage();
+            mMessage.setId(message.getId());
+            mMessage.setIs_read(message.getIs_read());
+            mMessage.setDate(message.getDate());
+            mMessage.setText(message.getText());
+            mMessage.setS_id(message.getS_id());
+
+            String s_id = message.getS_id();
+            Student student = studentService.getStudent(s_id);
+            if(student != null){
+                mMessage.setS_name(student.getS_name());
+            }
+
+            String e_id = message.getE_id();
+            Experiment experiment = expInfoDao.queryExperiment(e_id).get(0);
+            String e_name = experiment.getE_name();
+            mMessage.setE_name(e_name);
+
+            mMessageList.add(mMessage);
+        }
+
+        model.addAttribute("message",mMessageList);
+
+        return "/user/message";
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my.app.platform.repository.mapper.message.IMessageInfoDao">
+    <select id="queryMessage" parameterType="String" resultType="my.app.platform.domain.Message">
+        SELECT * FROM Message
+        WHERE t_id = #{t_id}
+        ORDER BY id DESC
+    </select>
+
+    <select id="queryNotReadMessage" parameterType="String" resultType="my.app.platform.domain.Message">
+        SELECT * FROM Message
+        WHERE t_id = #{t_id} AND is_read = "0"
+    </select>
+
+    <insert id="insertMessage" parameterType="my.app.platform.domain.Message">
+        INSERT INTO
+        message(t_id,s_id,e_id,text,date,is_read)
+        VALUES (#{t_id},#{s_id},#{e_id},#{text},#{date},#{is_read})
+    </insert>
+
+    <update id="updateIsRead" parameterType="String">
+        UPDATE message
+        SET is_read = "1"
+        WHERE id = #{id}
+    </update>
+</mapper>

@@ -149,6 +149,8 @@
             <span class="input-xlarge uneditable-input" id="score"></span>
             <label class="control-label">报告提交情况</label>
             <span class="input-xlarge uneditable-input" id="report"></span>
+            <label class="control-label"></label>
+            <span id="progress"></span>
         </div>
     </div>
     <div class="modal-footer">

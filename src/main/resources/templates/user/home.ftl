@@ -19,7 +19,7 @@
 
             <div class="span3 statbox purple">
                 <div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
-                <div class="number">${s_num}<i class="icon-arrow-up"></i></div>
+                <div class="number">${s_num}<i class="icon-user"></i></div>
                 <div class="title">学生总数</div>
                 <div class="footer">
                     <a href="${base}/user/student"> 查看学生</a>
@@ -27,7 +27,7 @@
             </div>
             <div class="span3 statbox green">
                 <div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
-                <div class="number">${e_num}<i class="icon-arrow-up"></i></div>
+                <div class="number">${e_num}<i class="icon-book"></i></div>
                 <div class="title">实验总数</div>
                 <div class="footer">
                     <a href="${base}/user/exp"> 查看实验</a>
@@ -36,10 +36,14 @@
 
             <div class="span3 statbox blue noMargin">
                 <div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
-                <div class="number">8<i class="icon-arrow-up"></i></div>
-                <div class="title">消息</div>
+                <#if m_num == 0>
+                    <div class="number">${m_num}<i class="icon-arrow-right"></i></div>
+                <#else>
+                    <div class="number">${m_num}<i class="icon-arrow-up"></i></div>
+                </#if>
+                <div class="title">新消息</div>
                 <div class="footer">
-                    <a href="#"> 查看消息</a>
+                    <a href="${base}/user/message"> 查看消息</a>
                 </div>
             </div>
 

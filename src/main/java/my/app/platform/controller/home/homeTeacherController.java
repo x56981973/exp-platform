@@ -1,6 +1,7 @@
 package my.app.platform.controller.home;
 
 import my.app.platform.domain.Teacher;
+import my.app.platform.repository.mapper.message.IMessageInfoDao;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class homeTeacherController {
 
     @Autowired
     TeacherService teacherService;
+
+    @Autowired
+    IMessageInfoDao messageInfoDao;
 
 
     /**
@@ -91,9 +95,24 @@ public class homeTeacherController {
                 new_exp_status += e + "-" + ",";
             }
         }
-        teacher.setActive_exp(new_exp_status.substring(0,new_exp_status.length()-1));
+        teacher.setActive_exp(new_exp_status.substring(0, new_exp_status.length() - 1));
 
         if (teacherService.updateTeacher(teacher) != 0) {
+            return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
+        } else {
+            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
+        }
+    }
+
+    /**
+     * 更新教师阅读消息
+     * @param id 消息id
+     * @return 处理结果
+     */
+    @RequestMapping(value = "/teacher/readMessage", method = RequestMethod.POST)
+    @ResponseBody
+    public String readMessage(String id){
+        if (messageInfoDao.updateIsRead(id) != 0) {
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
         } else {
             return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
