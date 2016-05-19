@@ -169,11 +169,11 @@
                 <label class="control-label">学号</label>
                 <span class="input-xlarge uneditable-input" id="id"></span>
                 <label class="control-label">姓名</label>
-                <input class="input-xlarge focused" id="new_name" type="text">
+                <input class="input-xlarge focused" id="edit_name" type="text">
                 <label class="control-label">年级</label>
-                <input class="input-xlarge focused" id="new_grade" type="text">
+                <input class="input-xlarge focused" id="edit_grade" type="text">
                 <label class="control-label">成绩</label>
-                <input class="input-xlarge focused" id="new_score" type="text">
+                <input class="input-xlarge focused" id="edit_score" type="text">
             </form>
         </div>
     </div>
@@ -258,37 +258,45 @@
 
         var modal = $(this);
         modal.find('#id').text(id);
-        modal.find('#new_name').val(name);
-        modal.find('#new_grade').val(grade);
-        modal.find('#new_score').val(score);
+        modal.find('#edit_name').val(name);
+        modal.find('#edit_grade').val(grade);
+        modal.find('#edit_score').val(score);
     });
 
     $("#postEdit").click(function(){
-        var new_name = $('#new_name').val();
-        var new_grade = $('#new_grade').val();
-        var new_score = $('#new_score').val();
-        $.ajax({
-            url: '${base}/user/student/update/info',
-            type: 'POST',
-            data: $.param({'s_login_name':id,'s_name':new_name,'s_grade':new_grade,'s_score':new_score}),
-            success: function (result) {
-                var data = eval("(" + result + ")");
-                if (data.error == 0) {
-                    swal({
-                        title: data.msg,
-                        text: "",
-                        type: "success",
-                        confirmButtonText: "确认"
-                    },
-                    function(){
-                        location.reload();
-                    });
-                } else {
-                    swal(data.msg,"","error");
+        var new_name = $('#edit_name').val();
+        var new_grade = $('#edit_grade').val();
+        var new_score = $('#edit_score').val();
+        console.log(new_name);
+        if(new_name == ''){
+            swal("姓名不能为空","","error");
+        } else if(new_grade == ''){
+            swal("年级不能为空","","error");
+        } else if(new_score == ''){
+            swal("分数不能为空","","error");
+        } else {
+            $.ajax({
+                url: '${base}/user/student/update/info',
+                type: 'POST',
+                data: $.param({'s_login_name': id, 's_name': new_name, 's_grade': new_grade, 's_score': new_score}),
+                success: function (result) {
+                    var data = eval("(" + result + ")");
+                    if (data.error == 0) {
+                        swal({
+                                    title: data.msg,
+                                    text: "",
+                                    type: "success",
+                                    confirmButtonText: "确认"
+                                },
+                                function () {
+                                    location.reload();
+                                });
+                    } else {
+                        swal(data.msg, "", "error");
+                    }
                 }
-            }
-        });
-        $('#editModal').modal('hide');
+            });
+        }
     })
 </script>
 
@@ -298,28 +306,35 @@
         var new_name = $('#new_name').val();
         var new_password = $('#new_password').val();
         var new_grade = $('#new_grade').val();
-        $.ajax({
-            url: '${base}/user/student/insert',
-            type: 'POST',
-            data: $('#insertStudent').serialize(),
-            success: function (result) {
-                var data = eval("(" + result + ")");
-                if (data.error == 0) {
-                    swal({
-                                title: data.msg,
-                                text: "",
-                                type: "success",
-                                confirmButtonText: "确认"
-                            },
-                            function(){
-                                location.reload();
-                            });
-                } else {
-                    swal(data.msg,"","error");
+        if(typeof (new_id) == 'undefined'){
+            swal("学号不能为空","","error");
+        } else if(typeof (new_name) == 'undefined'){
+            swal("姓名不能为空","","error");
+        } else if(typeof (new_password) == 'undefined'){
+            swal("密码不能为空","","error");
+        } else {
+            $.ajax({
+                url: '${base}/user/student/insert',
+                type: 'POST',
+                data: $('#insertStudent').serialize(),
+                success: function (result) {
+                    var data = eval("(" + result + ")");
+                    if (data.error == 0) {
+                        swal({
+                                    title: data.msg,
+                                    text: "",
+                                    type: "success",
+                                    confirmButtonText: "确认"
+                                },
+                                function () {
+                                    location.reload();
+                                });
+                    } else {
+                        swal(data.msg, "", "error");
+                    }
                 }
-            }
-        });
-        $('#addModal').modal('hide');
+            });
+        }
     })
 </script>
 
