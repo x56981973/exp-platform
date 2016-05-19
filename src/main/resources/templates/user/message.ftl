@@ -24,20 +24,20 @@
                             <ul class="messagesList">
                             <#list message as m>
                             <#if m.is_read == "0">
-                                <li id="${m.id}">
+                                <li>
                                     <span class="from"><a class="glyphicons star"><i></i></a><strong>${m.s_id}&nbsp;&nbsp;${m.s_name}&nbsp;&nbsp;${m.date}</strong></span>
                                     <span class="title"><strong>${m.e_name}&nbsp;&nbsp;${m.text}</strong></span>
                                     <a class="btn btn-mini btn-success" data-toggle="modal" data-target="#detailModal"
                                        data-mid="${m.id}" data-sname="${m.s_name}" data-ename="${m.e_name}" data-text="${m.text}"
-                                       data-sid="${m.s_id}" data-date="${m.date}"
-                                            >查看</a>
+                                       data-sid="${m.s_id}" data-date="${m.date}" data-read="${m.is_read}">查看</a>
                                 </li>
                             <#else>
                                 <li>
                                     <span class="from"><a class="glyphicons dislikes"><i></i></a>${m.s_id}&nbsp;&nbsp;${m.s_name}&nbsp;&nbsp;${m.date}</span>
                                     <span class="title">${m.e_name}&nbsp;&nbsp;${m.text}</span>
                                     <a class="btn btn-mini btn-success" data-toggle="modal" data-target="#detailModal"
-                                       data-mid="${m.id}" data-sname="${m.s_name}" data-ename="${m.e_name}" data-text="${m.text}">查看</a>
+                                       data-mid="${m.id}" data-sname="${m.s_name}" data-ename="${m.e_name}" data-text="${m.text}"
+                                       data-read="${m.is_read}">查看</a>
                                 </li>
                             </#if>
                             </#list>
@@ -77,6 +77,7 @@
     var e_name = "";
     var text = "";
     var date = "";
+    var isRead = "";
     $("#detailModal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget);
         m_id = button.data("mid");
@@ -85,28 +86,25 @@
         e_name = button.data("ename");
         text = button.data("text");
         date = button.data("date");
+        isRead = button.data("read");
         var modal = $(this);
         modal.find('.modal-title').text(s_name + " " + e_name);
         modal.find('.modal-body').text(text);
     });
 
     $('#confirm').click(function(){
-//        $('#'+m_id).html(
-//            '<span class="from"><a class="glyphicons dislikes"><i></i></a>' + s_id + '&nbsp;&nbsp;'+ s_name + '&nbsp;&nbsp;' + date + '</span>' +
-//            '<span class="title">' + e_name + '&nbsp;&nbsp;' + text +'</span>' +
-//            '<a class="btn btn-mini btn-success" data-toggle="modal" data-target="#detailModal" data-mid=' + m_id + ' data-sname=' + s_name + ' data-ename=' + e_name + ' data-text=' + text + '>查看</a>'
-//        );
-//        $('#'+m_id).removeAttr("id");
-//        $('#detailModal').modal('hide');
-        $.ajax({
-            url: '${base}/user/teacher/readMessage',
-            type: 'POST',
-            data: $.param({"id":m_id}),
-            success: function () {
-                location.reload();
-                $('#detailModal').modal('hide');
-            }
-        });
+        if(isRead == "1"){
+            $('#detailModal').modal('hide');
+        } else {
+            $.ajax({
+                url: '${base}/user/teacher/readMessage',
+                type: 'POST',
+                data: $.param({"id": m_id}),
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
     });
 </script>
 

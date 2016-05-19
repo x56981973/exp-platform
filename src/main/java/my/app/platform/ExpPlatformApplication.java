@@ -15,19 +15,19 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @ComponentScan("my.app")
-public class ExpPlatformApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ExpPlatformApplication.class, args);
-    }
-}
-
-//public class ExpPlatformApplication extends SpringBootServletInitializer {
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(ExpPlatformApplication.class);
-//    }
-//
-//    public static void main(String[] args) throws Exception {
+//public class ExpPlatformApplication {
+//    public static void main(String[] args) {
 //        SpringApplication.run(ExpPlatformApplication.class, args);
 //    }
 //}
+
+public class ExpPlatformApplication extends SpringBootServletInitializer {
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(ExpPlatformApplication.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(ExpPlatformApplication.class, args);
+    }
+}
