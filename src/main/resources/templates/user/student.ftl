@@ -302,10 +302,11 @@
 
 <script type="text/javascript">
     $("#postAdd").click(function(){
-        var new_id = $('#new_id').val();
-        var new_name = $('#new_name').val();
-        var new_password = $('#new_password').val();
-        var new_grade = $('#new_grade').val();
+        var new_id = $('#s_login_name').val();
+        console.log(new_id);
+        var new_name = $('#s_name').val();
+        var new_password = $('#s_password').val();
+        var new_grade = $('#s_grade').val();
         if(typeof (new_id) == 'undefined'){
             swal("学号不能为空","","error");
         } else if(typeof (new_name) == 'undefined'){
