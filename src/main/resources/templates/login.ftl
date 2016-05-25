@@ -117,25 +117,37 @@
                 })
                 .on('success.form.fv',function(e) {
                     e.preventDefault();
-                    var $form = $(e.target),
-                            fv = $form.data('formValidation');
-                    // Use Ajax to submit form data
-                    $.ajax({
-                        url: $form.attr('action'),
-                        type: 'POST',
-                        data: $form.serialize(),
-                        success: function (result) {
-                            var data = eval("("+result+")");
-                            if(data.error != 0){
-                                $('#loginMsg').addClass('alert alert-danger').css('display','block').text(data.msg);
-                            } else{
-                                $('#loginMsg').removeClass('alert-danger').addClass('alert-success').css('display','block').text(data.msg);
-                                console.log(data.to);
-                                window.location.href= "${base}"+data.to;
+
+                    var patt = new RegExp('^([A-Za-z]|[0-9]){3,}$');
+                    var username = $('#username').val();
+                    var password = $('#password').val();
+                    var u_test = patt.test(username);
+                    var p_test = patt.test(password);
+                    if(u_test != true ){
+                        $('#loginMsg').addClass('alert alert-danger').css('display','block').text("登录名格式错误");
+                    } else if(p_test != true){
+                        $('#loginMsg').addClass('alert alert-danger').css('display','block').text("密码格式错误");
+                    } else {
+                        var $form = $(e.target),
+                                fv = $form.data('formValidation');
+                        // Use Ajax to submit form data
+                        $.ajax({
+                            url: $form.attr('action'),
+                            type: 'POST',
+                            data: $form.serialize(),
+                            success: function (result) {
+                                var data = eval("(" + result + ")");
+                                if (data.error != 0) {
+                                    $('#loginMsg').addClass('alert alert-danger').css('display', 'block').text(data.msg);
+                                } else {
+                                    $('#loginMsg').removeClass('alert-danger').addClass('alert-success').css('display', 'block').text(data.msg);
+                                    console.log(data.to);
+                                    window.location.href = "${base}" + data.to;
+                                }
                             }
-                        }
-                    });
-                    fv.disableSubmitButtons(false);
+                        });
+                        fv.disableSubmitButtons(false);
+                    }
                 });
         });
         </script>

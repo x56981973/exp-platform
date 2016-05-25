@@ -306,12 +306,11 @@
         console.log(new_id);
         var new_name = $('#s_name').val();
         var new_password = $('#s_password').val();
-        var new_grade = $('#s_grade').val();
-        if(typeof (new_id) == 'undefined'){
+        if(new_id == ''){
             swal("学号不能为空","","error");
-        } else if(typeof (new_name) == 'undefined'){
+        } else if(new_name == ''){
             swal("姓名不能为空","","error");
-        } else if(typeof (new_password) == 'undefined'){
+        } else if(new_password == ''){
             swal("密码不能为空","","error");
         } else {
             $.ajax({
