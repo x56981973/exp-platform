@@ -56,11 +56,31 @@ public class TeacherService {
     }
 
     /**
+     * 更新实验列表
+     * @param t_id 教师id
+     * @param activeExp 新实验列表
+     * @return 更新条数
+     */
+    public int updateActiveExpList(String t_id, String activeExp){
+        return teacherInfoDao.updateActiveExp(t_id, activeExp);
+    }
+
+    /**
+     * 更新教师密码
+     * @param t_id 教师id
+     * @param password 新密码
+     * @return 更新条数
+     */
+    public int updateTeacherPwd(String t_id, String password){
+        return teacherInfoDao.updateTeacherPwd(t_id, password);
+    }
+
+    /**
      * 更新教师信息
      * @param teacher 教师信息
      * @return 更新条数
      */
-    public int updateTeacher(Teacher teacher){
+    public int updateTeacherInfo(Teacher teacher){
         return teacherInfoDao.updateTeacherInfo(teacher);
     }
 

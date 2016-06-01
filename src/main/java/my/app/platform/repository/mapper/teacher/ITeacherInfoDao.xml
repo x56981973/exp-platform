@@ -27,9 +27,19 @@
         VALUES (#{t_name},#{t_login_name},#{t_password},#{t_school},#{role})
     </insert>
 
+    <update id="updateTeacherPwd" parameterType="my.app.platform.domain.Teacher">
+        UPDATE teacher SET t_password = #{1}
+        WHERE t_login_name = #{0}
+    </update>
+
     <update id="updateTeacherInfo" parameterType="my.app.platform.domain.Teacher">
-        UPDATE teacher SET t_name = #{t_name},t_password = #{t_password},t_school = #{t_school},role = #{role},active_exp = #{active_exp}
+        UPDATE teacher SET t_password = #{t_password},t_name = #{t_name},t_school = #{t_school},role = #{role}
         WHERE t_login_name = #{t_login_name}
+    </update>
+
+    <update id="updateActiveExp" parameterType="my.app.platform.domain.Teacher">
+        UPDATE teacher SET active_exp = #{1}
+        WHERE t_login_name = #{0}
     </update>
 
     <delete id="deleteTeacherInfo" parameterType="String">

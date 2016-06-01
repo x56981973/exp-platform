@@ -347,7 +347,7 @@ public class adminExpController {
             return "{\"error\":\"1\",\"msg\":\"上传文件失败\"}";
         }
 
-        String filename = "Exp\\" + guide.getOriginalFilename();
+        String filename = guide.getOriginalFilename();
         if(expInfoDao.updateExpSrc(filename, e_id) > 0){
             return "{\"error\":\"0\",\"msg\":\"文档路径修改成功\"}";
         }else{

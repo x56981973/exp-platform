@@ -85,16 +85,16 @@ public class FileController {
     @RequestMapping(value="/download/referenceCode", method= RequestMethod.GET)
     public void downloadCodeFile(String s_id,String e_id,HttpServletResponse response){
 
-        Student student = studentService.getStudent(s_id);
-        Teacher teacher = teacherService.getTeacher(student.getTeacher());
-        String activeExp = teacher.getActive_exp();
-        if(!activeExp.contains(e_id)){
-            return;
-        }
-        int index = activeExp.lastIndexOf(e_id);
-        if(activeExp.charAt(index+e_id.length())=='-'){
-            return;
-        }
+//        Student student = studentService.getStudent(s_id);
+//        Teacher teacher = teacherService.getTeacher(student.getTeacher());
+//        String activeExp = teacher.getActive_exp();
+//        if(!activeExp.contains(e_id)){
+//            return;
+//        }
+//        int index = activeExp.lastIndexOf(e_id);
+//        if(activeExp.charAt(index+e_id.length())=='-'){
+//            return;
+//        }
 
         Experiment experiment = expInfoDao.queryExperiment(e_id).get(0);
         String refPath = experiment.getRef_path();

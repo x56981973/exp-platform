@@ -35,14 +35,8 @@ public class UserTeacherController {
      */
     @RequestMapping(value = "/teacher/update", method = RequestMethod.POST)
     @ResponseBody
-    public String updateTeacher(String t_login_name, String t_name,String school,String password){
-        Teacher teacher = new Teacher();
-        teacher.setT_login_name(t_login_name);
-        teacher.setT_name(t_name);
-        teacher.setT_school(school);
-        teacher.setT_password(password);
-
-        int result = teacherService.updateTeacher(teacher);
+    public String updateTeacher(String t_login_name, String password){
+        int result = teacherService.updateTeacherPwd(t_login_name, password);
         if (result != 0) {
             return "{\"error\":\"0\",\"msg\":\"更新成功\"}";
         } else {
@@ -60,13 +54,14 @@ public class UserTeacherController {
     @ResponseBody
     public String changeExpStatus(String e_id,String status){
         String t_id = httpSession.getAttribute("t_id").toString();
+
         Teacher teacher = teacherService.getTeacher(t_id);
         String exp_status = teacher.getActive_exp();
         StringBuilder new_status = new StringBuilder(exp_status);
         int index = exp_status.indexOf(e_id) + e_id.length();
         new_status.replace(index, index + 1, status);
-        teacher.setActive_exp(new_status.toString());
-        if (teacherService.updateTeacher(teacher) != 0) {
+
+        if (teacherService.updateActiveExpList(t_id, new_status.toString()) != 0) {
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
         } else {
             return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
@@ -95,9 +90,9 @@ public class UserTeacherController {
                 new_exp_status += e + "-" + ",";
             }
         }
-        teacher.setActive_exp(new_exp_status.substring(0, new_exp_status.length() - 1));
+        String active_exp = new_exp_status.substring(0, new_exp_status.length() - 1);
 
-        if (teacherService.updateTeacher(teacher) != 0) {
+        if (teacherService.updateActiveExpList(t_id,active_exp) != 0) {
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
         } else {
             return "{\"error\":\"1\",\"msg\":\"修改失败\"}";

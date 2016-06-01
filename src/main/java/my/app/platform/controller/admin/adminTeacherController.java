@@ -92,7 +92,7 @@ public class adminTeacherController {
     @RequestMapping(value = "/teacher/update")
     @ResponseBody
     public String teacherUpdateHandler(Teacher teacher){
-        if(teacherService.updateTeacher(teacher) != 0) {
+        if(teacherService.updateTeacherInfo(teacher) != 0) {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             String date = df.format(new Date());
             optionRecord.setDate(date);

@@ -46,9 +46,25 @@ public interface ITeacherInfoDao {
     int insertTeacherInfo(Teacher teacher);
 
     /**
-     * 更新教师基本信息
-     * @param teacher 教师基本信息
+     * 更新教师密码
+     * @param t_id 教师id
+     * @param password 新密码
      * @return 成功条数
+     */
+    int updateTeacherPwd(String t_id, String password);
+
+    /**
+     * 更新正在进行中的实验
+     * @param t_id 教师id
+     * @param activeExp 新实验列表
+     * @return 成功条数
+     */
+    int updateActiveExp(String t_id, String activeExp);
+
+    /**
+     * 更新教师密码
+     * @param teacher 教师信息
+     * @return 更新条数
      */
     int updateTeacherInfo(Teacher teacher);
 

@@ -34,7 +34,7 @@ public class UploadFileService {
      * @return 是否上传成功
      */
     public String uploadStudentListService(MultipartFile file, String userId){
-        String prefix = userId + "/";
+        String prefix = "temp/";
         if (!file.isEmpty()) {
             try {
                 String folderPath = path + prefix;
@@ -72,7 +72,7 @@ public class UploadFileService {
     public String uploadExpGuideService(MultipartFile file){
         if (!file.isEmpty()) {
             try {
-                String folderPath = path + "Exp/";
+                String folderPath = path + "exp/";
 
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);

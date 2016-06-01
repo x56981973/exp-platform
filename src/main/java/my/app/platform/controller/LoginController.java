@@ -72,22 +72,22 @@ public class LoginController {
 
         Teacher teacher = loginService.teacherLoginCheck(username, password);
         if(teacher != null) {
-            session.setAttribute("t_id",teacher.getT_login_name());
-            session.setAttribute("t_name",teacher.getT_name());
-            session.setAttribute("role",teacher.getRole());
-
-            //插入登陆记录
-            LoginRecord loginRecord = new LoginRecord();
-            loginRecord.setUid(username);
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            loginRecord.setDate(date);
-            loginRecord.setIp_address(IpUtil.getIpAddr(request));
-            logInfoDao.insertLoginRecord(loginRecord);
+            session.setAttribute("t_id", teacher.getT_login_name());
+            session.setAttribute("t_name", teacher.getT_name());
+            session.setAttribute("role", teacher.getRole());
 
             if("user".equals(teacher.getRole())) {
                 return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/user/home\"}";
             } else {
+                //插入登陆记录
+                LoginRecord loginRecord = new LoginRecord();
+                loginRecord.setUid(username);
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                String date = df.format(new Date());
+                loginRecord.setDate(date);
+                loginRecord.setIp_address(IpUtil.getIpAddr(request));
+                logInfoDao.insertLoginRecord(loginRecord);
+
                 return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/admin/home\"}";
             }
         } else{

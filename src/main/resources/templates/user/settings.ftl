@@ -38,12 +38,6 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="focusedInput">学校</label>
-                            <div class="controls">
-                                <input class="input-xlarge focused" name="school" id="focusedInput" type="text" value=${teacher.t_school}>
-                            </div>
-                        </div>
-                        <div class="control-group">
                             <label class="control-label">新密码</label>
                             <div class="controls">
                                 <input type="text" name="s_password1" id="s_password1">
@@ -198,9 +192,7 @@
 
         //全部无修改
         if(form.s_password2.value == "" && form.s_password1.value == ""){
-            if(form.school.value == ${teacher.t_school}) {
-                return false;
-            }
+            return false;
         }
 
         //两次密码不一致
@@ -212,8 +204,7 @@
         $.ajax({
             url: '${base}/user/teacher/update',
             type: 'POST',
-            data: $.param({'t_login_name':"${teacher.t_login_name}",'t_name':"${teacher.t_name}",
-                'school':form.school.value,'password':form.s_password2.value}),
+            data: $.param({'t_login_name':"${teacher.t_login_name}",'password':form.s_password2.value}),
             success: function (result) {
                 var data = eval("(" + result + ")");
                 if (data.error == 0) {
