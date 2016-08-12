@@ -8,7 +8,7 @@
     </select>
 
     <select id="queryAllExp" resultType="my.app.platform.domain.Experiment">
-        SELECT * FROM experiment
+        SELECT * FROM experiment ORDER BY e_name
     </select>
 
     <select id="queryAllExpClass" resultType="my.app.platform.domain.ExpClass">

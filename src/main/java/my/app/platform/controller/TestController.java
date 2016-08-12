@@ -2,6 +2,8 @@ package my.app.platform.controller;
 
 import my.app.framework.web.Result;
 import my.app.framework.web.ResultHelper;
+import my.app.platform.repository.mapper.experiment.IExpInfoDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,13 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
+    @Autowired
+    IExpInfoDao expInfoDao;
+
     /**
      * 客户端连接测试结果
-     * @param hello 测试语句
      * @return 原句返回
      */
-    @RequestMapping(value = "/client/interface/test", method = RequestMethod.POST)
-    public Result interfaceTestHandler(String hello) {
-        return ResultHelper.newSuccessResult(hello);
+    @RequestMapping(value = "/client/interface/test", method = RequestMethod.GET)
+    public Result interfaceTestHandler() {
+        return ResultHelper.newSuccessResult(expInfoDao.queryAllExp());
     }
 }

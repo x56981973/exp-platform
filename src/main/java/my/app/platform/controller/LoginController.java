@@ -34,6 +34,19 @@ public class LoginController {
     private LoginService loginService;
 
     /**
+     * 默认接口
+     * @return 跳转到主页面
+     */
+    @RequestMapping(value = "/")
+    public String home(){
+        if("user".equals(session.getAttribute("role").toString())){
+            return "redirect:/user/home";
+        } else {
+            return "redirect:/admin/home";
+        }
+    }
+
+    /**
      * 登陆接口
      * @return 跳转到登陆页面
      */
@@ -58,7 +71,7 @@ public class LoginController {
      * @param request http请求
      * @param username 用户名
      * @param password 密码
-     * @return
+     * @return 登陆结果
      */
     @RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
     @ResponseBody
@@ -72,6 +85,7 @@ public class LoginController {
 
         Teacher teacher = loginService.teacherLoginCheck(username, password);
         if(teacher != null) {
+            session.setMaxInactiveInterval(900);
             session.setAttribute("t_id", teacher.getT_login_name());
             session.setAttribute("t_name", teacher.getT_name());
             session.setAttribute("role", teacher.getRole());
