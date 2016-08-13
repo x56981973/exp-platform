@@ -72,7 +72,7 @@ public class UploadFileService {
     public String uploadExpGuideService(MultipartFile file){
         if (!file.isEmpty()) {
             try {
-                String folderPath = path + "exp/";
+                String folderPath = path + "/client/download/exp/";
 
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
@@ -100,7 +100,7 @@ public class UploadFileService {
     public String uploadExpRefService(MultipartFile file){
         if (!file.isEmpty()) {
             try {
-                String folderPath = path + "ref/";
+                String folderPath = path + "/client/download/ref/";
 
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
@@ -120,6 +120,12 @@ public class UploadFileService {
         }
     }
 
+    /**
+     * 学生提交实验报告
+     * @param file 实验报告
+     * @param s_id 学生id
+     * @return 是否上传成功
+     */
     public String uploadStudentReport(MultipartFile file,String s_id){
         if (!file.isEmpty()) {
             try {
