@@ -6,7 +6,6 @@
             <li><a href="${base}/admin/exp"><i class="icon-align-justify"></i><span class="hidden-tablet"> 实验列表</span></a></li>
             <li><a href="${base}/admin/student"><i class="icon-align-justify"></i><span class="hidden-tablet"> 学生列表</span></a></li>
             <li><a href="${base}/admin/teacher"><i class="icon-align-justify"></i><span class="hidden-tablet"> 教师列表</span></a></li>
-            <li><a href="${base}/admin/exp/add"><i class="icon-align-justify"></i><span class="hidden-tablet"> 实验配置</span></a></li>
         </ul>
     </div>
 </div>

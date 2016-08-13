@@ -32,18 +32,7 @@
                             <input class="input-xlarge focused" id="e_name" type="text" name="e_name" value="${experiment.e_name}">
                             <label class="control-label">实验简介</label>
                             <input class="input-xlarge focused" id="e_description" type="text" name="e_description" value="${experiment.e_description}">
-                            <label class="control-label">实验文件路径</label>
-                            <input class="input-xlarge focused" id="e_srcPath" type="text" name="e_srcPath"
-                                   <#if experiment.e_srcPath??>
-                                   value="${experiment.e_srcPath}"
-                                   </#if>
-                                    >
-                            <label class="control-label">参考代码路径</label>
-                            <input class="input-xlarge focused" id="ref_path" type="text" name="ref_path"
-                                    <#if experiment.ref_path??>
-                                           value="${experiment.ref_path}"
-                                    </#if>
-                                    >
+
                             <div class="control-group">
                                 <label class="control-label">所属大类</label>
                                 <div class="controls">
@@ -84,9 +73,67 @@
                             <button class="btn" id="back">返回</button>
                         </div>
                     </div>
+
                 </div>
             </div>
 
+            <div class="row-fluid">
+                <div class="box span12">
+                    <div class="box-header" data-original-title>
+                        <h2><i class="halflings-icon edit"></i><span class="break"></span>修改实验文档</h2>
+                    </div>
+                    <div class="box-content">
+                        <form id="guideUpload" enctype="multipart/form-data" method="post">
+                            <label class="control-label">编号</label>
+                            <input class="input-xlarge" id="e_id2" type="text" name="e_id" value="${experiment.e_id}" readOnly="true">
+                            <label class="control-label">当前实验文档名称：
+                            <#if experiment.e_srcPath??>
+                                <#if experiment.e_srcPath != "">
+                                <a href="${doc_base}/${experiment.e_srcPath}">
+                                    ${experiment.e_srcPath}
+                                </a>
+                                <#else>
+                                    <a>无</a>
+                                </#if>
+                            </#if>
+                            </label>
+                            <label class="control-label">选择文件</label>
+                            <input class="input-file uniform_on" id="guide" type="file" name="guide">
+
+                            <button type="submit" class="btn btn-primary" onclick="return uploadGuide()">上传</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="box span12">
+                    <div class="box-header" data-original-title>
+                        <h2><i class="halflings-icon edit"></i><span class="break"></span>修改参考代码</h2>
+                    </div>
+                    <div class="box-content">
+                        <form id="refUpload" enctype="multipart/form-data" method="post">
+                            <label class="control-label">编号</label>
+                            <input class="input-xlarge" id="e_id3" type="text" name="e_id" value="${experiment.e_id}" readOnly="true">
+                            <label class="control-label">当前参考代码名称：
+                            <#if experiment.ref_path??>
+                                <#if experiment.ref_path != "">
+                                <a href="${ref_base}/${experiment.ref_path}">
+                                    ${experiment.ref_path}
+                                </a>
+                                <#else>
+                                <a>无</a>
+                                </#if>
+                            </#if>
+                            </label>
+                            <label class="control-label">选择文件</label>
+                            <input class="input-file uniform_on" id="ref" type="file" name="ref">
+
+                            <button type="submit" class="btn btn-primary" onclick="return uploadRef()">上传</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -134,14 +181,14 @@
                     var data = eval("(" + result + ")");
                     if (data.error == 0) {
                         swal({
-                                    title: data.msg,
-                                    text: "",
-                                    type: "success",
-                                    confirmButtonText: "确认"
-                                },
-                                function () {
-                                    window.location.href= "${base}"+"/admin/exp";
-                                });
+                                title: data.msg,
+                                text: "",
+                                type: "success",
+                                confirmButtonText: "确认"
+                            },
+                            function () {
+                                window.location.href= "${base}"+"/admin/exp";
+                            });
                     } else {
                         swal(data.msg, "", "error");
                     }
@@ -149,6 +196,64 @@
             });
         }
     });
+</script>
+
+<script type="text/javascript">
+    function uploadGuide(){
+        var form = document.getElementById("guideUpload");
+        if(form.e_id.value == ""){
+            return false;
+        }
+    }
+    var options = {
+        url: '${base}/admin/exp/insertGuide',
+        success: function (result) {
+            var data = eval("(" + result + ")");
+            if (data.error == 0) {
+                swal({
+                        title: data.msg,
+                        text: "",
+                        type: "success",
+                        confirmButtonText: "确认"
+                    },
+                    function () {
+                        window.location.href= "${base}"+"/admin/exp";
+                    });
+            } else {
+                swal(data.msg,"","error");
+            }
+        }
+    };
+    $('#guideUpload').ajaxForm(options);
+</script>
+
+<script type="text/javascript">
+    function uploadRef(){
+        var form = document.getElementById("refUpload");
+        if(form.e_id.value == ""){
+            return false;
+        }
+    }
+    var options = {
+        url: '${base}/admin/exp/insertRef',
+        success: function (result) {
+            var data = eval("(" + result + ")");
+            if (data.error == 0) {
+                swal({
+                        title: data.msg,
+                        text: "",
+                        type: "success",
+                        confirmButtonText: "确认"
+                    },
+                    function () {
+                        window.location.href= "${base}"+"/admin/exp";
+                    });
+            } else {
+                swal(data.msg,"","error");
+            }
+        }
+    };
+    $('#refUpload').ajaxForm(options);
 </script>
 
 </body>

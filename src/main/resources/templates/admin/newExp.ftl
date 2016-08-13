@@ -25,7 +25,7 @@
                         <h2><i class="halflings-icon edit"></i><span class="break"></span>新增实验</h2>
                     </div>
                     <div class="box-content">
-                        <form id="addExpForm">
+                        <form id="addExpForm" enctype="multipart/form-data" method="post">
                             <label class="control-label">编号</label>
                             <input class="input-xlarge" id="e_id" type="text" name="e_id">
                             <label class="control-label">实验名称</label>
@@ -52,46 +52,15 @@
                                     </select>
                                 </div>
                             </div>
-                        </form>
-                        <div>
-                            <button class="btn btn-primary" id="postAddExp">导入</button>
-                            <button class="btn" id="reset">重置</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="box span12">
-                    <div class="box-header" data-original-title>
-                        <h2><i class="halflings-icon edit"></i><span class="break"></span>课程指南上传</h2>
-                    </div>
-                    <div class="box-content">
-                        <form id="guideUpload" enctype="multipart/form-data" method="post">
-                            <label class="control-label">编号</label>
-                            <input class="input" id="e_id2" type="text" name="e_id">
-                            <label class="control-label">选择文件</label>
-                            <input class="input-file uniform_on" id="guide" type="file" name="guide">
-
-                            <button type="submit" class="btn btn-primary" onclick="return uploadGuide()">上传</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="box span12">
-                    <div class="box-header" data-original-title>
-                        <h2><i class="halflings-icon edit"></i><span class="break"></span>实验参考代码上传</h2>
-                    </div>
-                    <div class="box-content">
-                        <form id="refUpload" enctype="multipart/form-data" method="post">
-                            <label class="control-label">编号</label>
-                            <input class="input" id="e_id3" type="text" name="e_id">
-                            <label class="control-label">选择文件</label>
+                            <label class="control-label">文档上传</label>
+                            <input class="input-file uniform_on" id="doc" type="file" name="doc">
+                            <label class="control-label">参考代码上传</label>
                             <input class="input-file uniform_on" id="ref" type="file" name="ref">
 
-                            <button type="submit" class="btn btn-primary" onclick="return uploadRef()">上传</button>
+                            <div class="control-group" style="margin-top: 20px; margin-left: 5px">
+                                <button class="btn btn-primary" id="postAddExp">导入</button>
+                                <button class="btn" id="reset">重置</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -131,76 +100,36 @@ function onSelected(value){
         } else if($('#class_info1').val() == "-1"){
             swal("实验分类不能为空","","error");
         } else {
-            $.ajax({
+            var options = {
                 url: '${base}/admin/exp/insert',
-                type: 'POST',
-                data: $('#addExpForm').serialize(),
                 success: function (result) {
                     var data = eval("(" + result + ")");
                     if (data.error == 0) {
-                        swal({
-                                    title: data.msg,
-                                    text: "",
-                                    type: "success",
-                                    confirmButtonText: "确认"
-                                },
-                                function () {
-                                    window.location.href= "${base}"+"/admin/exp";
-                                });
+
+                        if (data.error == 0) {
+                            swal({
+                                        title: data.msg,
+                                        text: "",
+                                        type: "success",
+                                        confirmButtonText: "确认"
+                                    },
+                                    function () {
+                                        window.location.href= "${base}"+"/admin/exp";
+                                    });
+                        } else {
+                            swal(data.msg, "", "error");
+                        }
                     } else {
-                        swal(data.msg, "", "error");
+                        swal(data.msg,"","error");
                     }
                 }
-            });
+            };
+
+            $('#addExpForm').ajaxForm(options);
         }
     });
 </script>
 
-<script type="text/javascript">
-    function uploadGuide(){
-        var form = document.getElementById("guideUpload");
-        if(form.e_id.value == ""){
-            return false;
-        }
-    }
-
-    var options = {
-        url: '${base}/admin/exp/insertGuide',
-        success: function (result) {
-            var data = eval("(" + result + ")");
-            if (data.error == 0) {
-                swal(data.msg,"","success");
-            } else {
-                swal(data.msg,"","error");
-            }
-        }
-    };
-
-    $('#guideUpload').ajaxForm(options);
-</script>
-
-<script type="text/javascript">
-    function uploadRef(){
-        var form = document.getElementById("refUpload");
-        if(form.e_id.value == ""){
-            return false;
-        }
-    }
-
-    var options = {
-        url: '${base}/admin/exp/insertRef',
-        success: function (result) {
-            var data = eval("(" + result + ")");
-            if (data.error == 0) {
-                swal(data.msg,"","success");
-            } else {
-                swal(data.msg,"","error");
-            }
-        }
-    };
-
-    $('#refUpload').ajaxForm(options);
-</script>
 
 </body>
 </html>

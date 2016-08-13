@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author 夏之阳
@@ -231,7 +233,7 @@ public class adminExpController {
     //新增实验
     @RequestMapping(value = "/exp/insert")
     @ResponseBody
-    public String expAddHandler(Experiment experiment,String class_info,String type_info){
+    public String expAddHandler(Experiment experiment,String class_info,String type_info,MultipartFile doc,MultipartFile ref){
         String class_id = class_info.split(" ")[0];
         experiment.setClass_id(class_id);
 
@@ -239,9 +241,22 @@ public class adminExpController {
         experiment.setType_id(type_id);
 
         String exp_id = experiment.getE_id();
+        Pattern pattern = Pattern.compile("^[0-9]+$");
+        Matcher isNum = pattern.matcher(exp_id);
+        if( !isNum.matches() ){
+            return "{\"error\":\"1\",\"msg\":\"编号格式错误，必须为数字\"}";
+        }
+
         List<Experiment> experiments = expInfoDao.queryExperiment(exp_id);
         if(experiments.size() != 0){
             return "{\"error\":\"1\",\"msg\":\"编号已存在\"}";
+        }
+
+        if(doc != null){
+            insertDoc(doc, exp_id);
+        }
+        if(ref != null){
+            insertRef(ref, exp_id);
         }
 
         if(expInfoDao.insertExperiment(experiment) != 0) {
@@ -333,6 +348,36 @@ public class adminExpController {
         }
     }
 
+    //导入实验文档
+    public int insertDoc(MultipartFile doc, String e_id){
+        String result = uploadFileService.uploadExpGuideService(doc);
+        if("".equals(result)){
+            return 0;
+        }
+
+        String filename = doc.getOriginalFilename();
+        if(expInfoDao.updateExpSrc(filename, e_id) > 0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    //导入实验参考代码
+    public int insertRef(MultipartFile ref,String e_id){
+        String result = uploadFileService.uploadExpRefService(ref);
+        if("".equals(result)){
+            return 0;
+        }
+
+        String filename = ref.getOriginalFilename();
+        if(expInfoDao.updateRefPath(filename,e_id) > 0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     //导入实验指南
     @RequestMapping(value = "/exp/insertGuide")
     @ResponseBody
@@ -342,38 +387,26 @@ public class adminExpController {
             return "{\"error\":\"1\",\"msg\":\"查无此实验编号\"}";
         }
 
-        String result = uploadFileService.uploadExpGuideService(guide);
-        if("".equals(result)){
-            return "{\"error\":\"1\",\"msg\":\"上传文件失败\"}";
-        }
-
-        String filename = guide.getOriginalFilename();
-        if(expInfoDao.updateExpSrc(filename, e_id) > 0){
+        if(insertDoc(guide, e_id) == 1){
             return "{\"error\":\"0\",\"msg\":\"文档路径修改成功\"}";
-        }else{
-            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
+        } else {
+            return "{\"error\":\"1\",\"msg\":\"上传文件失败\"}";
         }
     }
 
     //导入实验参考代码
     @RequestMapping(value = "/exp/insertRef")
     @ResponseBody
-    public String insertRef(MultipartFile ref,String e_id){
+    public String insertReference(MultipartFile ref,String e_id){
         List<Experiment> experiments = expInfoDao.queryExperiment(e_id);
         if(experiments.size() == 0){
             return "{\"error\":\"1\",\"msg\":\"查无此实验编号\"}";
         }
 
-        String result = uploadFileService.uploadExpRefService(ref);
-        if("".equals(result)){
+        if(insertRef(ref, e_id) == 1){
+            return "{\"error\":\"0\",\"msg\":\"文档路径修改成功\"}";
+        } else {
             return "{\"error\":\"1\",\"msg\":\"上传文件失败\"}";
-        }
-
-        String filename = ref.getOriginalFilename();
-        if(expInfoDao.updateRefPath(filename,e_id) > 0){
-            return "{\"error\":\"0\",\"msg\":\"参考代码修改成功\"}";
-        }else{
-            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
         }
     }
 }
