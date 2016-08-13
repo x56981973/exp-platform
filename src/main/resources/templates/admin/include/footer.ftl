@@ -1,6 +1,6 @@
 <footer>
     <p>
-        <span style="text-align:left;float:left">&copy; 2016 无线攻防实验平台</span>
+        <span style="text-align:left;float:left">&copy; 2016 无线攻防实验平台 上海交通大学</span>
     </p>
 
 </footer>
