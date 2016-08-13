@@ -42,7 +42,7 @@ public class UploadFileService {
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
                 if(!newFile.isDirectory()){
-                    newFile.mkdir();
+                    newFile.mkdirs();
                 }
 
                 String fileName = file.getOriginalFilename();
@@ -77,7 +77,7 @@ public class UploadFileService {
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
                 if(!newFile.isDirectory()){
-                    newFile.mkdir();
+                    newFile.mkdirs();
                 }
 
                 String fileName = file.getOriginalFilename();
@@ -105,7 +105,7 @@ public class UploadFileService {
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
                 if(!newFile.isDirectory()){
-                    newFile.mkdir();
+                    newFile.mkdirs();
                 }
 
                 String fileName = file.getOriginalFilename();
@@ -133,7 +133,7 @@ public class UploadFileService {
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
                 if(!newFile.isDirectory()){
-                    newFile.mkdir();
+                    newFile.mkdirs();
                 }
 
                 String fileName = file.getOriginalFilename();
