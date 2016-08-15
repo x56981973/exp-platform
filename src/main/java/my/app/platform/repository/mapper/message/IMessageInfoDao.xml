@@ -14,8 +14,8 @@
 
     <insert id="insertMessage" parameterType="my.app.platform.domain.Message">
         INSERT INTO
-        message(t_id,s_id,e_id,text,date,is_read)
-        VALUES (#{t_id},#{s_id},#{e_id},#{text},#{date},#{is_read})
+        message(t_id,s_id,text,date,is_read)
+        VALUES (#{t_id},#{s_id},#{text},#{date},#{is_read})
     </insert>
 
     <update id="updateIsRead" parameterType="String">

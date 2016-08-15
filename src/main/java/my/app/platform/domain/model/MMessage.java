@@ -23,11 +23,6 @@ public class MMessage {
     private String s_name;
 
     /**
-     * 实验id
-     */
-    private String e_name;
-
-    /**
      * 消息正文
      */
     private String text;
@@ -64,14 +59,6 @@ public class MMessage {
 
     public void setS_name(String s_name) {
         this.s_name = s_name;
-    }
-
-    public String getE_name() {
-        return e_name;
-    }
-
-    public void setE_name(String e_name) {
-        this.e_name = e_name;
     }
 
     public String getText() {

@@ -125,11 +125,6 @@ public class TeacherHomeController {
                 mMessage.setS_name(student.getS_name());
             }
 
-            String e_id = message.getE_id();
-            Experiment experiment = expInfoDao.queryExperiment(e_id).get(0);
-            String e_name = experiment.getE_name();
-            mMessage.setE_name(e_name);
-
             mMessageList.add(mMessage);
         }
 

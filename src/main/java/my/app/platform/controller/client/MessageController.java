@@ -28,8 +28,8 @@ public class MessageController {
      * @return
      */
     @RequestMapping(value = "/message", method = RequestMethod.POST)
-    public Result messageInsertHandler(String s_id, String e_id, String text) {
-        int result = messageService.insertMessage(s_id, e_id, text);
+    public Result messageInsertHandler(String s_id, String text) {
+        int result = messageService.insertMessage(s_id, text);
         if(result != 0){
             return ResultHelper.newSuccessResult("");
         }else {

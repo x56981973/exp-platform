@@ -27,7 +27,7 @@ public class MessageService {
     @Autowired
     TeacherService teacherService;
 
-    public int insertMessage(String s_id, String e_id, String text){
+    public int insertMessage(String s_id, String text){
         Student student = studentService.getStudent(s_id);
         String t_id = student.getTeacher();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
@@ -36,7 +36,6 @@ public class MessageService {
         Message message = new Message();
         message.setS_id(s_id);
         message.setDate(date);
-        message.setE_id(e_id);
         message.setT_id(t_id);
         message.setText(text);
         message.setIs_read("0"); //默认未读

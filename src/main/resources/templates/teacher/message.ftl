@@ -26,17 +26,17 @@
                             <#if m.is_read == "0">
                                 <li>
                                     <span class="from"><a class="glyphicons star"><i></i></a><strong>${m.s_id}&nbsp;&nbsp;${m.s_name}&nbsp;&nbsp;${m.date}</strong></span>
-                                    <span class="title"><strong>${m.e_name}&nbsp;&nbsp;${m.text}</strong></span>
+                                    <span class="title"><strong>${m.text}</strong></span>
                                     <a class="btn btn-mini btn-success" data-toggle="modal" data-target="#detailModal"
-                                       data-mid="${m.id}" data-sname="${m.s_name}" data-ename="${m.e_name}" data-text="${m.text}"
+                                       data-mid="${m.id}" data-sname="${m.s_name}" data-text="${m.text}"
                                        data-sid="${m.s_id}" data-date="${m.date}" data-read="${m.is_read}">查看</a>
                                 </li>
                             <#else>
                                 <li>
                                     <span class="from"><a class="glyphicons dislikes"><i></i></a>${m.s_id}&nbsp;&nbsp;${m.s_name}&nbsp;&nbsp;${m.date}</span>
-                                    <span class="title">${m.e_name}&nbsp;&nbsp;${m.text}</span>
+                                    <span class="title">${m.text}</span>
                                     <a class="btn btn-mini btn-success" data-toggle="modal" data-target="#detailModal"
-                                       data-mid="${m.id}" data-sname="${m.s_name}" data-ename="${m.e_name}" data-text="${m.text}"
+                                       data-mid="${m.id}" data-sname="${m.s_name}" data-text="${m.text}"
                                        data-read="${m.is_read}">查看</a>
                                 </li>
                             </#if>
@@ -74,7 +74,6 @@
     var m_id = "";
     var s_id = "";
     var s_name = "";
-    var e_name = "";
     var text = "";
     var date = "";
     var isRead = "";
@@ -83,12 +82,11 @@
         m_id = button.data("mid");
         s_id = button.data("sid");
         s_name = button.data("sname");
-        e_name = button.data("ename");
         text = button.data("text");
         date = button.data("date");
         isRead = button.data("read");
         var modal = $(this);
-        modal.find('.modal-title').text(s_name + " " + e_name);
+        modal.find('.modal-title').text(s_name + "的问题");
         modal.find('.modal-body').text(text);
     });
 

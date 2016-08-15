@@ -24,11 +24,6 @@ public class Message {
     private String s_id;
 
     /**
-     * 实验id
-     */
-    private String e_id;
-
-    /**
      * 消息正文
      */
     private String text;
@@ -65,14 +60,6 @@ public class Message {
 
     public void setS_id(String s_id) {
         this.s_id = s_id;
-    }
-
-    public String getE_id() {
-        return e_id;
-    }
-
-    public void setE_id(String e_id) {
-        this.e_id = e_id;
     }
 
     public String getText() {
