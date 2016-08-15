@@ -22,7 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class adminController {
+public class AdminHomeController {
     @Autowired
     private HttpSession session;
 

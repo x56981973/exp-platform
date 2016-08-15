@@ -57,13 +57,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="${base}/user/home"><span>无线攻防实验平台</span></a>
+            <a class="brand" href="${base}/student/home"><span>无线攻防实验平台</span></a>
 
             <!-- start: Header Menu -->
             <div class="nav-no-collapse header-nav">
                 <ul class="nav pull-right">
                     <li>
-                        <a class="btn" href="${base}/user/settings">
+                        <a class="btn" href="${base}/student/settings">
                             <i class="halflings-icon white wrench"></i>
                         </a>
                     </li>
@@ -78,7 +78,7 @@
                             <li class="dropdown-menu-title">
                                 <span>账户信息</span>
                             </li>
-                            <li><a href="${base}/user/home"><i class="halflings-icon user"></i> 账户概览</a></li>
+                            <li><a href="${base}/student/home"><i class="halflings-icon user"></i> 账户概览</a></li>
                             <li><a href="${base}/logout"><i class="halflings-icon off"></i> 退出账户</a></li>
                         </ul>
                     </li>

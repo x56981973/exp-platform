@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class adminExpController {
+public class AdminExpController {
     @Autowired
     HttpSession session;
 

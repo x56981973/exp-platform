@@ -25,7 +25,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class adminTeacherController {
+public class AdminTeacherController {
     @Autowired
     private HttpSession session;
 

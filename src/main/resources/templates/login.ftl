@@ -119,7 +119,7 @@
                 .on('success.form.fv',function(e) {
                     e.preventDefault();
 
-                    var patt = new RegExp('^([A-Za-z]|[0-9]){3,}$');
+                    var patt = new RegExp('^([A-Za-z]|[0-9]){0,}$');
                     var username = $('#username').val();
                     var password = $('#password').val();
                     var u_test = patt.test(username);
