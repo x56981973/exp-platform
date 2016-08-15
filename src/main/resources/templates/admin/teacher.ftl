@@ -100,7 +100,7 @@
                 <label class="control-label">角色</label>
                 <div class="controls">
                     <select id="role" name="role">
-                        <option>user</option>
+                        <option>teacher</option>
                         <option>admin</option>
                     </select>
                 </div>
@@ -132,7 +132,7 @@
                 <label class="control-label">角色</label>
                 <div class="controls">
                     <select id="new_role" name="role">
-                        <option value="user">user</option>
+                        <option value="user">teacher</option>
                         <option value="admin">admin</option>
                     </select>
                 </div>

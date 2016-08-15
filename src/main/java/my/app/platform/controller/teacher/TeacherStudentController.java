@@ -1,4 +1,4 @@
-package my.app.platform.controller.user;
+package my.app.platform.controller.teacher;
 
 import my.app.platform.domain.Student;
 import my.app.platform.service.File.UploadFileService;
@@ -22,8 +22,8 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/user")
-public class UserStudentController {
+@RequestMapping(value = "/teacher")
+public class TeacherStudentController {
     @Autowired
     HttpSession httpSession;
 
@@ -43,7 +43,7 @@ public class UserStudentController {
         List<Student> studentList = studentService.getStudentListByTeacher(t_login_name);
         model.addAttribute("student",studentList);
 
-        return "/user/student";
+        return "/teacher/student";
     }
 
     /**

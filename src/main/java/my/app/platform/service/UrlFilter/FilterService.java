@@ -1,4 +1,4 @@
-package my.app.platform.service.login;
+package my.app.platform.service.UrlFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,8 +49,8 @@ public class FilterService extends OncePerRequestFilter {
             }
         }
 
-        if(url.contains("user")){
-            if( "user".equals(session.getAttribute("role")) ){
+        if(url.contains("teacher")){
+            if( "teacher".equals(session.getAttribute("role")) ){
                 filterChain.doFilter(httpServletRequest,httpServletResponse);
                 return;
             } else {

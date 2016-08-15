@@ -1,4 +1,4 @@
-package my.app.platform.controller.user;
+package my.app.platform.controller.teacher;
 
 import my.app.platform.domain.*;
 import my.app.platform.domain.model.ActiveExperiment;
@@ -26,8 +26,8 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/user")
-public class UserController {
+@RequestMapping(value = "/teacher")
+public class TeacherHomeController {
     @Autowired
     private HttpSession session;
 
@@ -67,7 +67,7 @@ public class UserController {
         List<Message> messageList = messageInfoDao.queryNotReadMessage(t_id);
         model.addAttribute("m_num", messageList.size());
 
-        return "/user/home";
+        return "/teacher/home";
     }
 
     //实验页面
@@ -87,7 +87,7 @@ public class UserController {
         List<ExpClass> expClassList = expInfoDao.queryAllExpClass();
         model.addAttribute("exp_class",expClassList);
 
-        return "/user/experiment";
+        return "/teacher/experiment";
     }
 
     //设置页面
@@ -97,7 +97,7 @@ public class UserController {
         Teacher teacher = teacherService.getTeacher(t_id);
         model.addAttribute("teacher", teacher);
 
-        return "/user/settings";
+        return "/teacher/settings";
     }
 
     //消息页面
@@ -135,6 +135,6 @@ public class UserController {
 
         model.addAttribute("message",mMessageList);
 
-        return "/user/message";
+        return "/teacher/message";
     }
 }

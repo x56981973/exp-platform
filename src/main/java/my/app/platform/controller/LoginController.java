@@ -39,8 +39,8 @@ public class LoginController {
      */
     @RequestMapping(value = "/")
     public String home(){
-        if("user".equals(session.getAttribute("role").toString())){
-            return "redirect:/user/home";
+        if("teacher".equals(session.getAttribute("role").toString())){
+            return "redirect:/teacher/home";
         } else {
             return "redirect:/admin/home";
         }
@@ -90,8 +90,8 @@ public class LoginController {
             session.setAttribute("t_name", teacher.getT_name());
             session.setAttribute("role", teacher.getRole());
 
-            if("user".equals(teacher.getRole())) {
-                return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/user/home\"}";
+            if("teacher".equals(teacher.getRole())) {
+                return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/teacher/home\"}";
             } else {
                 //插入登陆记录
                 LoginRecord loginRecord = new LoginRecord();
