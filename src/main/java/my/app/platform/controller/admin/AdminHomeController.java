@@ -41,9 +41,9 @@ public class AdminHomeController {
     //首页
     @RequestMapping(value = "/home")
     public String admin(Model model){
-        String t_id = session.getAttribute("t_id").toString();
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name", t_name);
+        String id = session.getAttribute("uid").toString();
+        String name = session.getAttribute("name").toString();
+        model.addAttribute("name", name);
 
         int t_num = teacherService.getTeacherList().size();
         model.addAttribute("t_num",t_num);
@@ -54,10 +54,10 @@ public class AdminHomeController {
         int e_num = expInfoDao.queryAllMExp().size();
         model.addAttribute("e_num", e_num);
 
-        List<LoginRecord> loginRecordList = logInfoDao.queryLoginRecord(t_id);
+        List<LoginRecord> loginRecordList = logInfoDao.queryLoginRecord(id);
         model.addAttribute("login_record",loginRecordList);
 
-        List<OptionRecord> optionRecordList = logInfoDao.queryOptionRecord(t_id);
+        List<OptionRecord> optionRecordList = logInfoDao.queryOptionRecord(id);
         model.addAttribute("option_record",optionRecordList);
 
         return "/admin/home";

@@ -3,8 +3,11 @@ package my.app.platform.controller;
 import my.app.platform.domain.LoginRecord;
 import my.app.platform.domain.Student;
 import my.app.platform.domain.Teacher;
+import my.app.platform.domain.User;
 import my.app.platform.repository.mapper.log.ILogInfoDao;
 import my.app.platform.service.LoginService;
+import my.app.platform.service.StudentService;
+import my.app.platform.service.TeacherService;
 import my.app.platform.tool.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,12 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private TeacherService teacherService;
+
+    @Autowired
+    private StudentService studentService;
 
     /**
      * 默认接口
@@ -84,27 +93,25 @@ public class LoginController {
             return "{\"error\":\"1\",\"msg\":\"密码仅能使用数字字母组合\",\"to\":\"/login\"}";
         }
 
-        Teacher teacher = loginService.teacherLoginCheck(username, password);
-        Student student = loginService.studentLoginCheck(username, password);
-        if(teacher != null) {
+        User user = loginService.loginCheck(username,password);
+        if(user != null) {
+            String role = user.getRole();
+            session.setAttribute("role", role);
+            String name = user.getName();
+            session.setAttribute("name",name);
+            session.setAttribute("uid", username);
             session.setMaxInactiveInterval(900);
-            session.setAttribute("t_id", teacher.getT_login_name());
-            session.setAttribute("t_name", teacher.getT_name());
-            session.setAttribute("role", teacher.getRole());
 
-            if ("teacher".equals(teacher.getRole())) {
+            if("teacher".equals(role)){
                 return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/teacher/home\"}";
-            } else {
-                insertLoginRecord(request, username);
+            } else if("student".equals(role)){
+                return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/student/home\"}";
+            } else if ("admin".equals(role)){
+                //insertLoginRecord(request, username);
                 return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/admin/home\"}";
+            } else {
+                return "{\"error\":\"1\",\"msg\":\"未知权限，请联系管理员\",\"to\":\"/login\"}";
             }
-        } else if (student != null) {
-            session.setMaxInactiveInterval(900);
-            session.setAttribute("t_id", student.getS_login_name());
-            session.setAttribute("t_name", student.getS_name());
-            session.setAttribute("role", "student");
-
-            return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/student/home\"}";
         } else {
             return "{\"error\":\"1\",\"msg\":\"用户名或密码错误\",\"to\":\"/login\"}";
         }
@@ -114,9 +121,11 @@ public class LoginController {
         //插入登陆记录
         LoginRecord loginRecord = new LoginRecord();
         loginRecord.setUid(username);
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String date = df.format(new Date());
         loginRecord.setDate(date);
+
         loginRecord.setIp_address(IpUtil.getIpAddr(request));
         return logInfoDao.insertLoginRecord(loginRecord);
     }

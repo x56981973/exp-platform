@@ -149,7 +149,4 @@ public class ExpController {
         return expInfoDao.queryAllExpType();
     }
 
-//    public ExpType queryExpType(){
-//        return expInfoDao.queryAllExpType().get(0);
-//    }
 }

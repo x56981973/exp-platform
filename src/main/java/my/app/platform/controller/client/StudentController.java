@@ -22,29 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/client")
 public class StudentController {
     @Autowired
-    LoginService loginService;
-
-    @Autowired
     IStudentInfoDao studentInfoDao;
 
     @Autowired
     StudentService studentService;
-
-    /**
-     * 学生登录
-     * @param usr 用户名
-     * @param pwd 密码
-     * @return 登录结果
-     */
-    @RequestMapping(value = "/student/login", method = RequestMethod.POST)
-    public Result studentLoginHandler(String usr, String pwd) {
-        Student student = loginService.studentLoginCheck(usr, pwd);
-        if(student != null) {
-            return ResultHelper.newSuccessResult(student);
-        } else {
-            return ResultHelper.newFailureResult("Login Failed");
-        }
-    }
 
     /**
      * 查询成绩

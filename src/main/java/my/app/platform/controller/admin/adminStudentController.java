@@ -42,8 +42,8 @@ public class AdminStudentController {
 
     @RequestMapping(value = "/student")
     public String student(Model model){
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
+        String name = session.getAttribute("name").toString();
+        model.addAttribute("name",name);
 
         List<Student> studentList = studentService.getStudentList();
         model.addAttribute("student",studentList);
@@ -55,14 +55,8 @@ public class AdminStudentController {
     @ResponseBody
     public String deleteStudentHandler(String s_login_name) {
         if(studentService.deleteStudent(s_login_name) != 0) {
-            OptionRecord optionRecord = new OptionRecord();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("student");
-            optionRecord.setOption_detail("删除学生：" + s_login_name);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "删除学生：" + s_login_name;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"删除成功\"}";
         }else{
@@ -97,14 +91,8 @@ public class AdminStudentController {
         new_student.setS_grade(s_grade);
         new_student.setTeacher(t_login_name);
         if(studentService.insertStudent(new_student) > 0){
-            OptionRecord optionRecord = new OptionRecord();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("student");
-            optionRecord.setOption_detail("添加学生：" + s_login_name);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "添加学生：" + s_login_name;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
@@ -117,18 +105,24 @@ public class AdminStudentController {
     public String updateStudentInfoHandler(Student student) {
         int result = studentService.updateStudent(student);
         if(result != 0){
-            OptionRecord optionRecord = new OptionRecord();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("student");
-            optionRecord.setOption_detail("修改学生：" + student.getS_login_name());
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "修改学生：" + student.getS_login_name();
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
         } else {
             return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
         }
+    }
+
+    private int setOptionRecord(String record){
+        OptionRecord optionRecord = new OptionRecord();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String date = df.format(new Date());
+        optionRecord.setDate(date);
+        optionRecord.setUid(session.getAttribute("uid").toString());
+        optionRecord.setOption_class("student");
+        optionRecord.setOption_detail(record);
+
+        return logInfoDao.insertOptionRecord(optionRecord);
     }
 }

@@ -303,7 +303,6 @@
 <script type="text/javascript">
     $("#postAdd").click(function(){
         var new_id = $('#s_login_name').val();
-        console.log(new_id);
         var new_name = $('#s_name').val();
         var new_password = $('#s_password').val();
         if(new_id == ''){

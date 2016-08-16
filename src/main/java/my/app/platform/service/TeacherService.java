@@ -26,14 +26,6 @@ public class TeacherService {
     IExpInfoDao expInfoDao;
 
     /**
-     * 获取管理员列表
-     * @return 管理员列表
-     */
-    public List<Teacher> getAdminList(){
-        return teacherInfoDao.queryAllAdmin();
-    }
-
-    /**
      * 获取教师列表
      * @return 教师列表
      */

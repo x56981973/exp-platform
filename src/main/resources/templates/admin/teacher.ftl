@@ -31,7 +31,6 @@
                                 <th>姓名</th>
                                 <th>密码</th>
                                 <th>学校</th>
-                                <th>角色</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -43,11 +42,10 @@
                                     <td class="center">${t.t_name}</td>
                                     <td class="center">${t.t_password}</td>
                                     <td class="center">${t.t_school}</td>
-                                    <td class="center">${t.role}</td>
                                     <td class="center">
                                         <a class="btn btn-info" data-toggle="modal" data-target="#editModal"
                                            data-id="${t.t_login_name}" data-name="${t.t_name}" data-password="${t.t_password}"
-                                           data-grade="${t.t_school}" data-role="${t.role}" >
+                                           data-grade="${t.t_school}" >
                                             编辑
                                         </a>
                                         <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
@@ -96,15 +94,6 @@
             <input class="input-xlarge focused" id="t_password" type="text" name="t_password">
             <label class="control-label">学校</label>
             <input class="input-xlarge focused" id="t_school" type="text" name="t_school">
-            <div class="control-group">
-                <label class="control-label">角色</label>
-                <div class="controls">
-                    <select id="role" name="role">
-                        <option>teacher</option>
-                        <option>admin</option>
-                    </select>
-                </div>
-            </div>
         </form>
     </div>
     <div class="modal-footer">
@@ -116,7 +105,7 @@
 <div class="modal hide fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3>添加教师</h3>
+        <h3>编辑教师</h3>
     </div>
     <div class="modal-body">
         <form id="editForm">
@@ -128,15 +117,6 @@
             <input class="input-xlarge focused" id="new_password" type="text" name="t_password">
             <label class="control-label">学校</label>
             <input class="input-xlarge focused" id="new_school" type="text" name="t_school">
-            <div class="control-group">
-                <label class="control-label">角色</label>
-                <div class="controls">
-                    <select id="new_role" name="role">
-                        <option value="user">teacher</option>
-                        <option value="admin">admin</option>
-                    </select>
-                </div>
-            </div>
         </form>
     </div>
     <div class="modal-footer">
@@ -168,14 +148,14 @@
                 var data = eval("(" + result + ")");
                 if (data.error == 0) {
                     swal({
-                                title: data.msg,
-                                text: "",
-                                type: "success",
-                                confirmButtonText: "确认"
-                            },
-                            function(){
-                                location.reload();
-                            });
+                            title: data.msg,
+                            text: "",
+                            type: "success",
+                            confirmButtonText: "确认"
+                        },
+                        function(){
+                            location.reload();
+                        });
                 } else {
                     swal(data.msg,"","error");
                 }
@@ -205,14 +185,14 @@
                     var data = eval("(" + result + ")");
                     if (data.error == 0) {
                         swal({
-                                    title: data.msg,
-                                    text: "",
-                                    type: "success",
-                                    confirmButtonText: "确认"
-                                },
-                                function () {
-                                    location.reload();
-                                });
+                                title: data.msg,
+                                text: "",
+                                type: "success",
+                                confirmButtonText: "确认"
+                            },
+                            function () {
+                                location.reload();
+                            });
                     } else {
                         swal(data.msg, "", "error");
                     }
@@ -232,18 +212,12 @@
         var name = button.data("name");
         var password = button.data("password");
         var grade = button.data("grade");
-        var role = button.data("role");
 
         var modal = $(this);
         modal.find('#new_login_name').val(id);
         modal.find('#new_name').val(name);
         modal.find('#new_password').val(password);
         modal.find('#new_school').val(grade);
-        if(role == "admin"){
-            modal.find("#new_role option[value='admin']").attr("selected",true);
-        } else{
-            modal.find("#new_role option[value='user']").attr("selected",true);
-        }
     });
 
     $("#postEdit").click(function(){
@@ -264,14 +238,14 @@
                     var data = eval("(" + result + ")");
                     if (data.error == 0) {
                         swal({
-                                    title: data.msg,
-                                    text: "",
-                                    type: "success",
-                                    confirmButtonText: "确认"
-                                },
-                                function () {
-                                    location.reload();
-                                });
+                                title: data.msg,
+                                text: "",
+                                type: "success",
+                                confirmButtonText: "确认"
+                            },
+                            function () {
+                                location.reload();
+                            });
                     } else {
                         swal(data.msg, "", "error");
                     }

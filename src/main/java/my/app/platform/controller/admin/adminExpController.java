@@ -45,14 +45,11 @@ public class AdminExpController {
     @Autowired
     UploadFileService uploadFileService;
 
-    OptionRecord optionRecord = new OptionRecord();
-
     //实验页面
     @RequestMapping(value = "/exp")
     public String experiment(Model model){
-        //Get t_name
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
+        String name = session.getAttribute("name").toString();
+        model.addAttribute("name",name);
 
         //Get Exp info
         List<MExperiment> experimentList = expInfoDao.queryAllMExp();
@@ -72,13 +69,8 @@ public class AdminExpController {
     @ResponseBody
     public String expDeleteHandler(String id){
         if(expInfoDao.deleteExperiment(id) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("删除实验：" + id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "删除实验：" + id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"删除成功\"}";
         }else{
@@ -91,13 +83,8 @@ public class AdminExpController {
     @ResponseBody
     public String typeDeleteHandler(String id){
         if(expInfoDao.deleteExpType(id) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("删除实验小类：" + id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "删除实验小类：" + id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"删除成功\"}";
         }else{
@@ -110,13 +97,8 @@ public class AdminExpController {
     @ResponseBody
     public String classDeleteHandler(String id){
         if(expInfoDao.deleteExpClass(id) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("删除实验大类：" + id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "删除实验大类：" + id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"删除成功\"}";
         }else{
@@ -135,13 +117,8 @@ public class AdminExpController {
         }
 
         if(expInfoDao.insertExpClass(expClass) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("添加实验大类：" + class_id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "添加实验大类：" + class_id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
@@ -160,13 +137,8 @@ public class AdminExpController {
         }
 
         if(expInfoDao.updateExpClass(expClass) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("编辑实验大类：" + class_id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "编辑实验大类：" + class_id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"编辑成功\"}";
         }else{
@@ -188,13 +160,8 @@ public class AdminExpController {
         }
 
         if(expInfoDao.insertExpType(expType) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("添加实验小类：" + type_id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "添加实验小类：" + type_id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
@@ -216,13 +183,8 @@ public class AdminExpController {
         }
 
         if(expInfoDao.updateExpType(expType) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("编辑实验小类：" + type_id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "编辑实验小类：" + type_id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"编辑成功\"}";
         }else{
@@ -260,13 +222,8 @@ public class AdminExpController {
         }
 
         if(expInfoDao.insertExperiment(experiment) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("添加实验："+ exp_id);
-            logInfoDao.insertOptionRecord(optionRecord);
+            String record = "添加实验：" + exp_id;
+            setOptionRecord(record);
 
             return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
@@ -334,14 +291,8 @@ public class AdminExpController {
         }
 
         if(expInfoDao.updateExperiment(experiment) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("exp");
-            optionRecord.setOption_detail("修改实验："+ exp_id);
-            logInfoDao.insertOptionRecord(optionRecord);
-
+            String record = "修改实验："+ exp_id;
+            setOptionRecord(record);
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
         }else{
             return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
@@ -371,7 +322,7 @@ public class AdminExpController {
         }
 
         String filename = ref.getOriginalFilename();
-        if(expInfoDao.updateRefPath(filename,e_id) > 0){
+        if(expInfoDao.updateRefPath(filename, e_id) > 0){
             return 1;
         }else{
             return 0;
@@ -408,5 +359,17 @@ public class AdminExpController {
         } else {
             return "{\"error\":\"1\",\"msg\":\"上传文件失败\"}";
         }
+    }
+
+    private int setOptionRecord(String record){
+        OptionRecord optionRecord = new OptionRecord();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String date = df.format(new Date());
+        optionRecord.setDate(date);
+        optionRecord.setUid(session.getAttribute("uid").toString());
+        optionRecord.setOption_class("exp");
+        optionRecord.setOption_detail(record);
+
+        return logInfoDao.insertOptionRecord(optionRecord);
     }
 }

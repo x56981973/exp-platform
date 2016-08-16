@@ -28,11 +28,6 @@ public class Teacher {
     private String t_school;
 
     /**
-     * 角色
-     */
-    private String role;
-
-    /**
      * 正在进行中的实验
      */
     private String active_exp;
@@ -67,14 +62,6 @@ public class Teacher {
 
     public void setT_school(String t_school) {
         this.t_school = t_school;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getActive_exp() {

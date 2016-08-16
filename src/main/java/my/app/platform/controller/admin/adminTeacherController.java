@@ -35,12 +35,10 @@ public class AdminTeacherController {
     @Autowired
     ILogInfoDao logInfoDao;
 
-    OptionRecord optionRecord = new OptionRecord();
-
     @RequestMapping(value = "/teacher")
     public String teacher(Model model){
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name", t_name);
+        String name = session.getAttribute("name").toString();
+        model.addAttribute("name", name);
 
         List<Teacher> teacherList = teacherService.getTeacherList();
         model.addAttribute("teacher",teacherList);
@@ -52,14 +50,8 @@ public class AdminTeacherController {
     @ResponseBody
     public String teacherDeleteHandler(String t_login_name){
         if(teacherService.deleteTeacher(t_login_name) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("teacher");
-            optionRecord.setOption_detail("删除教师：" + t_login_name);
-            logInfoDao.insertOptionRecord(optionRecord);
-
+            String record = "删除教师：" + t_login_name;
+            setOptionRecord(record);
             return "{\"error\":\"0\",\"msg\":\"删除成功\"}";
         }else{
             return "{\"error\":\"1\",\"msg\":\"删除失败\"}";
@@ -75,14 +67,8 @@ public class AdminTeacherController {
         }
 
         if(teacherService.insertTeacher(teacher) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("teacher");
-            optionRecord.setOption_detail("添加教师：" + teacher.getT_login_name());
-            logInfoDao.insertOptionRecord(optionRecord);
-
+            String record = "新增教师：" + teacher.getT_login_name();
+            setOptionRecord(record);
             return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
             return "{\"error\":\"1\",\"msg\":\"添加失败\"}";
@@ -93,16 +79,23 @@ public class AdminTeacherController {
     @ResponseBody
     public String teacherUpdateHandler(Teacher teacher){
         if(teacherService.updateTeacherInfo(teacher) != 0) {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-            String date = df.format(new Date());
-            optionRecord.setDate(date);
-            optionRecord.setUid(session.getAttribute("t_id").toString());
-            optionRecord.setOption_class("teacher");
-            optionRecord.setOption_detail("更新教师：" + teacher.getT_login_name());
-
+            String record = "更新教师：" + teacher.getT_login_name();
+            setOptionRecord(record);
             return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
         }else{
             return "{\"error\":\"1\",\"msg\":\"添加失败\"}";
         }
+    }
+
+    private int setOptionRecord(String record){
+        OptionRecord optionRecord = new OptionRecord();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String date = df.format(new Date());
+        optionRecord.setDate(date);
+        optionRecord.setUid(session.getAttribute("uid").toString());
+        optionRecord.setOption_class("teacher");
+        optionRecord.setOption_detail(record);
+
+        return logInfoDao.insertOptionRecord(optionRecord);
     }
 }

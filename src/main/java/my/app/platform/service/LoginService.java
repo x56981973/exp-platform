@@ -1,9 +1,7 @@
 package my.app.platform.service;
 
-import my.app.platform.domain.Student;
-import my.app.platform.domain.Teacher;
-import my.app.platform.repository.mapper.student.IStudentInfoDao;
-import my.app.platform.repository.mapper.teacher.ITeacherInfoDao;
+import my.app.platform.domain.User;
+import my.app.platform.repository.mapper.login.ILoginCheckDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,25 +16,7 @@ import java.util.List;
 @Service
 public class LoginService {
     @Autowired
-    IStudentInfoDao studentInfoDao;
-
-    @Autowired
-    ITeacherInfoDao teacherInfoDao;
-
-    /**
-     * 学生登录验证
-     * @param userName 用户名
-     * @param password 密码
-     * @return 学生信息
-     */
-    public Student studentLoginCheck(String userName, String password){
-        List<Student> students = studentInfoDao.checkStudentInfo(userName, password);
-        if(students.size() != 0){
-            return students.get(0);
-        } else {
-            return null;
-        }
-    }
+    ILoginCheckDao loginCheckDao;
 
     /**
      * 用户登录验证
@@ -44,10 +24,10 @@ public class LoginService {
      * @param password 密码
      * @return 用户信息
      */
-    public Teacher teacherLoginCheck(String userName, String password){
-        List<Teacher> teachers = teacherInfoDao.checkLogin(userName, password);
-        if(teachers.size() != 0){
-            return teachers.get(0);
+    public User loginCheck(String userName, String password){
+        List<User> userList = loginCheckDao.checkLogin(userName, password);
+        if(userList.size() != 0){
+            return userList.get(0);
         } else {
             return null;
         }

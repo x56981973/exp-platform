@@ -46,25 +46,25 @@ public class TeacherHomeController {
     //主页
     @RequestMapping(value = "/home")
     public String home(Model model){
-        String t_id = session.getAttribute("t_id").toString();
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name", t_name);
+        String uid = session.getAttribute("uid").toString();
+        String name = session.getAttribute("name").toString();
+        model.addAttribute("name", name);
 
         //Get Active Exp info
-        List<ActiveExperiment> activeExperiments = teacherService.getActiveExpList(t_id);
+        List<ActiveExperiment> activeExperiments = teacherService.getActiveExpList(uid);
         model.addAttribute("active_exp",activeExperiments);
 
         //Get Exp info
         List<MExperiment> experiments = expInfoDao.queryAllMExp();
         model.addAttribute("exp",experiments);
 
-        int s_num = studentService.getStudentListByTeacher(t_id).size();
+        int s_num = studentService.getStudentListByTeacher(uid).size();
         model.addAttribute("s_num",s_num);
 
         int e_num = experiments.size();
         model.addAttribute("e_num", e_num);
 
-        List<Message> messageList = messageInfoDao.queryNotReadMessage(t_id);
+        List<Message> messageList = messageInfoDao.queryNotReadMessage(uid);
         model.addAttribute("m_num", messageList.size());
 
         return "/teacher/home";
@@ -73,9 +73,8 @@ public class TeacherHomeController {
     //实验页面
     @RequestMapping(value = "/exp")
     public String experiment(Model model){
-        //Get t_name
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
+        String name = session.getAttribute("name").toString();
+        model.addAttribute("name",name);
 
         //Get Exp info
         List<MExperiment> experimentList = expInfoDao.queryAllMExp();
@@ -93,8 +92,8 @@ public class TeacherHomeController {
     //设置页面
     @RequestMapping(value = "/settings")
     public String setting(Model model){
-        String t_id = session.getAttribute("t_id").toString();
-        Teacher teacher = teacherService.getTeacher(t_id);
+        String uid = session.getAttribute("uid").toString();
+        Teacher teacher = teacherService.getTeacher(uid);
         model.addAttribute("teacher", teacher);
 
         return "/teacher/settings";
@@ -103,13 +102,11 @@ public class TeacherHomeController {
     //消息页面
     @RequestMapping(value = "/message")
     public String message(Model model){
-        //Get t_name
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
+        String name = session.getAttribute("name").toString();
+        model.addAttribute("name",name);
 
-        //Get t_name
-        String t_id = session.getAttribute("t_id").toString();
-        List<Message> messageList = messageInfoDao.queryMessage(t_id);
+        String uid = session.getAttribute("uid").toString();
+        List<Message> messageList = messageInfoDao.queryMessage(uid);
         List<MMessage> mMessageList = new ArrayList<>();
         for(Message message : messageList){
             MMessage mMessage = new MMessage();

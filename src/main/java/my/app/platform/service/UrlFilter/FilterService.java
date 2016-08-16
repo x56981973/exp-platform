@@ -25,16 +25,16 @@ public class FilterService extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String url = httpServletRequest.getRequestURI();
-        if(url.contains("client")){    //客户端请求不拦截
-            filterChain.doFilter(httpServletRequest,httpServletResponse);
-            return;
-        }
+//        if(url.contains("client")){    //客户端请求不拦截
+//            filterChain.doFilter(httpServletRequest,httpServletResponse);
+//            return;
+//        }
         if(url.contains("login")){    //登陆页面不拦截
             filterChain.doFilter(httpServletRequest,httpServletResponse);
             return;
         }
 
-        if (session.getAttribute("t_name") == null) {
+        if (session.getAttribute("uid") == null || session.getAttribute("name") == null) {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
             return;
         }
@@ -51,6 +51,16 @@ public class FilterService extends OncePerRequestFilter {
 
         if(url.contains("teacher")){
             if( "teacher".equals(session.getAttribute("role")) ){
+                filterChain.doFilter(httpServletRequest,httpServletResponse);
+                return;
+            } else {
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/error");
+                return;
+            }
+        }
+
+        if(url.contains("student")){
+            if( "student".equals(session.getAttribute("role")) ){
                 filterChain.doFilter(httpServletRequest,httpServletResponse);
                 return;
             } else {

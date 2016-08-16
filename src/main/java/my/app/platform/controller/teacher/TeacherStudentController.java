@@ -36,10 +36,10 @@ public class TeacherStudentController {
     //学生页面
     @RequestMapping(value = "/student")
     public String student(Model model){
-        String t_name = httpSession.getAttribute("t_name").toString();
-        model.addAttribute("t_name",t_name);
+        String name = httpSession.getAttribute("name").toString();
+        model.addAttribute("name",name);
 
-        String t_login_name = httpSession.getAttribute("t_id").toString();
+        String t_login_name = httpSession.getAttribute("uid").toString();
         List<Student> studentList = studentService.getStudentListByTeacher(t_login_name);
         model.addAttribute("student",studentList);
 
@@ -57,7 +57,7 @@ public class TeacherStudentController {
     @ResponseBody
     public String insertStudentHandler(String s_login_name,String s_name,String s_password,String s_grade) {
         //获取教师id
-        String t_id = httpSession.getAttribute("t_id").toString();
+        String t_id = httpSession.getAttribute("uid").toString();
 
         Student student = studentService.getStudent(s_login_name);
         if(student != null){
@@ -86,7 +86,7 @@ public class TeacherStudentController {
     @ResponseBody
     public String insertStudentListHandler(MultipartFile studentList) {
         //获取教师id
-        String t_id = httpSession.getAttribute("t_id").toString();
+        String t_id = httpSession.getAttribute("uid").toString();
 
         String fileName = studentList.getOriginalFilename();
         int index = fileName.lastIndexOf(".");
