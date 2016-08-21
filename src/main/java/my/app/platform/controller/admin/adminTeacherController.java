@@ -81,9 +81,9 @@ public class AdminTeacherController {
         if(teacherService.updateTeacherInfo(teacher) != 0) {
             String record = "更新教师：" + teacher.getT_login_name();
             setOptionRecord(record);
-            return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
+            return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
         }else{
-            return "{\"error\":\"1\",\"msg\":\"添加失败\"}";
+            return "{\"error\":\"1\",\"msg\":\"修改失败\"}";
         }
     }
 

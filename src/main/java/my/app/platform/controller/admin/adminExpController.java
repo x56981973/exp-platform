@@ -209,9 +209,19 @@ public class AdminExpController {
             return "{\"error\":\"1\",\"msg\":\"编号格式错误，必须为数字\"}";
         }
 
+        experiment.setRef_path("");
+        experiment.setE_srcPath("");
+
         List<Experiment> experiments = expInfoDao.queryExperiment(exp_id);
         if(experiments.size() != 0){
             return "{\"error\":\"1\",\"msg\":\"编号已存在\"}";
+        }
+
+        if(expInfoDao.insertExperiment(experiment) != 0) {
+            String record = "添加实验：" + exp_id;
+            setOptionRecord(record);
+        }else{
+            return "{\"error\":\"1\",\"msg\":\"添加失败\"}";
         }
 
         if(doc != null){
@@ -220,23 +230,12 @@ public class AdminExpController {
         if(ref != null){
             insertRef(ref, exp_id);
         }
-
-        if(expInfoDao.insertExperiment(experiment) != 0) {
-            String record = "添加实验：" + exp_id;
-            setOptionRecord(record);
-
-            return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
-        }else{
-            return "{\"error\":\"1\",\"msg\":\"添加失败\"}";
-        }
+        return "{\"error\":\"0\",\"msg\":\"添加成功\"}";
     }
 
     //新增页面
     @RequestMapping(value = "/exp/add")
     public String expAddHandler(Model model){
-        //Get t_name
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name", t_name);
 
         //Get Exp info
         List<MExperiment> experimentList = expInfoDao.queryAllMExp();
@@ -254,9 +253,6 @@ public class AdminExpController {
     //编辑实验页面
     @RequestMapping(value = "/exp/edit/{e_id}")
     public String expEditHandler(@PathVariable String e_id,Model model){
-        //Get t_name
-        String t_name = session.getAttribute("t_name").toString();
-        model.addAttribute("t_name", t_name);
 
         List<Experiment> experiments = expInfoDao.queryExperiment(e_id);
         if(experiments == null){
@@ -299,36 +295,6 @@ public class AdminExpController {
         }
     }
 
-    //导入实验文档
-    public int insertDoc(MultipartFile doc, String e_id){
-        String result = uploadFileService.uploadExpGuideService(doc);
-        if("".equals(result)){
-            return 0;
-        }
-
-        String filename = doc.getOriginalFilename();
-        if(expInfoDao.updateExpSrc(filename, e_id) > 0){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
-
-    //导入实验参考代码
-    public int insertRef(MultipartFile ref,String e_id){
-        String result = uploadFileService.uploadExpRefService(ref);
-        if("".equals(result)){
-            return 0;
-        }
-
-        String filename = ref.getOriginalFilename();
-        if(expInfoDao.updateRefPath(filename, e_id) > 0){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
-
     //导入实验指南
     @RequestMapping(value = "/exp/insertGuide")
     @ResponseBody
@@ -358,6 +324,36 @@ public class AdminExpController {
             return "{\"error\":\"0\",\"msg\":\"文档路径修改成功\"}";
         } else {
             return "{\"error\":\"1\",\"msg\":\"上传文件失败\"}";
+        }
+    }
+
+    //导入实验文档
+    public int insertDoc(MultipartFile doc, String e_id){
+        String result = uploadFileService.uploadExpGuideService(doc);
+        if("".equals(result)){
+            return 0;
+        }
+
+        String filename = doc.getOriginalFilename();
+        if(expInfoDao.updateExpSrc(filename, e_id) > 0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    //导入实验参考代码
+    public int insertRef(MultipartFile ref,String e_id){
+        String result = uploadFileService.uploadExpRefService(ref);
+        if("".equals(result)){
+            return 0;
+        }
+
+        String filename = ref.getOriginalFilename();
+        if(expInfoDao.updateRefPath(filename, e_id) > 0){
+            return 1;
+        }else{
+            return 0;
         }
     }
 

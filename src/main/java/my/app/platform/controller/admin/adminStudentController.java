@@ -84,6 +84,10 @@ public class AdminStudentController {
             return "{\"error\":\"1\",\"msg\":\"查无此教师\"}";
         }
 
+        if(!s_password.matches("^([A-Za-z]|[0-9]){0,}$")){
+            return "{\"error\":\"1\",\"msg\":\"密码仅能使用数字字母组合\"}";
+        }
+
         Student new_student = new Student();
         new_student.setS_name(s_name);
         new_student.setS_login_name(s_login_name);

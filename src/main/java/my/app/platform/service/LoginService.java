@@ -1,7 +1,7 @@
 package my.app.platform.service;
 
 import my.app.platform.domain.User;
-import my.app.platform.repository.mapper.login.ILoginCheckDao;
+import my.app.platform.repository.mapper.user.IUserListDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class LoginService {
     @Autowired
-    ILoginCheckDao loginCheckDao;
+    IUserListDao loginCheckDao;
 
     /**
      * 用户登录验证

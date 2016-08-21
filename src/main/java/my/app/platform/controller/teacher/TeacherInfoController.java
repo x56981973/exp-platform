@@ -36,6 +36,10 @@ public class TeacherInfoController {
     @RequestMapping(value = "/teacher/update", method = RequestMethod.POST)
     @ResponseBody
     public String updateTeacher(String t_login_name, String password){
+        if(!password.matches("^([A-Za-z]|[0-9]){0,}$")){
+            return "{\"error\":\"1\",\"msg\":\"密码仅能使用数字字母组合\"}";
+        }
+
         int result = teacherService.updateTeacherPwd(t_login_name, password);
         if (result != 0) {
             return "{\"error\":\"0\",\"msg\":\"更新成功\"}";

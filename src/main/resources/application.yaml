@@ -7,8 +7,8 @@ spring:
     requestContextAttribute: request
 
 multipart:
-  maxFileSize: 10MB
-  maxRequestSize: 10MB
+  maxFileSize: 20MB
+  maxRequestSize: 20MB
 
 exp-platform:
   datasource:

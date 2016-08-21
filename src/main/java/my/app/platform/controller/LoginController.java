@@ -1,13 +1,9 @@
 package my.app.platform.controller;
 
 import my.app.platform.domain.LoginRecord;
-import my.app.platform.domain.Student;
-import my.app.platform.domain.Teacher;
 import my.app.platform.domain.User;
 import my.app.platform.repository.mapper.log.ILogInfoDao;
 import my.app.platform.service.LoginService;
-import my.app.platform.service.StudentService;
-import my.app.platform.service.TeacherService;
 import my.app.platform.tool.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,12 +33,6 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private StudentService studentService;
-
     /**
      * 默认接口
      * @return 跳转到主页面
@@ -51,6 +41,8 @@ public class LoginController {
     public String home(){
         if("teacher".equals(session.getAttribute("role").toString())){
             return "redirect:/teacher/home";
+        } else if("student".equals(session.getAttribute("role").toString())){
+            return "redirect:/student/home";
         } else {
             return "redirect:/admin/home";
         }
@@ -71,8 +63,9 @@ public class LoginController {
      */
     @RequestMapping(value = "/logout")
     public String logout(){
-        session.removeAttribute("t_id");
-        session.removeAttribute("t_name");
+        session.removeAttribute("role");
+        session.removeAttribute("name");
+        session.removeAttribute("uid");
         return "redirect:/login";
     }
 

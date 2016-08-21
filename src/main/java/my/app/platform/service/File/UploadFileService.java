@@ -2,6 +2,7 @@ package my.app.platform.service.File;
 
 import my.app.platform.domain.Student;
 import my.app.platform.repository.mapper.student.IStudentInfoDao;
+import my.app.platform.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class UploadFileService {
     private String path;
 
     @Autowired
+    StudentService studentService;
+
+    @Autowired
     IStudentInfoDao studentInfoDao;
 
     /**
@@ -34,10 +38,9 @@ public class UploadFileService {
      * @return 是否上传成功
      */
     public String uploadStudentListService(MultipartFile file, String userId){
-        String prefix = "temp/";
         if (!file.isEmpty()) {
             try {
-                String folderPath = path + prefix;
+                String folderPath = path + "temp/";
 
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
@@ -72,7 +75,7 @@ public class UploadFileService {
     public String uploadExpGuideService(MultipartFile file){
         if (!file.isEmpty()) {
             try {
-                String folderPath = path + "/client/download/exp/";
+                String folderPath = path + "file/exp/";
 
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
@@ -100,7 +103,7 @@ public class UploadFileService {
     public String uploadExpRefService(MultipartFile file){
         if (!file.isEmpty()) {
             try {
-                String folderPath = path + "/client/download/ref/";
+                String folderPath = path + "file/ref/";
 
                 //如果路径不存在，则创建
                 File newFile = new File(folderPath);
@@ -129,11 +132,7 @@ public class UploadFileService {
     public String uploadStudentReport(MultipartFile file,String s_id){
         if (!file.isEmpty()) {
             try {
-                List<Student> studentList = studentInfoDao.queryStudentInfo(s_id);
-                if(studentList.size() == 0){
-                    return "";
-                }
-                Student student = studentList.get(0);
+                Student student = studentService.getStudent(s_id);
                 String folderPath = path + student.getTeacher() + "/" + student.getS_login_name() + "/";
 
                 //如果路径不存在，则创建

@@ -9,6 +9,7 @@ package my.app.platform.service;
 import my.app.platform.domain.Student;
 import my.app.platform.domain.Teacher;
 import my.app.platform.repository.mapper.student.IStudentInfoDao;
+import my.app.platform.repository.mapper.user.IUserListDao;
 import my.app.platform.tool.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ import java.util.List;
 public class StudentService {
     @Autowired
     IStudentInfoDao studentInfoDao;
+
+    @Autowired
+    IUserListDao userListDao;
 
     @Autowired
     TeacherService teacherService;
@@ -136,7 +140,9 @@ public class StudentService {
      * @return 更新条数
      */
     public int updateStudentPwd(String s_login_name,String s_password){
-        return studentInfoDao.updatePwd(s_login_name, s_password);
+        int i = userListDao.updatePwd(s_login_name,s_password);
+        int j = studentInfoDao.updatePwd(s_login_name, s_password);
+        return i * j;
     }
 
     /**

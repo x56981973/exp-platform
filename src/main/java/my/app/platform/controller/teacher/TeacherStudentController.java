@@ -64,6 +64,10 @@ public class TeacherStudentController {
             return "{\"error\":\"1\",\"msg\":\"已存在此学生\"}";
         }
 
+        if(!s_password.matches("^([A-Za-z]|[0-9]){0,}$")){
+            return "{\"error\":\"1\",\"msg\":\"密码仅能使用数字字母组合\"}";
+        }
+
         Student new_student = new Student();
         new_student.setS_name(s_name);
         new_student.setS_login_name(s_login_name);
@@ -157,6 +161,10 @@ public class TeacherStudentController {
     @RequestMapping(value = "/student/update/pwd", method = RequestMethod.POST)
     @ResponseBody
     public String updateStudentPwdHandler(String s_login_name,String s_password) {
+        if(!s_password.matches("^([A-Za-z]|[0-9]){0,}$")){
+            return "{\"error\":\"1\",\"msg\":\"密码仅能使用数字字母组合\"}";
+        }
+
         int result = studentService.updateStudentPwd(s_login_name,s_password);
         if(result != 0){
             return "{\"error\":\"0\",\"msg\":\"修改成功\"}";
