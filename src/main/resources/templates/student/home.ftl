@@ -20,8 +20,8 @@
                 <div class="page-header">
                     <h1>系统下载</h1>
                     <blockquote>
-                        <p>NS2实验环境下载：<a href="#">aaa</a></p>
-                        <p>WIFI攻防实验环境下载：<a href="#">aaa</a></p>
+                        <p>NS2实验环境下载：<a href=${cloud_url}>百度网盘下载</a></p>
+                        <p>WIFI攻防实验环境下载：<a href="${base}/file/Kali2.0安装指南.pdf">Kali2.0安装指南.pdf</a></p>
                     </blockquote>
                 </div>
             </div>

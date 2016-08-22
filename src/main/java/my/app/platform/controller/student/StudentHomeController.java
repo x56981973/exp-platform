@@ -7,6 +7,7 @@ import my.app.platform.repository.mapper.experiment.IExpInfoDao;
 import my.app.platform.service.StudentService;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,9 @@ public class StudentHomeController {
     @Autowired
     TeacherService teacherService;
 
+    @Value("${cloud.url}")
+    String cloudUrl;
+
     //主页
     @RequestMapping(value = "/home")
     public String home(Model model){
@@ -48,6 +52,7 @@ public class StudentHomeController {
 
         List<ActiveExperiment> activeExperimentList = teacherService.getActiveExpList(t_login_name);
         model.addAttribute("activeExp", activeExperimentList);
+        model.addAttribute("cloud_url",cloudUrl);
 
         return "/student/home";
     }
