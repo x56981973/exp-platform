@@ -1,4 +1,4 @@
-package my.app.platform.controller.client;
+package my.app.platform.controller.test;
 
 import my.app.framework.web.Result;
 import my.app.framework.web.ResultHelper;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping(value = "/test")
 public class ExpController {
     @Autowired
     IExpInfoDao expInfoDao;

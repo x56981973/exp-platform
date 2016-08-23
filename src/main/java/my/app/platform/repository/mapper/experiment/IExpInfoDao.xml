@@ -27,8 +27,8 @@
 
     <insert id="insertExperiment" parameterType="my.app.platform.domain.Experiment">
         INSERT INTO
-        experiment(e_id,e_name,e_description,class_id,type_id,e_srcPath)
-        VALUES (#{e_id},#{e_name},#{e_description},#{class_id},#{type_id},#{e_srcPath})
+        experiment(e_id,e_name,e_description,class_id,type_id,e_srcPath,ref_path)
+        VALUES (#{e_id},#{e_name},#{e_description},#{class_id},#{type_id},#{e_srcPath},#{ref_path})
     </insert>
 
     <insert id="insertExpClass" parameterType="my.app.platform.domain.ExpClass">

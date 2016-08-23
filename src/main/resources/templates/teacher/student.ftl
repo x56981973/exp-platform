@@ -57,7 +57,7 @@
                                     <a class="btn btn-success" data-toggle="modal" data-target="#detailModal"
                                        data-id="${s.s_login_name}" data-name="${s.s_name}" data-password="${s.s_password}"
                                        data-grade="${s.s_grade}" data-report="${s.report_status}" data-score="${s.s_score}"
-                                            data-progress="${s.progress}">
+                                    >
                                         <#--<i class="halflings-icon white zoom-in"></i>-->
                                         查看
                                     </a>
@@ -231,7 +231,7 @@
         var grade = button.data("grade");
         var score = button.data("score");
         var report = button.data("report");
-        var progress = button.data("progress");
+
         var modal = $(this);
         modal.find('#id').text(id);
         modal.find('#name').text(name);
@@ -239,7 +239,6 @@
         modal.find('#grade').text(grade);
         modal.find('#score').text(score);
         modal.find('#report').text(report);
-        modal.find('#progress').html("课程进度: <strong> "+ progress +"% </strong>");
     });
 </script>
 

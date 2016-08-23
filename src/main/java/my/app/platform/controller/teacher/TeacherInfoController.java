@@ -1,6 +1,8 @@
 package my.app.platform.controller.teacher;
 
+import my.app.platform.domain.Experiment;
 import my.app.platform.domain.Teacher;
+import my.app.platform.domain.model.ActiveExperiment;
 import my.app.platform.repository.mapper.message.IMessageInfoDao;
 import my.app.platform.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 夏之阳
@@ -33,7 +37,7 @@ public class TeacherInfoController {
     /**
      * 更新教师信息接口
      */
-    @RequestMapping(value = "/teacher/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public String updateTeacher(String t_login_name, String password){
         if(!password.matches("^([A-Za-z]|[0-9]){0,}$")){
@@ -54,10 +58,10 @@ public class TeacherInfoController {
      * @param status 状态
      * @return 处理结果
      */
-    @RequestMapping(value = "/teacher/changeExpStatus", method = RequestMethod.POST)
+    @RequestMapping(value = "/changeExpStatus", method = RequestMethod.POST)
     @ResponseBody
     public String changeExpStatus(String e_id,String status){
-        String t_id = httpSession.getAttribute("t_id").toString();
+        String t_id = httpSession.getAttribute("uid").toString();
 
         Teacher teacher = teacherService.getTeacher(t_id);
         String exp_status = teacher.getActive_exp();
@@ -77,10 +81,10 @@ public class TeacherInfoController {
      * @param list 新实验列表
      * @return 处理结果
      */
-    @RequestMapping(value = "/teacher/changeActiveExp", method = RequestMethod.POST)
+    @RequestMapping(value = "/changeActiveExp", method = RequestMethod.POST)
     @ResponseBody
     public String changeActiveExp(String list){
-        String t_id = httpSession.getAttribute("t_id").toString();
+        String t_id = httpSession.getAttribute("uid").toString();
         Teacher teacher = teacherService.getTeacher(t_id);
         String exp_status = teacher.getActive_exp();
         String[] new_exp = list.split(",");
@@ -108,7 +112,7 @@ public class TeacherInfoController {
      * @param id 消息id
      * @return 处理结果
      */
-    @RequestMapping(value = "/teacher/readMessage", method = RequestMethod.POST)
+    @RequestMapping(value = "/readMessage", method = RequestMethod.POST)
     @ResponseBody
     public String readMessage(String id){
         if (messageInfoDao.updateIsRead(id) != 0) {

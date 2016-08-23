@@ -1,4 +1,4 @@
-package my.app.platform.controller.client;
+package my.app.platform.controller.test;
 
 import my.app.framework.web.Result;
 import my.app.framework.web.ResultHelper;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RestController
-@RequestMapping(value="/client")
+@RequestMapping(value="/test")
 public class FileController {
     @Autowired
     UploadFileService uploadFileService;

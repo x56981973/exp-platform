@@ -1,4 +1,4 @@
-package my.app.platform.controller.client;
+package my.app.platform.controller.test;
 
 import my.app.framework.web.Result;
 import my.app.framework.web.ResultHelper;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping(value = "/test")
 public class MessageController {
     @Autowired
     MessageService messageService;
@@ -23,7 +23,6 @@ public class MessageController {
     /**
      * 消息插入
      * @param s_id 学生id
-     * @param e_id 实验id
      * @param text 消息正文
      * @return
      */

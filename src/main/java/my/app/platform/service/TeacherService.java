@@ -113,18 +113,53 @@ public class TeacherService {
         List<ActiveExperiment> result = new ArrayList<>();
         for(String exp : expList){
             String exp_id = exp.substring(0,exp.length()-1);
-            String status = exp.substring(exp.length()-1);
+            String status = exp.substring(exp.length() - 1);
 
-            Experiment experiment = expInfoDao.queryExperiment(exp_id).get(0);
-            ActiveExperiment activeExperiment = new ActiveExperiment();
-            activeExperiment.setStatus(status);
-            activeExperiment.setE_id(exp_id);
-            activeExperiment.setE_name(experiment.getE_name());
-            activeExperiment.setRef_path(experiment.getRef_path());
-            activeExperiment.setE_description(experiment.getE_description());
+            List<Experiment> experiments = expInfoDao.queryExperiment(exp_id);
+            if(experiments.size() != 0) {
+                Experiment experiment = experiments.get(0);
 
-            result.add(activeExperiment);
+                ActiveExperiment activeExperiment = new ActiveExperiment();
+                activeExperiment.setStatus(status);
+                activeExperiment.setE_id(exp_id);
+                activeExperiment.setE_name(experiment.getE_name());
+                activeExperiment.setRef_path(experiment.getRef_path());
+                activeExperiment.setE_description(experiment.getE_description());
+
+                result.add(activeExperiment);
+            }
         }
         return result;
+    }
+
+    /**
+     * 更新正在进行中的实验
+     * @return 更新条数
+     */
+    public int updateActiveExp(){
+        List<Teacher> teacherList = teacherInfoDao.queryAllTeacher();
+
+        int count = 0;
+        for(Teacher teacher : teacherList){
+            String list = teacher.getActive_exp();
+            String[] expList = list.split(",");
+
+            String newList = "";
+            for(String exp : expList){
+                String exp_id = exp.substring(0,exp.length()-1);
+                String status = exp.substring(exp.length() - 1);
+
+                List<Experiment> experiments = expInfoDao.queryExperiment(exp_id);
+                if(experiments.size() != 0) {
+                    newList += exp_id + status + ",";
+                }
+            }
+            newList = newList.substring(0,newList.length()-1);
+            if(!newList.equals(list)){
+                count += teacherInfoDao.updateActiveExp(teacher.getT_login_name(),newList);
+            }
+        }
+
+        return count;
     }
 }

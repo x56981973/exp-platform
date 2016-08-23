@@ -146,7 +146,7 @@
         list = list.substring(0,list.length-1);
 
         $.ajax({
-            url: '${base}/teacher/teacher/changeActiveExp',
+            url: '${base}/teacher/changeActiveExp',
             type: 'POST',
             data: $.param({'list':list}),
             success: function (result) {
@@ -186,7 +186,7 @@
        }
 
        $.ajax({
-           url: '${base}/teacher/teacher/changeExpStatus',
+           url: '${base}/teacher/changeExpStatus',
            type: 'POST',
            data: $.param({'e_id':id,'status':status}),
            success: function (result) {

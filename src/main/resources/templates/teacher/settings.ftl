@@ -202,7 +202,7 @@
         }
 
         $.ajax({
-            url: '${base}/teacher/teacher/update',
+            url: '${base}/teacher/update',
             type: 'POST',
             data: $.param({'t_login_name':"${teacher.t_login_name}",'password':form.s_password2.value}),
             success: function (result) {

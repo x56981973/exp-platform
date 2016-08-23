@@ -95,7 +95,7 @@
             $('#detailModal').modal('hide');
         } else {
             $.ajax({
-                url: '${base}/teacher/teacher/readMessage',
+                url: '${base}/teacher/readMessage',
                 type: 'POST',
                 data: $.param({"id": m_id}),
                 success: function () {
