@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class LoginService {
     @Autowired
-    IUserListDao loginCheckDao;
+    IUserListDao userListDao;
 
     /**
      * 用户登录验证
@@ -25,7 +25,7 @@ public class LoginService {
      * @return 用户信息
      */
     public User loginCheck(String userName, String password){
-        List<User> userList = loginCheckDao.checkLogin(userName, password);
+        List<User> userList = userListDao.checkLogin(userName, password);
         if(userList.size() != 0){
             return userList.get(0);
         } else {

@@ -5,7 +5,6 @@ import my.app.platform.domain.Teacher;
 import my.app.platform.domain.model.ActiveExperiment;
 import my.app.platform.repository.mapper.experiment.IExpInfoDao;
 import my.app.platform.repository.mapper.teacher.ITeacherInfoDao;
-import my.app.platform.repository.mapper.user.IUserListDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +24,6 @@ public class TeacherService {
 
     @Autowired
     IExpInfoDao expInfoDao;
-
-    @Autowired
-    IUserListDao userListDao;
 
     /**
      * 获取教师列表
@@ -68,9 +64,7 @@ public class TeacherService {
      * @return 更新条数
      */
     public int updateTeacherPwd(String t_id, String password){
-        int i = userListDao.updatePwd(t_id,password);
-        int j = teacherInfoDao.updateTeacherPwd(t_id, password);
-        return i * j;
+        return teacherInfoDao.updateTeacherPwd(t_id, password);
     }
 
     /**
@@ -108,6 +102,9 @@ public class TeacherService {
     public List<ActiveExperiment> getActiveExpList(String t_login_name){
         Teacher teacher = teacherInfoDao.querySingleTeacher(t_login_name).get(0);
         String list = teacher.getActive_exp();
+        if(list == null){
+            return null;
+        }
         String[] expList = list.split(",");
 
         List<ActiveExperiment> result = new ArrayList<>();

@@ -76,6 +76,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <#if active_exp??>
                         <#if (active_exp?size > 0)>
                             <#list active_exp as e>
                             <tr>
@@ -93,6 +94,7 @@
                                 </#if>
                             </tr>
                             </#list>
+                        </#if>
                         </#if>
                         </tbody>
                     </table>
@@ -129,10 +131,12 @@
 <#include "include/footer.ftl">
 
 <script type="text/javascript">
-    <#if (active_exp?size > 0)>
-        <#list active_exp as e>
-        $('.'+'${e.e_id}').attr("checked",true);
-        </#list>
+    <#if active_exp??>
+        <#if (active_exp?size > 0)>
+            <#list active_exp as e>
+            $('.'+'${e.e_id}').attr("checked",true);
+            </#list>
+        </#if>
     </#if>
 
     $("#postEdit").click(function(){

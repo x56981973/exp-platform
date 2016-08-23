@@ -91,7 +91,7 @@ public class TeacherInfoController {
 
         String new_exp_status = "";
         for(String e : new_exp){
-            if(exp_status.contains(e)){
+            if( exp_status!= null && exp_status.contains(e)){
                 int index = exp_status.indexOf(e);
                 new_exp_status += e + exp_status.charAt(index+e.length()) + ",";
             } else {

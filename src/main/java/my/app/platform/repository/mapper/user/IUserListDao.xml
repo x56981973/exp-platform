@@ -2,12 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="my.app.platform.repository.mapper.user.IUserListDao">
     <select id="checkLogin" parameterType="String" resultType="my.app.platform.domain.User">
-        SELECT * FROM user_list
+        SELECT * FROM user
         WHERE username = #{0} AND password = #{1}
     </select>
-
-    <update id="updatePwd" parameterType="String">
-        UPDATE user_list SET password = #{1}
-        WHERE username = #{0}
-    </update>
 </mapper>
