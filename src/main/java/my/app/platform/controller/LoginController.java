@@ -100,7 +100,7 @@ public class LoginController {
             } else if("student".equals(role)){
                 return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/student/home\"}";
             } else if ("admin".equals(role)){
-                //insertLoginRecord(request, username);
+                insertLoginRecord(request, username);
                 return "{\"error\":\"0\",\"msg\":\"登陆成功\",\"to\":\"/admin/home\"}";
             } else {
                 return "{\"error\":\"1\",\"msg\":\"未知权限，请联系管理员\",\"to\":\"/login\"}";
