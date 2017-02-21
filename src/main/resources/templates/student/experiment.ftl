@@ -39,8 +39,11 @@
                                             <#list experimentList as exp>
                                                 <#if (exp.class_id?number == eClass.class_id && exp.type_id?number == eType.type_id)>
 
-                                                    <li> <a href="${base}/file/exp/${exp.e_srcPath}">${exp.e_name}</a></li>
-
+                                                    <#--<li> <a href="${base}/file/exp/${exp.e_srcPath}">${exp.e_name}</a></li>-->
+                                                    <li>
+                                                        <a href="${base}/student/exp/${exp.e_id}" target="_blank">${exp.e_name}</a>
+                                                        <a href="${base}/file/exp/${exp.e_srcPath}">下载</a>
+                                                    </li>
                                                 </#if>
                                             </#list>
                                         </#if>

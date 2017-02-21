@@ -18,7 +18,7 @@
             <div class="row-fluid">
                 <div class="box span12">
                     <div class="box-header">
-                        <h2><i class="halflings-icon align-justify"></i><span class="break"></span>实验列表</h2>
+                        <h2><i class="halflings-icon align-justify"></i><span class="break"></span>教师列表</h2>
                         <div class="box-icon">
                             <a data-toggle="modal" data-target="#addModal"><i class="halflings-icon plus"></i></a>
                         </div>

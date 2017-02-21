@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -72,6 +73,16 @@ public class StudentHomeController {
         model.addAttribute("student",student);
 
         return "/student/experiment";
+    }
+
+    //实验详情页面
+    @RequestMapping(value = "/exp/{e_id}")
+    public String experimentDetail(@PathVariable String e_id, Model model){
+        List<Experiment> experiments = expInfoDao.queryExperiment(e_id);
+        Experiment experiment = experiments.get(0);
+        model.addAttribute("experiment", experiment);
+
+        return "/student/experiment_detail";
     }
 
     //设置页面
